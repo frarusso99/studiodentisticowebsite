@@ -55,7 +55,7 @@ export default function Navbar() {
             >
               <img
                 className="h-12 w-auto sm:h-14 md:h-16"
-                src="./logo.png"
+                src="/logo.png"
                 alt="Studio Logo"
               />
             </motion.a>
