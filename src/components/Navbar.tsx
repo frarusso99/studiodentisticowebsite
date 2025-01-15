@@ -24,7 +24,7 @@ export default function Navbar() {
           <div className="flex-shrink-0 relative group">
             <div className="absolute -inset-2 bg-gradient-to-r from-primary/20 to-blue-100/20 rounded-xl blur opacity-0 group-hover:opacity-100 transition duration-500"></div>
             <img 
-              src="/logo.png" 
+              src="./public/logo.png" 
               alt="Dr. Nicola Russo" 
               className="h-16 relative transform transition duration-300 group-hover:scale-105" 
             />
