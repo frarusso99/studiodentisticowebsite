@@ -1,0 +1,324 @@
+import React, { useState } from 'react';
+import styled from 'styled-components';
+import { FaGoogle, FaMapMarkerAlt, FaPhone, FaEnvelope } from 'react-icons/fa';
+import { motion } from 'framer-motion';
+
+type FormData = {
+  name: string;
+  phone: string;
+  email: string;
+  message: string;
+};
+
+const Location = () => {
+  const [formData, setFormData] = useState<FormData>({
+    name: '',
+    phone: '',
+    email: '',
+    message: ''
+  });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    const { name, value } = e.target;
+    setFormData(prev => ({ ...prev, [name]: value }));
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+    // Simulate API call
+    await new Promise(resolve => setTimeout(resolve, 1000));
+    console.log(formData);
+    setIsSubmitting(false);
+  };
+
+  return (
+    <LocationSection>
+      <SectionTitle>Dove Trovarci</SectionTitle>
+      <Container>
+        <MapColumn>
+          <InfoCard>
+            <InfoTitle><FaMapMarkerAlt /> La Nostra Sede</InfoTitle>
+            <InfoText>Via Roma 123, Milano</InfoText>
+            <InfoText>
+              <FaPhone /> +39 02 1234567
+            </InfoText>
+            <InfoText>
+              <FaEnvelope /> info@studiodentistico.it
+            </InfoText>
+          </InfoCard>
+
+          <MapContainer
+            as={motion.div}
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+          >
+            <iframe
+              src="https://www.google.com/maps/embed?pb=YOUR_EMBED_URL"
+              width="100%"
+              height="400"
+              style={{ border: 0 }}
+              allowFullScreen
+              loading="lazy"
+            ></iframe>
+          </MapContainer>
+          
+          <GoogleLink 
+            href="#" 
+            target="_blank"
+            as={motion.a}
+            whileHover={{ scale: 1.02 }}
+            whileTap={{ scale: 0.98 }}
+          >
+            <FaGoogle /> Scopri le recensioni su Google
+          </GoogleLink>
+        </MapColumn>
+
+        <FormColumn
+          as={motion.div}
+          initial={{ opacity: 0, x: 20 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.6, delay: 0.2 }}
+        >
+          <FormCard>
+            <Title>Prenota una Visita</Title>
+            <Subtitle>
+              Compila il form e ti ricontatteremo entro 24 ore per trovare 
+              l'appuntamento più adatto alle tue esigenze
+            </Subtitle>
+            
+            <Form onSubmit={handleSubmit}>
+              <InputGroup>
+                <Label>Nome e Cognome</Label>
+                <Input
+                  type="text"
+                  name="name"
+                  value={formData.name}
+                  onChange={handleChange}
+                  required
+                />
+              </InputGroup>
+              
+              <InputGroup>
+                <Label>Telefono</Label>
+                <Input
+                  type="tel"
+                  name="phone"
+                  value={formData.phone}
+                  onChange={handleChange}
+                  required
+                />
+              </InputGroup>
+
+              <InputGroup>
+                <Label>Email</Label>
+                <Input
+                  type="email"
+                  name="email"
+                  value={formData.email}
+                  onChange={handleChange}
+                  required
+                />
+              </InputGroup>
+
+              <InputGroup>
+                <Label>Il tuo messaggio</Label>
+                <TextArea
+                  name="message"
+                  value={formData.message}
+                  onChange={handleChange}
+                  rows={4}
+                />
+              </InputGroup>
+
+              <Button 
+                type="submit" 
+                disabled={isSubmitting}
+                as={motion.button}
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
+              >
+                {isSubmitting ? 'Invio in corso...' : 'Richiedi Appuntamento'}
+              </Button>
+            </Form>
+          </FormCard>
+        </FormColumn>
+      </Container>
+    </LocationSection>
+  );
+};
+
+const LocationSection = styled.section`
+  padding: 6rem 2rem;
+  background: linear-gradient(to bottom, #AFCDD5 0%, #ffffff 100%);
+`;
+
+const SectionTitle = styled.h1`
+  text-align: center;
+  font-size: 2.5rem;
+  color: #233539;
+  margin-bottom: 3rem;
+`;
+
+const Container = styled.div`
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  
+  @media (max-width: 968px) {
+    grid-template-columns: 1fr;
+    gap: 3rem;
+  }
+`;
+
+const MapColumn = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+`;
+
+const InfoCard = styled.div`
+  background: white;
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+`;
+
+const InfoTitle = styled.h3`
+  font-size: 1.2rem;
+  color: #233539;
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+`;
+
+const InfoText = styled.p`
+  color: #2E545D;
+  margin: 0.5rem 0;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+`;
+
+const MapContainer = styled.div`
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+`;
+
+const GoogleLink = styled.a`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 1rem;
+  background: #4A828F;
+  color: white;
+  text-decoration: none;
+  border-radius: 8px;
+  font-weight: 500;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+
+  &:hover {
+    background: #2E545D;
+  }
+`;
+
+const FormColumn = styled.div``;
+
+const FormCard = styled.div`
+  background: white;
+  padding: 2.5rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+`;
+
+const Title = styled.h2`
+  font-size: 2rem;
+  color: #233539;
+  margin-bottom: 1rem;
+`;
+
+const Subtitle = styled.p`
+  color: #2E545D;
+  margin-bottom: 2rem;
+  line-height: 1.6;
+`;
+
+const Form = styled.form`
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+`;
+
+const InputGroup = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+`;
+
+const Label = styled.label`
+  color: #233539;
+  font-size: 0.9rem;
+  font-weight: 500;
+`;
+
+const Input = styled.input`
+  width: 100%;
+  padding: 0.8rem;
+  border: 2px solid #e0e0e0;
+  border-radius: 8px;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+
+  &:focus {
+    outline: none;
+    border-color: #4A828F;
+    box-shadow: 0 0 0 3px rgba(74, 130, 143, 0.1);
+  }
+`;
+
+const TextArea = styled.textarea`
+  width: 100%;
+  padding: 0.8rem;
+  border: 2px solid #e0e0e0;
+  border-radius: 8px;
+  font-size: 1rem;
+  resize: vertical;
+  transition: all 0.3s ease;
+
+  &:focus {
+    outline: none;
+    border-color: #4A828F;
+    box-shadow: 0 0 0 3px rgba(74, 130, 143, 0.1);
+  }
+`;
+
+const Button = styled.button`
+  padding: 1rem;
+  background: #4A828F;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+
+  &:hover {
+    background: #2E545D;
+  }
+
+  &:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+  }
+`;
+
+export default Location;

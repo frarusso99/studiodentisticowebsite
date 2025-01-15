@@ -1,0 +1,17 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+    font-family: 'Seasons';
+    src: url('/fonts/Fontspring-DEMO-theseasons-reg.otf') format('opentype');
+    font-weight: normal;
+    font-style: normal;
+  }
+  
+  @font-face {
+    font-family: 'Seasons';
+    src: url('/fonts/Fontspring-DEMO-theseasons-bd.otf') format('opentype');
+    font-weight: bold;
+    font-style: normal;
+  }

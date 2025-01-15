@@ -1,0 +1,106 @@
+import { FaWhatsapp, FaInstagram, FaFacebookF, FaLinkedinIn } from 'react-icons/fa';
+import { HiOutlineMail, HiOutlinePhone, HiOutlineLocationMarker } from 'react-icons/hi';
+
+const Footer = () => {
+  const currentYear = new Date().getFullYear();
+
+  return (
+    <footer className="bg-[#233539] text-white">
+      {/* WhatsApp Button - Fixed */}
+      <a 
+        href="https://wa.me/+390000000000" 
+        target="_blank"
+        rel="noopener noreferrer"
+        className="fixed bottom-8 right-8 bg-green-500 p-4 rounded-full shadow-lg 
+                   hover:scale-110 transition-transform duration-300 z-50"
+      >
+        <FaWhatsapp className="w-6 h-6" />
+      </a>
+
+      <div className="container mx-auto px-6 py-16">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
+          {/* Brand Section */}
+          <div className="space-y-4">
+            <h2 className="text-2xl font-light">Studio Dentistico</h2>
+            <p className="text-[#AFCDD5]/80 leading-relaxed">
+              Il tuo sorriso è la nostra priorità. 
+              Prenota una visita e scopri come possiamo prenderci cura di te.
+            </p>
+          </div>
+
+          {/* Quick Links */}
+          <div>
+            <h3 className="text-lg font-medium mb-4">Collegamenti Rapidi</h3>
+            <ul className="space-y-3">
+              {['Home', 'Servizi', 'Team', 'Studio', 'Blog'].map((item) => (
+                <li key={item}>
+                  <a 
+                    href={`#${item.toLowerCase()}`}
+                    className="text-[#AFCDD5]/80 hover:text-white transition-colors duration-300"
+                  >
+                    {item}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Contact Info */}
+          <div>
+            <h3 className="text-lg font-medium mb-4">Contatti</h3>
+            <ul className="space-y-3">
+              <li className="flex items-center gap-2 text-[#AFCDD5]/80">
+                <HiOutlineLocationMarker />
+                <span>Via Roma 123, Milano</span>
+              </li>
+              <li className="flex items-center gap-2 text-[#AFCDD5]/80">
+                <HiOutlinePhone />
+                <span>+39 02 1234567</span>
+              </li>
+              <li className="flex items-center gap-2 text-[#AFCDD5]/80">
+                <HiOutlineMail />
+                <span>info@studiodentistico.it</span>
+              </li>
+            </ul>
+          </div>
+
+          {/* Social Links */}
+          <div>
+            <h3 className="text-lg font-medium mb-4">Social</h3>
+            <div className="flex gap-4">
+              {[FaInstagram, FaFacebookF, FaLinkedinIn].map((Icon, index) => (
+                <a
+                  key={index}
+                  href="#"
+                  className="bg-[#4A828F] p-3 rounded-full hover:bg-[#2E545D] 
+                           transition-colors duration-300"
+                >
+                  <Icon className="w-5 h-5" />
+                </a>
+              ))}
+            </div>
+          </div>
+        </div>
+
+        {/* Bottom Bar */}
+        <div className="border-t border-[#AFCDD5]/20 mt-12 pt-8">
+          <div className="flex flex-col md:flex-row justify-between items-center gap-4">
+            <p className="text-[#AFCDD5]/60 text-sm">
+              © {currentYear} Studio Dentistico. Tutti i diritti riservati.
+            </p>
+            <div className="flex gap-6 text-sm">
+              <a href="#" className="text-[#AFCDD5]/60 hover:text-white transition-colors duration-300">
+                Privacy Policy
+              </a>
+              <a href="#" className="text-[#AFCDD5]/60 hover:text-white transition-colors duration-300">
+                Cookie Policy
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
+  );
+};
+
+export default Footer;

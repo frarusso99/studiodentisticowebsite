@@ -1,0 +1,471 @@
+import React, { useState } from 'react';
+import styled from 'styled-components';
+import { motion } from 'framer-motion';
+import { 
+  FaGoogle, FaMapMarkerAlt, FaPhone, FaEnvelope, 
+  FaClock, FaParking, FaSubway, FaTooth, FaRegCalendarCheck,
+  FaRegCreditCard, FaShieldAlt
+} from 'react-icons/fa';
+
+type FormData = {
+  name: string;
+  phone: string;
+  email: string;
+  preferredTime: string;
+  treatment: string;
+  message: string;
+  insurance: string;
+};
+
+const businessHours = [
+  { day: 'Lunedì - Venerdì', hours: '09:00 - 19:00' },
+  { day: 'Sabato', hours: '09:00 - 13:00' },
+  { day: 'Domenica', hours: 'Chiuso' }
+];
+
+const Location = () => {
+  const [formData, setFormData] = useState<FormData>({
+    name: '',
+    phone: '',
+    email: '',
+    preferredTime: '',
+    treatment: '',
+    message: '',
+    insurance: ''
+  });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
+    const { name, value } = e.target;
+    setFormData(prev => ({ ...prev, [name]: value }));
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+    await new Promise(resolve => setTimeout(resolve, 1000));
+    console.log(formData);
+    setIsSubmitting(false);
+  };
+
+  return (
+    <LocationSection>
+      <PromoBanner>
+        <FaTooth /> Prima Visita e Preventivo Gratuiti
+      </PromoBanner>
+
+      <SectionTitle>Vieni a Trovarci</SectionTitle>
+      <Container>
+        <MapColumn>
+          <InfoGrid>
+            <InfoCard>
+              <InfoTitle><FaMapMarkerAlt /> Studio Dentistico</InfoTitle>
+              <InfoText>Via Roma 123, 20123 Milano</InfoText>
+              <InfoText><FaPhone /> +39 02 1234567</InfoText>
+              <InfoText><FaEnvelope /> info@studiodentistico.it</InfoText>
+            </InfoCard>
+
+            <InfoCard>
+              <InfoTitle><FaClock /> Orari di Apertura</InfoTitle>
+              {businessHours.map(({ day, hours }) => (
+                <InfoText key={day}>
+                  <strong>{day}:</strong> {hours}
+                </InfoText>
+              ))}
+            </InfoCard>
+
+            <InfoCard>
+              <InfoTitle><FaParking /> Come Raggiungerci</InfoTitle>
+              <InfoText>
+                <FaParking /> Parcheggio gratuito per i pazienti
+              </InfoText>
+              <InfoText>
+                <FaSubway /> Metro: Linea M1 - Fermata Duomo
+              </InfoText>
+            </InfoCard>
+          </InfoGrid>
+
+          <MapContainer
+            as={motion.div}
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+          >
+            <iframe
+              src="https://www.google.com/maps/embed?pb=YOUR_EMBED_URL"
+              width="100%"
+              height="400"
+              style={{ border: 0 }}
+              allowFullScreen
+              loading="lazy"
+            ></iframe>
+          </MapContainer>
+
+          <GoogleLink 
+            href="#" 
+            target="_blank"
+            as={motion.a}
+            whileHover={{ scale: 1.02 }}
+          >
+            <FaGoogle /> Leggi le Recensioni su Google
+          </GoogleLink>
+        </MapColumn>
+
+        <FormColumn
+          as={motion.div}
+          initial={{ opacity: 0, x: 20 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.6, delay: 0.2 }}
+        >
+          <FormCard>
+            <HighlightBadge>
+              <FaRegCalendarCheck /> Risposta entro 24h
+            </HighlightBadge>
+            
+            <Title>Prenota una Visita</Title>
+            <Subtitle>
+              Compila il form per richiedere un appuntamento. 
+              Il nostro team ti ricontatterà per trovare l'orario più adatto alle tue esigenze.
+            </Subtitle>
+
+            <Form onSubmit={handleSubmit}>
+              <InputGroup>
+                <Label>Nome e Cognome *</Label>
+                <Input
+                  type="text"
+                  name="name"
+                  value={formData.name}
+                  onChange={handleChange}
+                  required
+                />
+              </InputGroup>
+
+              <InputGrid>
+                <InputGroup>
+                  <Label>Telefono *</Label>
+                  <Input
+                    type="tel"
+                    name="phone"
+                    value={formData.phone}
+                    onChange={handleChange}
+                    required
+                  />
+                </InputGroup>
+
+                <InputGroup>
+                  <Label>Email *</Label>
+                  <Input
+                    type="email"
+                    name="email"
+                    value={formData.email}
+                    onChange={handleChange}
+                    required
+                  />
+                </InputGroup>
+              </InputGrid>
+
+              <InputGroup>
+                <Label>Fascia Oraria Preferita</Label>
+                <Select name="preferredTime" value={formData.preferredTime} onChange={handleChange}>
+                  <option value="">Seleziona un orario</option>
+                  <option value="mattina">Mattina (9:00 - 13:00)</option>
+                  <option value="pomeriggio">Pomeriggio (14:00 - 19:00)</option>
+                  <option value="sabato">Sabato Mattina</option>
+                </Select>
+              </InputGroup>
+
+              <InputGroup>
+                <Label>Trattamento di Interesse</Label>
+                <Select name="treatment" value={formData.treatment} onChange={handleChange}>
+                  <option value="">Seleziona un trattamento</option>
+                  <option value="visita">Prima Visita</option>
+                  <option value="igiene">Igiene e Prevenzione</option>
+                  <option value="implantologia">Implantologia</option>
+                  <option value="ortodonzia">Ortodonzia</option>
+                  <option value="estetica">Odontoiatria Estetica</option>
+                </Select>
+              </InputGroup>
+
+              <InputGroup>
+                <Label>Messaggio</Label>
+                <TextArea
+                  name="message"
+                  value={formData.message}
+                  onChange={handleChange}
+                  rows={4}
+                  placeholder="Descrivici le tue esigenze..."
+                />
+              </InputGroup>
+
+              <Button 
+                type="submit" 
+                disabled={isSubmitting}
+                as={motion.button}
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
+              >
+                {isSubmitting ? 'Invio in corso...' : 'Richiedi Appuntamento'}
+              </Button>
+            </Form>
+
+            <TrustIndicators>
+              <TrustItem>
+                <FaShieldAlt /> Convenzioni con i principali fondi sanitari
+              </TrustItem>
+              <TrustItem>
+                <FaRegCreditCard /> Finanziamenti personalizzati
+              </TrustItem>
+            </TrustIndicators>
+          </FormCard>
+        </FormColumn>
+      </Container>
+    </LocationSection>
+  );
+};
+
+const LocationSection = styled.section`
+  padding: 6rem 2rem;
+  background: linear-gradient(to bottom, #AFCDD5 0%, #ffffff 100%);
+`;
+
+const PromoBanner = styled.div`
+  background: #233539;
+  color: white;
+  text-align: center;
+  padding: 1rem;
+  margin-bottom: 3rem;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  font-weight: 500;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+`;
+const SectionTitle = styled.h1`
+  text-align: center;
+  font-size: 2.5rem;
+  color: #233539;
+  margin-bottom: 3rem;
+`;
+
+const Container = styled.div`
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  
+  @media (max-width: 968px) {
+    grid-template-columns: 1fr;
+    gap: 3rem;
+  }
+`;
+
+const MapColumn = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+`;
+
+const InfoCard = styled.div`
+  background: white;
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+`;
+
+const InfoTitle = styled.h3`
+  font-size: 1.2rem;
+  color: #233539;
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+`;
+
+const InfoText = styled.p`
+  color: #2E545D;
+  margin: 0.5rem 0;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+`;
+
+const MapContainer = styled.div`
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+`;
+
+const GoogleLink = styled.a`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 1rem;
+  background: #4A828F;
+  color: white;
+  text-decoration: none;
+  border-radius: 8px;
+  font-weight: 500;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+
+  &:hover {
+    background: #2E545D;
+  }
+`;
+
+const FormColumn = styled.div``;
+
+const FormCard = styled.div`
+  background: white;
+  padding: 2.5rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+`;
+
+const Title = styled.h2`
+  font-size: 2rem;
+  color: #233539;
+  margin-bottom: 1rem;
+`;
+
+const Subtitle = styled.p`
+  color: #2E545D;
+  margin-bottom: 2rem;
+  line-height: 1.6;
+`;
+
+const Form = styled.form`
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+`;
+
+const InputGroup = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+`;
+
+const Label = styled.label`
+  color: #233539;
+  font-size: 0.9rem;
+  font-weight: 500;
+`;
+
+const Input = styled.input`
+  width: 100%;
+  padding: 0.8rem;
+  border: 2px solid #e0e0e0;
+  border-radius: 8px;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+
+  &:focus {
+    outline: none;
+    border-color: #4A828F;
+    box-shadow: 0 0 0 3px rgba(74, 130, 143, 0.1);
+  }
+`;
+
+const TextArea = styled.textarea`
+  width: 100%;
+  padding: 0.8rem;
+  border: 2px solid #e0e0e0;
+  border-radius: 8px;
+  font-size: 1rem;
+  resize: vertical;
+  transition: all 0.3s ease;
+
+  &:focus {
+    outline: none;
+    border-color: #4A828F;
+    box-shadow: 0 0 0 3px rgba(74, 130, 143, 0.1);
+  }
+`;
+
+const Button = styled.button`
+  padding: 1rem;
+  background: #4A828F;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+
+  &:hover {
+    background: #2E545D;
+  }
+
+  &:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+  }
+`;
+
+const InputGrid = styled.div`
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+
+  @media (max-width: 768px) {
+    grid-template-columns: 1fr;
+  }
+`;
+
+const Select = styled.select`
+  width: 100%;
+  padding: 0.8rem;
+  border: 2px solid #e0e0e0;
+  border-radius: 8px;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+
+  &:focus {
+    outline: none;
+    border-color: #4A828F;
+    box-shadow: 0 0 0 3px rgba(74, 130, 143, 0.1);
+  }
+`;
+
+const HighlightBadge = styled.div`
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: #e8f5f7;
+  color: #4A828F;
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  font-size: 0.9rem;
+  margin-bottom: 1rem;
+`;
+
+const TrustIndicators = styled.div`
+  margin-top: 2rem;
+  padding-top: 2rem;
+  border-top: 1px solid #e0e0e0;
+`;
+
+const TrustItem = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: #2E545D;
+  font-size: 0.9rem;
+  margin: 0.5rem 0;
+`;
+
+const InfoGrid = styled.div`
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+`;
+
+export default Location;
+

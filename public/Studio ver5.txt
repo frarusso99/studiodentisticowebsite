@@ -1,0 +1,144 @@
+import { motion } from 'framer-motion';
+import { useState } from 'react';
+
+const rooms = [
+  {
+    id: 1,
+    name: 'Reception',
+    description: 'Un ambiente accogliente dove inizia il tuo percorso di cura',
+    image: '/images/studio/reception.jpg',
+    category: 'Accoglienza'
+  },
+  {
+    id: 2,
+    name: 'Sala Operatoria 1',
+    description: 'Tecnologie all\'avanguardia per diagnosi e cure precise',
+    image: '/images/studio/surgery1.jpg',
+    category: 'Trattamento'
+  },
+  {
+    id: 3,
+    name: 'Radiologia',
+    description: 'Diagnostica digitale di ultima generazione',
+    image: '/images/studio/xray.jpg',
+    category: 'Diagnostica'
+  },
+  {
+    id: 4,
+    name: 'Area Sterilizzazione',
+    description: 'Standard elevati di sicurezza e igiene',
+    image: '/images/studio/sterilization.jpg',
+    category: 'Sicurezza'
+  },
+  {
+    id: 5,
+    name: 'Sala Relax',
+    description: 'Uno spazio confortevole per il tuo benessere',
+    image: '/images/studio/relax.jpg',
+    category: 'Comfort'
+  },
+  {
+    id: 6,
+    name: 'Sala Operatoria 2',
+    description: 'Strumenti moderni per ogni tipo di intervento',
+    image: '/images/studio/surgery2.jpg',
+    category: 'Trattamento'
+  }
+];
+
+const Studio = () => {
+  const [selectedCategory, setSelectedCategory] = useState('all');
+
+  const filteredRooms = selectedCategory === 'all' 
+    ? rooms 
+    : rooms.filter(room => room.category === selectedCategory);
+
+  const categories = ['all', ...new Set(rooms.map(room => room.category))];
+
+  return (
+    <section className="py-24 bg-gradient-to-b from-[#AFCDD5]/10 to-white">
+      <div className="container mx-auto px-6">
+        {/* Intro Section */}
+        <div className="max-w-3xl mx-auto text-center mb-16">
+          <h2 className="text-5xl font-light text-[#233539] mb-6">
+            Il Nostro Studio
+          </h2>
+          <p className="text-xl text-[#2E545D]/80 leading-relaxed mb-8">
+            Benvenuti nel nostro studio dentistico all'avanguardia, dove tecnologia 
+            e comfort si uniscono per offrirti la migliore esperienza di cura possibile. 
+            Ogni ambiente è stato progettato pensando al tuo benessere.
+          </p>
+          <div className="flex flex-wrap justify-center gap-3">
+            {categories.map(category => (
+              <button
+                key={category}
+                onClick={() => setSelectedCategory(category)}
+                className={`px-6 py-2 rounded-full text-sm transition-all duration-300
+                          ${selectedCategory === category 
+                            ? 'bg-[#4A828F] text-white' 
+                            : 'bg-[#AFCDD5]/20 text-[#2E545D] hover:bg-[#AFCDD5]/30'}`}
+              >
+                {category.charAt(0).toUpperCase() + category.slice(1)}
+              </button>
+            ))}
+          </div>
+        </div>
+
+        {/* Gallery Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {filteredRooms.map(room => (
+            <motion.div
+              key={room.id}
+              layout
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              className="group cursor-pointer"
+            >
+              <div className="bg-white rounded-2xl overflow-hidden shadow-lg 
+                           hover:shadow-xl transition-all duration-500">
+                <div className="relative h-64 overflow-hidden">
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 
+                               to-transparent opacity-0 group-hover:opacity-100 
+                               transition-opacity duration-500 z-10" />
+                  <img
+                    src={room.image}
+                    alt={room.name}
+                    className="w-full h-full object-cover transform group-hover:scale-110 
+                             transition-transform duration-700"
+                  />
+                  <div className="absolute inset-0 p-6 text-white z-20 flex 
+                               flex-col justify-end translate-y-6 group-hover:translate-y-0 
+                               opacity-0 group-hover:opacity-100 transition-all duration-500">
+                    <h3 className="text-2xl font-medium mb-2">{room.name}</h3>
+                    <p className="text-white/90">{room.description}</p>
+                  </div>
+                </div>
+              </div>
+            </motion.div>
+          ))}
+        </div>
+
+        {/* CTA Section */}
+        <div className="mt-16 text-center">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            className="inline-block bg-gradient-to-r from-[#233539] to-[#2E545D] 
+                     rounded-2xl p-8 text-white"
+          >
+            <p className="text-lg mb-4">
+              Vuoi visitare il nostro studio di persona?
+            </p>
+            <button className="bg-white text-[#233539] px-8 py-3 rounded-full 
+                           hover:bg-[#AFCDD5] transition-colors duration-300">
+              Prenota una Visita
+            </button>
+          </motion.div>
+        </div>
+      </div>
+    </section>
+  );
+};
+
+export default Studio;

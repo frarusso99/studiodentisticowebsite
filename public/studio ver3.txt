@@ -1,0 +1,126 @@
+import { useState, useEffect } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { IoArrowBack, IoArrowForward } from 'react-icons/io5';
+import { FaWifi, FaTv, FaCoffee, FaParking } from 'react-icons/fa';
+
+const studioImages = [
+  {
+    url: 'https://images.unsplash.com/photo-1629909613654-28e377c37b09?auto=format&fit=crop&q=80',
+    title: 'Reception',
+    description: 'Un ambiente accogliente per il tuo comfort'
+  },
+  {
+    url: 'https://images.unsplash.com/photo-1629909613654-28e377c37b09?auto=format&fit=crop&q=80',
+    title: 'Sala Operativa',
+    description: 'Tecnologie all\'avanguardia per le tue cure'
+  },
+  {
+    url: 'https://images.unsplash.com/photo-1629909613654-28e377c37b09?auto=format&fit=crop&q=80',
+    title: 'Radiologia',
+    description: 'Diagnostica digitale di ultima generazione'
+  },
+  {
+    url: 'https://images.unsplash.com/photo-1629909613654-28e377c37b09?auto=format&fit=crop&q=80',
+    title: 'Sterilizzazione',
+    description: 'Massimi standard di sicurezza e igiene'
+  }
+];
+
+
+const Studio = () => {
+  const [currentIndex, setCurrentIndex] = useState(0);
+
+  const nextSlide = () => {
+    setCurrentIndex((prev) => (prev + 1) % studioImages.length);
+  };
+
+  const prevSlide = () => {
+    setCurrentIndex((prev) => 
+      prev === 0 ? studioImages.length - 1 : prev - 1
+    );
+  };
+
+  useEffect(() => {
+    const timer = setInterval(nextSlide, 5000);
+    return () => clearInterval(timer);
+  }, []);
+
+  return (
+    <section className="py-24 bg-gradient-to-b from-[#AFCDD5]/10 to-white">
+      <div className="container mx-auto px-6">
+        <div className="max-w-3xl mx-auto text-center mb-16">
+          <h2 className="text-5xl font-light text-[#233539] mb-6">
+            Il Nostro Studio
+          </h2>
+          <p className="text-xl text-[#2E545D]/80 leading-relaxed">
+            Un ambiente moderno e confortevole, progettato per garantirti 
+            la migliore esperienza di cura possibile
+          </p>
+        </div>
+
+        <div className="relative max-w-6xl mx-auto">
+          <div className="overflow-hidden rounded-2xl shadow-2xl">
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={currentIndex}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.5 }}
+                className="relative aspect-[16/9]"
+              >
+                <img
+                  src={studioImages[currentIndex].url}
+                  alt={studioImages[currentIndex].title}
+                  className="w-full h-full object-cover"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
+                <div className="absolute bottom-0 left-0 right-0 p-8 text-white">
+                  <h3 className="text-2xl font-medium mb-2">
+                    {studioImages[currentIndex].title}
+                  </h3>
+                  <p className="text-white/90">
+                    {studioImages[currentIndex].description}
+                  </p>
+                </div>
+              </motion.div>
+            </AnimatePresence>
+
+            <button
+              onClick={prevSlide}
+              className="absolute left-4 top-1/2 -translate-y-1/2 bg-white/90 hover:bg-[#4A828F] 
+                       text-[#4A828F] hover:text-white w-12 h-12 rounded-full flex items-center 
+                       justify-center transition-all duration-300 hover:scale-110"
+            >
+              <IoArrowBack className="w-6 h-6" />
+            </button>
+
+            <button
+              onClick={nextSlide}
+              className="absolute right-4 top-1/2 -translate-y-1/2 bg-white/90 hover:bg-[#4A828F] 
+                       text-[#4A828F] hover:text-white w-12 h-12 rounded-full flex items-center 
+                       justify-center transition-all duration-300 hover:scale-110"
+            >
+              <IoArrowForward className="w-6 h-6" />
+            </button>
+          </div>
+
+          <div className="flex justify-center mt-6 gap-2">
+            {studioImages.map((_, idx) => (
+              <button
+                key={idx}
+                onClick={() => setCurrentIndex(idx)}
+                className={`w-2.5 h-2.5 rounded-full transition-all duration-300
+                          ${currentIndex === idx ? 'bg-[#4A828F] w-8' : 'bg-[#4A828F]/20'}`}
+              />
+            ))}
+          </div>
+        </div>
+
+
+      </div>
+    </section>
+  );
+};
+
+export default Studio;
