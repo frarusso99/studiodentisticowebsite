@@ -52,7 +52,7 @@ const Location = () => {
   };
 
   return (
-    <section className="py-24 px-4 sm:px-8 bg-gradient-to-b from-[#AFCDD5]/30 to-white/80">
+    <section className="py-16 px-4 sm:px-8 bg-gradient-to-b from-[#AFCDD5]/30 to-white/80">
       <motion.h1 
         className="text-center text-4xl md:text-5xl font-light text-[#233539] mb-16"
         initial={{ opacity: 0, y: -20 }}

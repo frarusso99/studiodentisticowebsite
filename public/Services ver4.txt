@@ -1,0 +1,123 @@
+import { useState, useEffect } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { Stethoscope, Smile, Heart, Shield } from 'lucide-react';
+
+const services = [
+  {
+    icon: <Stethoscope className="w-12 h-12" />,
+    title: "Diagnosi Avanzata",
+    description: "Valutazione completa dello stato di salute orale con tecnologie all'avanguardia."
+  },
+  {
+    icon: <Smile className="w-12 h-12" />,
+    title: "Odontoiatria Estetica",
+    description: "Soluzioni personalizzate per un sorriso naturale e brillante."
+  },
+  {
+    icon: <Heart className="w-12 h-12" />,
+    title: "Implantologia",
+    description: "Tecniche innovative per ripristinare la funzionalità dentale."
+  },
+  {
+    icon: <Shield className="w-12 h-12" />,
+    title: "Ortodonzia",
+    description: "Trattamenti personalizzati per allineamento dentale perfetto."
+  }
+];
+
+export default function Services() {
+  const [currentIndex, setCurrentIndex] = useState(0);
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setCurrentIndex((prev) => (prev + 1) % services.length);
+    }, 5000);
+    return () => clearInterval(timer);
+  }, []);
+
+  return (
+    <section className="relative py-24 overflow-hidden bg-gradient-to-r from-primary-dark to-primary-medium">
+      <div className="max-w-7xl mx-auto px-4">
+        <div className="flex justify-between items-center mb-16">
+          <motion.h2 
+            initial={{ opacity: 0, x: -20 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            className="text-4xl font-bold text-white"
+          >
+            I Nostri Servizi
+          </motion.h2>
+
+          {/* Progress Bar */}
+          <div className="flex items-center gap-3">
+            {services.map((_, index) => (
+              <button
+                key={index}
+                onClick={() => setCurrentIndex(index)}
+                className="group relative"
+              >
+                <div className={`
+                  w-16 h-1.5 rounded-full transition-all duration-500
+                  ${index === currentIndex ? 'bg-primary-light' : 'bg-[#AFCDD5]/30'}
+                  ${index === currentIndex ? 'scale-100' : 'scale-90'}
+                `} />
+                {/* <span className="absolute -bottom-6 left-1/2 -translate-x-1/2 text-sm text-[#4A828F] opacity-0 group-hover:opacity-100 transition-opacity">
+                  {index + 1}
+                </span> */}
+              </button>
+            ))}
+          </div>
+        </div>
+
+        <div className="relative">
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={currentIndex}
+              initial={{ opacity: 0, x: 100 }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity: 0, x: -100 }}
+              transition={{ duration: 0.5 }}
+              className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+            >
+              {[
+                services[currentIndex],
+                services[(currentIndex + 1) % services.length],
+                services[(currentIndex + 2) % services.length]
+              ].map((service, idx) => (
+                <motion.div
+                  key={idx}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: idx * 0.2 }}
+                  className="relative group"
+                >
+                  <div className="absolute inset-0 bg-gradient-to-br from-primary to-primary-medium rounded-[2.5rem] transform rotate-6 transition-transform group-hover:rotate-0" />
+                  <div className="relative p-8 bg-white rounded-[2.5rem] shadow-lg transform transition-all duration-500 hover:-translate-y-2 hover:shadow-xl">
+                    <div className="mb-6 p-4 bg-[#4A828F]/10 rounded-2xl w-fit">
+                      <div className="text-[#4A828F]">{service.icon}</div>
+                    </div>
+                    <h3 className="text-2xl font-bold text-primary-dark mb-4">{service.title}</h3>
+                    <p className="text-[#4A828F] leading-relaxed">{service.description}</p>
+                  </div>
+                </motion.div>
+              ))}
+            </motion.div>
+          </AnimatePresence>
+
+          {/* Navigation Buttons */}
+          <button
+            onClick={() => setCurrentIndex((prev) => (prev - 1 + services.length) % services.length)}
+            className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-4 w-12 h-12 rounded-full bg-white shadow-lg flex items-center justify-center text-[#4A828F] hover:bg-[#4A828F] hover:text-white transition-colors"
+          >
+            ←
+          </button>
+          <button
+            onClick={() => setCurrentIndex((prev) => (prev + 1) % services.length)}
+            className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-4 w-12 h-12 rounded-full bg-white shadow-lg flex items-center justify-center text-[#4A828F] hover:bg-[#4A828F] hover:text-white transition-colors"
+          >
+            →
+          </button>
+        </div>
+      </div>
+    </section>
+  );
+}
