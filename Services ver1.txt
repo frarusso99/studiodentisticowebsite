@@ -1,0 +1,46 @@
+import { Stethoscope, Smile, Heart, Shield } from 'lucide-react';
+
+const services = [
+  {
+    icon: <Stethoscope className="w-8 h-8 text-primary" />,
+    title: 'Odontoiatria Conservativa',
+    description: 'Trattamenti personalizzati per preservare la salute dei tuoi denti.'
+  },
+  {
+    icon: <Smile className="w-8 h-8 text-primary" />,
+    title: 'Implantologia Guidata',
+    description: 'Tecnologia avanzata per risultati precisi e duraturi.'
+  },
+  {
+    icon: <Heart className="w-8 h-8 text-primary" />,
+    title: 'Ortodonzia',
+    description: 'Soluzioni su misura per adulti e bambini.'
+  },
+  {
+    icon: <Shield className="w-8 h-8 text-primary" />,
+    title: 'Igiene e Prevenzione',
+    description: 'Mantenimento della salute orale nel lungo termine.'
+  }
+];
+
+export default function Services() {
+  return (
+    <section id="servizi" className="py-20 bg-white">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="text-center mb-16">
+          <h2 className="text-3xl font-bold text-gray-900 mb-4">I Nostri Servizi Specializzati</h2>
+          <p className="text-xl text-gray-600">Offriamo una gamma completa di trattamenti odontoiatrici</p>
+        </div>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+          {services.map((service, index) => (
+            <div key={index} className="p-6 bg-gray-50 rounded-lg hover:shadow-lg transition-shadow">
+              <div className="mb-4">{service.icon}</div>
+              <h3 className="text-xl font-semibold text-gray-900 mb-2">{service.title}</h3>
+              <p className="text-gray-600">{service.description}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}

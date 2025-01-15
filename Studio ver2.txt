@@ -1,0 +1,162 @@
+import { motion, AnimatePresence } from 'framer-motion';
+import { useState, useEffect } from 'react';
+import styled from 'styled-components';
+import { IoArrowBack, IoArrowForward } from 'react-icons/io5';
+
+const studioImages = [
+  'https://images.unsplash.com/photo-1629909613654-28e377c37b09?auto=format&fit=crop&q=80',
+  'https://images.unsplash.com/photo-1629909613654-28e377c37b09?auto=format&fit=crop&q=80',
+  'https://images.unsplash.com/photo-1629909613654-28e377c37b09?auto=format&fit=crop&q=80',
+  'https://images.unsplash.com/photo-1629909613654-28e377c37b09?auto=format&fit=crop&q=80',
+  'https://images.unsplash.com/photo-1629909613654-28e377c37b09?auto=format&fit=crop&q=80',
+  'https://images.unsplash.com/photo-1629909613654-28e377c37b09?auto=format&fit=crop&q=80',
+  'https://images.unsplash.com/photo-1629909613654-28e377c37b09?auto=format&fit=crop&q=80',
+  'https://images.unsplash.com/photo-1629909613654-28e377c37b09?auto=format&fit=crop&q=80',
+];
+
+const Studio = () => {
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [direction, setDirection] = useState(0);
+
+  const slideVariants = {
+    enter: (direction: number) => ({
+      x: direction > 0 ? 1000 : -1000,
+      opacity: 0
+    }),
+    center: {
+      zIndex: 1,
+      x: 0,
+      opacity: 1
+    },
+    exit: (direction: number) => ({
+      zIndex: 0,
+      x: direction < 0 ? 1000 : -1000,
+      opacity: 0
+    })
+  };
+
+  const paginate = (newDirection: number) => {
+    setDirection(newDirection);
+    setCurrentIndex((prevIndex) => {
+      if (newDirection === 1) {
+        return prevIndex === studioImages.length - 1 ? 0 : prevIndex + 1;
+      }
+      return prevIndex === 0 ? studioImages.length - 1 : prevIndex - 1;
+    });
+  };
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      paginate(1);
+    }, 5000);
+    return () => clearInterval(timer);
+  }, []);
+
+  return (
+    <StudioSection>
+      <Title>Il Nostro Studio</Title>
+      <CarouselContainer>
+        <AnimatePresence initial={false} custom={direction}>
+          <ImageWrapper
+            key={currentIndex}
+            custom={direction}
+            variants={slideVariants}
+            initial="enter"
+            animate="center"
+            exit="exit"
+            transition={{
+              x: { type: "spring", stiffness: 300, damping: 30 },
+              opacity: { duration: 0.2 }
+            }}
+          >
+            <StudioImage src={studioImages[currentIndex]} alt={`Studio image ${currentIndex + 1}`} />
+          </ImageWrapper>
+        </AnimatePresence>
+        
+        <NavigationButtons>
+          <NavButton onClick={() => paginate(-1)}>
+            <IoArrowBack />
+          </NavButton>
+          <NavButton onClick={() => paginate(1)}>
+            <IoArrowForward />
+          </NavButton>
+        </NavigationButtons>
+      </CarouselContainer>
+    </StudioSection>
+  );
+};
+
+const StudioSection = styled.section`
+  padding: 4rem 2rem;
+  background: #f8f9fa;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;
+
+const Title = styled.h2`
+  text-align: center;
+  font-size: 2.5rem;
+  margin-bottom: 2rem;
+  color: #2c3e50;
+`;
+
+const CarouselContainer = styled.div`
+  position: relative;
+  width: 100%;
+  max-width: 1200px;
+  height: 600px;
+  overflow: hidden;
+  border-radius: 15px;
+  box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+`;
+
+const ImageWrapper = styled(motion.div)`
+  position: absolute;
+  width: 100%;
+  height: 100%;
+`;
+
+const StudioImage = styled.img`
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+`;
+
+const NavigationButtons = styled.div`
+  position: absolute;
+  bottom: 30px;
+  right: 30px;
+  display: flex;
+  gap: 12px;
+  z-index: 10;
+`;
+
+const NavButton = styled.button`
+  background: rgba(255, 255, 255, 0.9);
+  border: none;
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+
+  &:hover {
+    background: white;
+    transform: scale(1.1);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+  }
+
+  svg {
+    width: 22px;
+    height: 22px;
+    color: #2c3e50;
+  }
+`;
+
+export default Studio;

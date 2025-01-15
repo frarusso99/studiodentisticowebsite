@@ -1,0 +1,139 @@
+import { Clock, ChevronRight } from 'lucide-react';
+import { FaWhatsapp } from 'react-icons/fa';
+import { useState, useEffect } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+
+const openingHours = [
+  { day: "Lunedì - Venerdì", hours: "09:00 - 19:00" },
+  { day: "Sabato", hours: "09:00 - 13:00" },
+  { day: "Domenica", hours: "Chiuso" }
+];
+
+export default function Hero() {
+  const [currentHour, setCurrentHour] = useState(0);
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setCurrentHour((prev) => (prev + 1) % openingHours.length);
+    }, 3000);
+    return () => clearInterval(timer);
+  }, []);
+
+  return (
+    <div className="pt-8 bg-gradient-to-br from-white via-[#AFCDD5]/10 to-white">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
+          {/* Enhanced Gallery Section */}
+          <div className="relative">
+            <div className="absolute -top-20 -left-20 w-72 h-72 bg-[#4A828F]/5 rounded-full blur-3xl animate-pulse"></div>
+            <div className="absolute -bottom-20 -right-20 w-72 h-72 bg-[#4A828F]/5 rounded-full blur-3xl animate-pulse delay-700"></div>
+            
+            <div className="grid grid-cols-2 gap-6 items-center relative">
+              <div className="space-y-6">
+                <motion.div 
+                  whileHover={{ scale: 1.03 }}
+                  className="relative group rounded-3xl overflow-hidden shadow-[0_8px_30px_rgb(74,130,143,0.12)]"
+                >
+                  <img
+                    src="https://images.unsplash.com/photo-1629909613654-28e377c37b09?auto=format&fit=crop&q=80"
+                    alt="Studio View 1"
+                    className="w-full h-56 object-cover transform transition-all duration-500 group-hover:scale-110"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#233539]/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                </motion.div>
+                <motion.div 
+                  whileHover={{ scale: 1.03 }}
+                  className="relative group rounded-3xl overflow-hidden shadow-[0_8px_30px_rgb(74,130,143,0.12)]"
+                >
+                  <img
+                    src="https://centridentalsmile.it/wp-content/uploads/2018/11/scanner-intra-orale.jpg"
+                    alt="Studio View 2"
+                    className="w-full h-72 object-cover transform transition-all duration-500 group-hover:scale-110"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#233539]/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                </motion.div>
+              </div>
+
+              <div className="space-y-6 pt-12">
+                <motion.div 
+                  whileHover={{ scale: 1.03 }}
+                  className="relative group rounded-3xl overflow-hidden shadow-[0_8px_30px_rgb(74,130,143,0.12)]"
+                >
+                  <img
+                    src="https://www.dental-art.it/wp-content/uploads/2020/10/studio-dentistico-monterotti-area-servizio_11-scaled-e1602678564612.jpg"
+                    alt="Studio View 3"
+                    className="w-full h-72 object-cover transform transition-all duration-500 group-hover:scale-110"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#233539]/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                </motion.div>
+                <motion.div 
+                  whileHover={{ scale: 1.03 }}
+                  className="relative group rounded-3xl overflow-hidden shadow-[0_8px_30px_rgb(74,130,143,0.12)]"
+                >
+                  <img
+                    src="https://images.pexels.com/photos/269218/pexels-photo-269218.jpeg"
+                    alt="Studio View 4"
+                    className="w-full h-56 object-cover transform transition-all duration-500 group-hover:scale-110"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#233539]/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                </motion.div>
+              </div>
+            </div>
+          </div>
+
+          {/* Content Section */}
+          <div className="relative z-10">
+            <h1 className="text-5xl md:text-6xl font-bold text-[#233539] leading-tight">
+              Il Tuo Sorriso,
+              <span className="block text-[#4A828F] mt-2">La Nostra Passione</span>
+            </h1>
+            
+            <p className="text-xl text-[#2E545D] leading-relaxed mt-6">
+              Trasformiamo la salute del tuo sorriso con tecnologia all'avanguardia 
+              e cure personalizzate nel cuore di Reggio Calabria.
+            </p>
+
+            <div className="mt-8">
+              <a 
+                href="https://wa.me/+39NUMEROSTUDIO" 
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group inline-flex items-center px-8 py-4 bg-[#25D366] text-white rounded-full hover:bg-[#20BA5A] transition-all duration-300 shadow-lg hover:shadow-xl hover:-translate-y-0.5"
+              >
+                <FaWhatsapp className="mr-2" size={20} />
+                Contattaci su WhatsApp
+                <ChevronRight className="ml-2 transform transition-transform duration-300 group-hover:translate-x-1" size={20} />
+              </a>
+            </div>
+
+            {/* Opening Hours Carousel */}
+            <div className="mt-12 grid grid-cols-1 sm:grid-cols-2 gap-6">
+              <div className="relative h-[120px] bg-white/70 rounded-2xl backdrop-blur-sm shadow-lg overflow-hidden">
+                <AnimatePresence mode="wait">
+                  <motion.div
+                    key={currentHour}
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -20 }}
+                    className="absolute inset-0 p-6 flex flex-col justify-center"
+                  >
+                    <div className="flex items-center mb-2">
+                      <Clock className="text-[#4A828F] mr-3" size={24} />
+                      <span className="font-semibold text-[#233539]">{openingHours[currentHour].day}</span>
+                    </div>
+                    <span className="text-[#4A828F] text-lg">{openingHours[currentHour].hours}</span>
+                  </motion.div>
+                </AnimatePresence>
+              </div>
+              
+              <div className="bg-white/70 rounded-2xl backdrop-blur-sm shadow-lg p-6">
+                <div className="font-semibold text-[#233539] mb-1">Tecnologia Avanzata</div>
+                <span className="text-[#4A828F]">Strumenti all'avanguardia</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}

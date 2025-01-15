@@ -1,0 +1,210 @@
+import React, { useState } from 'react';
+import styled from 'styled-components';
+import { FaGoogle } from 'react-icons/fa';
+
+type FormData = {
+  name: string;
+  phone: string;
+  email: string;
+  message: string;
+};
+
+const Location = () => {
+  const [formData, setFormData] = useState<FormData>({
+    name: '',
+    phone: '',
+    email: '',
+    message: ''
+  });
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    const { name, value } = e.target;
+    setFormData(prev => ({ ...prev, [name]: value }));
+  };
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    console.log(formData);
+  };
+
+  return (
+    <LocationSection>
+      <Container>
+        <MapColumn>
+          <MapContainer>
+            <iframe
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2969.654248772747!2d12.4922309!3d41.8902102!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNDHCsDUzJzI0LjgiTiAxMsKwMjknMzIuMCJF!5e0!3m2!1sen!2sit!4v1625661234567!5m2!1sen!2sit"
+              width="100%"
+              height="400"
+              style={{ border: 0 }}
+              allowFullScreen
+              loading="lazy"
+            ></iframe>
+          </MapContainer>
+          <GoogleLink href="#" target="_blank">
+            <FaGoogle /> Visita la nostra pagina Google
+          </GoogleLink>
+        </MapColumn>
+
+        <FormColumn>
+          <Title>Richiedi una Consulenza</Title>
+          <Subtitle>Ti ricontattiamo entro 24 ore per fissare un appuntamento</Subtitle>
+          
+          <Form onSubmit={handleSubmit}>
+            <Input
+              type="text"
+              name="name"
+              placeholder="Nome e Cognome"
+              value={formData.name}
+              onChange={handleChange}
+              required
+            />
+            
+            <Input
+              type="tel"
+              name="phone"
+              placeholder="Numero di telefono"
+              value={formData.phone}
+              onChange={handleChange}
+              required
+            />
+
+            <Input
+              type="email"
+              name="email"
+              placeholder="Email"
+              value={formData.email}
+              onChange={handleChange}
+              required
+            />
+
+            <TextArea
+              name="message"
+              placeholder="Come possiamo aiutarti?"
+              value={formData.message}
+              onChange={handleChange}
+              rows={4}
+            />
+
+            <Button type="submit">
+              Invia Richiesta
+            </Button>
+          </Form>
+        </FormColumn>
+      </Container>
+    </LocationSection>
+  );
+};
+
+const LocationSection = styled.section`
+  padding: 5rem 2rem;
+  background: #ffffff;
+`;
+
+const Container = styled.div`
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3rem;
+  
+  @media (max-width: 768px) {
+    grid-template-columns: 1fr;
+  }
+`;
+
+const MapColumn = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+`;
+
+const MapContainer = styled.div`
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+`;
+
+const GoogleLink = styled.a`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 1rem;
+  background: #4A828F;
+  color: white;
+  text-decoration: none;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+
+  &:hover {
+    background: #2E545D;
+  }
+`;
+
+const FormColumn = styled.div`
+  background: #f8f9fa;
+  padding: 2rem;
+  border-radius: 12px;
+`;
+
+const Title = styled.h2`
+  font-size: 2rem;
+  color: #233539;
+  margin-bottom: 0.5rem;
+`;
+
+const Subtitle = styled.p`
+  color: #2E545D;
+  margin-bottom: 2rem;
+`;
+
+const Form = styled.form`
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+`;
+
+const Input = styled.input`
+  width: 100%;
+  padding: 0.8rem;
+  border: 2px solid #e0e0e0;
+  border-radius: 8px;
+  font-size: 1rem;
+
+  &:focus {
+    outline: none;
+    border-color: #4A828F;
+  }
+`;
+
+const TextArea = styled.textarea`
+  width: 100%;
+  padding: 0.8rem;
+  border: 2px solid #e0e0e0;
+  border-radius: 8px;
+  font-size: 1rem;
+  resize: vertical;
+
+  &:focus {
+    outline: none;
+    border-color: #4A828F;
+  }
+`;
+
+const Button = styled.button`
+  padding: 1rem;
+  background: #4A828F;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+
+  &:hover {
+    background: #2E545D;
+  }
+`;
+
+export default Location;
