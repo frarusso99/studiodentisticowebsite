@@ -1,0 +1,123 @@
+import { motion } from 'framer-motion';
+import { useState, useEffect } from 'react';
+import styled from 'styled-components';
+
+const studioImages = [
+  'https://images.unsplash.com/photo-1629909613654-28e377c37b09?auto=format&fit=crop&q=80',
+  'https://images.unsplash.com/photo-1629909613654-28e377c37b09?auto=format&fit=crop&q=80',
+  'https://images.unsplash.com/photo-1629909613654-28e377c37b09?auto=format&fit=crop&q=80',
+  'https://images.unsplash.com/photo-1629909613654-28e377c37b09?auto=format&fit=crop&q=80',
+  'https://images.unsplash.com/photo-1629909613654-28e377c37b09?auto=format&fit=crop&q=80',
+  'https://images.unsplash.com/photo-1629909613654-28e377c37b09?auto=format&fit=crop&q=80',
+  'https://images.unsplash.com/photo-1629909613654-28e377c37b09?auto=format&fit=crop&q=80',
+  'https://images.unsplash.com/photo-1629909613654-28e377c37b09?auto=format&fit=crop&q=80',
+];
+
+const Studio = () => {
+  const [currentIndex, setCurrentIndex] = useState(0);
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setCurrentIndex((prev) => (prev + 1) % studioImages.length);
+    }, 3000);
+    return () => clearInterval(timer);
+  }, []);
+
+  return (
+    <StudioSection>
+      <Title>Scopri l'Eccellenza nel Dettaglio</Title>
+      <Subtitle>Un viaggio visivo attraverso il nostro studio all'avanguardia</Subtitle>
+      
+      <GalleryGrid>
+        {studioImages.map((img, index) => (
+          <motion.div
+            key={img}
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: index * 0.2 }}
+          >
+            <GalleryImage
+              src={img}
+              alt={`Studio image ${index + 1}`}
+              $isActive={index === currentIndex}
+              onClick={() => setCurrentIndex(index)}
+            />
+          </motion.div>
+        ))}
+      </GalleryGrid>
+
+      <NavDots>
+        {studioImages.map((_, index) => (
+          <Dot
+            key={index}
+            $isActive={index === currentIndex}
+            onClick={() => setCurrentIndex(index)}
+          />
+        ))}
+      </NavDots>
+    </StudioSection>
+  );
+};
+
+const StudioSection = styled.section`
+  padding: 4rem 2rem;
+  background: #f8f9fa;
+`;
+
+const Title = styled.h2`
+  text-align: center;
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+  color: #2c3e50;
+`;
+
+const Subtitle = styled.p`
+  text-align: center;
+  font-size: 1.2rem;
+  color: #6c757d;
+  margin-bottom: 3rem;
+`;
+
+const GalleryGrid = styled.div`
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 2rem;
+  padding: 2rem;
+`;
+
+const GalleryImage = styled.img<{ $isActive: boolean }>`
+  width: 100%;
+  height: 300px;
+  object-fit: cover;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+  transform: scale(${props => props.$isActive ? 1.05 : 1});
+  
+  &:hover {
+    transform: scale(1.05);
+  }
+`;
+
+const NavDots = styled.div`
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 2rem;
+`;
+
+const Dot = styled.button<{ $isActive: boolean }>`
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  border: none;
+  background-color: ${props => props.$isActive ? '#2c3e50' : '#dee2e6'};
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  
+  &:hover {
+    background-color: #2c3e50;
+  }
+`;
+
+export default Studio;

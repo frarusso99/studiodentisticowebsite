@@ -1,0 +1,106 @@
+import React, { useState } from 'react';
+
+const Location: React.FC = () => {
+    const [formData, setFormData] = useState({
+        name: '',
+        phone: '',
+        email: '',
+        message: ''
+    });
+
+    const handleSubmit = (e: React.FormEvent) => {
+        e.preventDefault();
+        console.log('Form submitted:', formData);
+    };
+
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+        setFormData({
+            ...formData,
+            [e.target.name]: e.target.value
+        });
+    };
+
+    return (
+        <section className="py-12 px-4">
+            <div className="max-w-6xl mx-auto grid md:grid-cols-2 gap-8">
+                <div className="w-full">
+                    <iframe
+                        src="https://www.google.com/maps/embed?pb=..." // Inserire l'URL corretto della mappa
+                        width="100%"
+                        height="450"
+                        className="border-0"
+                        allowFullScreen
+                        loading="lazy"
+                        referrerPolicy="no-referrer-when-downgrade"
+                    />
+                    <a 
+                        href="https://goo.gl/maps/..." // Inserire l'URL corretto della pagina Google
+                        className="mt-4 inline-block text-blue-600 hover:text-blue-800"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                    >
+                        Visita la nostra pagina Google
+                    </a>
+                </div>
+
+                <div className="bg-white p-6 rounded-lg shadow-lg"></div>
+                    <h2 className="text-2xl font-bold mb-4">Prenota una Consulenza Gratuita</h2>
+                    <p className="mb-6 text-gray-600">Lascia i tuoi contatti e ti richiameremo per fissare un appuntamento.</p>
+                    
+                    <form onSubmit={handleSubmit} className="space-y-4">
+                        <div>
+                            <input
+                                type="text"
+                                name="name"
+                                placeholder="Nome e Cognome"
+                                value={formData.name}
+                                onChange={handleChange}
+                                required
+                                className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                            />
+                        </div>
+                        <div>
+                            <input
+                                type="tel"
+                                name="phone"
+                                placeholder="Numero di telefono"
+                                value={formData.phone}
+                                onChange={handleChange}
+                                required
+                                className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                            />
+                        </div>
+                        <div>
+                            <input
+                                type="email"
+                                name="email"
+                                placeholder="Email"
+                                value={formData.email}
+                                onChange={handleChange}
+                                required
+                                className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                            />
+                        </div>
+                        <div>
+                            <textarea
+                                name="message"
+                                placeholder="Come possiamo aiutarti?"
+                                value={formData.message}
+                                onChange={handleChange}
+                                rows={4}
+                                className="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                            />
+                        </div>
+                        <button 
+                            type="submit" 
+                            className="w-full bg-blue-600 text-white py-2 px-4 rounded-lg hover:bg-blue-700 transition-colors"
+                        >
+                            Richiedi Informazioni
+                        </button>
+                    </form>
+                </div>
+        </section>
+    );
+};
+
+export default Location;

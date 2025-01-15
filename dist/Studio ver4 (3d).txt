@@ -1,0 +1,176 @@
+import { useState, useEffect } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { IoArrowBack, IoArrowForward } from 'react-icons/io5';
+import { FaWifi, FaTv, FaCoffee, FaParking, FaVrCardboard } from 'react-icons/fa';
+import { MdSanitizer, MdAir, MdTv } from 'react-icons/md';
+
+const studioImages = [
+  {
+    url: '/images/studio/reception.jpg',
+    title: 'Accoglienza Moderna',
+    description: 'Un ambiente confortevole dove inizia il tuo percorso di cura'
+  },
+  {
+    url: '/images/studio/treatment.jpg',
+    title: 'Tecnologia Digitale',
+    description: 'Strumentazione di ultima generazione per diagnosi precise'
+  },
+  {
+    url: '/images/studio/panoramic.jpg',
+    title: 'Sala Operatoria',
+    description: 'Ambienti sterili con tecnologie all\'avanguardia'
+  }
+];
+
+const studioFeatures = [
+  { 
+    icon: MdSanitizer,
+    title: 'Sterilizzazione Avanzata',
+    description: 'Protocolli di sterilizzazione certificati e tracciabili'
+  },
+  {
+    icon: MdAir,
+    title: 'Aria Purificata',
+    description: 'Sistema di purificazione aria di ultima generazione'
+  },
+  {
+    icon: MdTv,
+    title: 'Monitor Dedicati',
+    description: 'Visualizzazione dei trattamenti in tempo reale'
+  }
+];
+
+const Studio = () => {
+  const [currentIndex, setCurrentIndex] = useState(0);
+
+  const nextSlide = () => {
+    setCurrentIndex((prev) => (prev + 1) % studioImages.length);
+  };
+
+  const prevSlide = () => {
+    setCurrentIndex((prev) => prev === 0 ? studioImages.length - 1 : prev - 1);
+  };
+
+  useEffect(() => {
+    const timer = setInterval(nextSlide, 5000);
+    return () => clearInterval(timer);
+  }, []);
+
+  return (
+    <section className="relative overflow-hidden">
+      {/* Hero Carousel */}
+      <div className="relative h-[80vh] bg-[#233539]">
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={currentIndex}
+            initial={{ opacity: 0, scale: 1.1 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.7 }}
+            className="absolute inset-0"
+          >
+            <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-transparent to-black/60" />
+            <img
+              src={studioImages[currentIndex].url}
+              alt={studioImages[currentIndex].title}
+              className="w-full h-full object-cover"
+            />
+            <div className="absolute bottom-0 left-0 right-0 p-12 text-white">
+              <motion.h3
+                initial={{ y: 20, opacity: 0 }}
+                animate={{ y: 0, opacity: 1 }}
+                transition={{ delay: 0.3 }}
+                className="text-4xl font-light mb-4"
+              >
+                {studioImages[currentIndex].title}
+              </motion.h3>
+              <motion.p
+                initial={{ y: 20, opacity: 0 }}
+                animate={{ y: 0, opacity: 1 }}
+                transition={{ delay: 0.4 }}
+                className="text-xl text-white/90"
+              >
+                {studioImages[currentIndex].description}
+              </motion.p>
+            </div>
+          </motion.div>
+        </AnimatePresence>
+
+        {/* Navigation Arrows */}
+        <div className="absolute bottom-12 right-12 flex gap-4">
+          <button
+            onClick={prevSlide}
+            className="bg-white/10 backdrop-blur-sm hover:bg-[#4A828F] text-white 
+                     w-12 h-12 rounded-full flex items-center justify-center 
+                     transition-all duration-300 hover:scale-110"
+          >
+            <IoArrowBack className="w-6 h-6" />
+          </button>
+          <button
+            onClick={nextSlide}
+            className="bg-white/10 backdrop-blur-sm hover:bg-[#4A828F] text-white 
+                     w-12 h-12 rounded-full flex items-center justify-center 
+                     transition-all duration-300 hover:scale-110"
+          >
+            <IoArrowForward className="w-6 h-6" />
+          </button>
+        </div>
+      </div>
+
+      {/* Studio Features */}
+      <div className="container mx-auto px-6 py-24">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
+          {studioFeatures.map((feature, index) => (
+            <motion.div
+              key={feature.title}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ delay: index * 0.2 }}
+              className="group"
+            >
+              <div className="bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl 
+                           transition-all duration-500 h-full border border-gray-100
+                           hover:border-[#4A828F]/20"
+              >
+                <feature.icon className="w-12 h-12 text-[#4A828F] mb-6 
+                                     group-hover:scale-110 transition-transform duration-300" />
+                <h3 className="text-xl font-medium text-[#233539] mb-4">
+                  {feature.title}
+                </h3>
+                <p className="text-[#2E545D]/70 leading-relaxed">
+                  {feature.description}
+                </p>
+              </div>
+            </motion.div>
+          ))}
+        </div>
+
+        {/* Virtual Tour CTA */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          className="mt-24 bg-gradient-to-r from-[#233539] to-[#2E545D] 
+                   rounded-2xl p-12 text-center text-white relative overflow-hidden"
+        >
+          <div className="absolute inset-0 bg-[url('/pattern.svg')] opacity-10" />
+          <div className="relative">
+            <FaVrCardboard className="w-16 h-16 mx-auto mb-6 text-[#AFCDD5]" />
+            <h3 className="text-3xl font-light mb-4">
+              Scopri il Nostro Studio in 3D
+            </h3>
+            <p className="text-white/80 mb-8 max-w-2xl mx-auto">
+              Esplora virtualmente i nostri ambienti e scopri le tecnologie 
+              che utilizziamo per prenderci cura del tuo sorriso
+            </p>
+            <button className="bg-white text-[#233539] px-8 py-4 rounded-full 
+                           hover:bg-[#AFCDD5] transition-colors duration-300">
+              Inizia il Tour Virtuale
+            </button>
+          </div>
+        </motion.div>
+      </div>
+    </section>
+  );
+};
+
+export default Studio;
