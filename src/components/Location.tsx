@@ -115,7 +115,7 @@ const Location = () => {
           </motion.div>
 
           <motion.a 
-            href="https://g.co/kgs/aFuDtRT" 
+            href="https://g.co/kgs/MWvDSnS" 
             target="_blank"
             className="flex items-center justify-center gap-3 p-6 bg-white text-[#4A828F] no-underline rounded-2xl font-medium shadow-lg shadow-blue-100/50 border border-gray-100 hover:bg-[#4A828F] hover:text-white transition-all duration-300"
             whileHover={{ scale: 1.02 }}
