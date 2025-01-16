@@ -4,10 +4,9 @@ import { IoArrowBack, IoArrowForward } from 'react-icons/io5';
 
 const BlogCarousel = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [isDragging, setIsDragging] = useState(false);
-  const [startX, setStartX] = useState(0);
-  const [scrollLeft, setScrollLeft] = useState(0);
-  const carouselRef = useRef<HTMLDivElement>(null); // Tipo specificato
+  const [touchStart, setTouchStart] = useState({ x: 0, y: 0 });
+  const [touchEnd, setTouchEnd] = useState({ x: 0, y: 0 });
+  const carouselRef = useRef<HTMLDivElement>(null);
 
   const blogArticles = [
     {
@@ -15,28 +14,28 @@ const BlogCarousel = () => {
       category: 'Ortodonzia',
       title: 'Sorriso Perfetto con Invisalign',
       subtitle: 'Scopri come ottenere un sorriso perfetto in modo discreto e confortevole',
-      image: '/api/placeholder/800/600'
+      image: 'https://studiomedicom.it/wp-content/uploads/2020/11/invasilign.jpg'
     },
     {
       id: 2,
       category: 'Implantologia',
       title: 'Tecnologie Innovative per i Tuoi Impianti',
       subtitle: 'Le ultime novità per un recupero più rapido e risultati naturali',
-      image: '/api/placeholder/800/600'
+      image: 'https://www.studiodentisticominasi.it/media/k2/items/cache/ccb4e23c8aa216f1e96d31ab209c036b_M.jpg'
     },
     {
       id: 3,
       category: 'Igiene Dentale',
       title: 'La Prevenzione è il Miglior Sorriso',
       subtitle: 'Guida pratica per mantenere una corretta igiene orale quotidiana',
-      image: '/api/placeholder/800/600'
+      image: 'https://i0.wp.com/www.centridentisticiprimo.it/wp-content/uploads/2020/05/igiene-orale-732x447-1.jpg?fit=732%2C447&ssl=1'
     },
     {
       id: 4,
       category: 'Estetica Dentale',
       title: 'Il Tuo Sorriso, Più Brillante che Mai',
       subtitle: 'Trattamenti personalizzati per una bellezza naturale',
-      image: '/api/placeholder/800/600'
+      image: 'https://pentadentswiss.com/wp-content/uploads/2019/01/sbiancamento-dentale-1-1024x683.jpg'
     }
   ];
 
@@ -52,57 +51,37 @@ const BlogCarousel = () => {
     );
   };
 
-  const handleDragStart = (e: TouchEvent | MouseEvent) => {
-    setIsDragging(true);
-    const pageX = e instanceof TouchEvent ? e.touches[0].pageX : e.pageX;
-    setStartX(pageX);
-    if (carouselRef.current) {
-      setScrollLeft(carouselRef.current.scrollLeft);
-    }
+  const handleTouchStart = (e: React.TouchEvent) => {
+    setTouchStart({
+      x: e.touches[0].clientX,
+      y: e.touches[0].clientY
+    });
   };
-  
-  const handleDragMove = (e: TouchEvent | MouseEvent) => {
-    if (!isDragging) return;
-    e.preventDefault();
-    const pageX = e instanceof TouchEvent ? e.touches[0].pageX : e.pageX;
-    const walk = (pageX - startX) * 2;
-  
-    if (Math.abs(walk) > 50) {
-      if (walk > 0) {
-        prevSlide();
-      } else {
+
+  const handleTouchMove = (e: React.TouchEvent) => {
+    setTouchEnd({
+      x: e.touches[0].clientX,
+      y: e.touches[0].clientY
+    });
+  };
+
+  const handleTouchEnd = () => {
+    const deltaX = touchStart.x - touchEnd.x;
+    const deltaY = touchStart.y - touchEnd.y;
+
+    // Se il movimento orizzontale è maggiore di quello verticale e supera una soglia minima
+    if (Math.abs(deltaX) > Math.abs(deltaY) && Math.abs(deltaX) > 50) {
+      if (deltaX > 0) {
         nextSlide();
+      } else {
+        prevSlide();
       }
-      setIsDragging(false);
     }
+
+    // Reset degli stati touch
+    setTouchStart({ x: 0, y: 0 });
+    setTouchEnd({ x: 0, y: 0 });
   };
-  
-  const handleDragEnd = () => {
-    setIsDragging(false);
-  };
-
-  useEffect(() => {
-    const carousel = carouselRef.current;
-    if (!carousel) return;
-
-    carousel.addEventListener('touchstart', handleDragStart);
-    carousel.addEventListener('touchmove', handleDragMove);
-    carousel.addEventListener('touchend', handleDragEnd);
-    carousel.addEventListener('mousedown', handleDragStart);
-    carousel.addEventListener('mousemove', handleDragMove);
-    carousel.addEventListener('mouseup', handleDragEnd);
-    carousel.addEventListener('mouseleave', handleDragEnd);
-
-    return () => {
-      carousel.removeEventListener('touchstart', handleDragStart);
-      carousel.removeEventListener('touchmove', handleDragMove);
-      carousel.removeEventListener('touchend', handleDragEnd);
-      carousel.removeEventListener('mousedown', handleDragStart);
-      carousel.removeEventListener('mousemove', handleDragMove);
-      carousel.removeEventListener('mouseup', handleDragEnd);
-      carousel.removeEventListener('mouseleave', handleDragEnd);
-    };
-  }, [isDragging, startX]);
 
   return (
     <section className="py-16 md:py-32 bg-gradient-to-b from-[#AFCDD5]/10 to-white">
@@ -118,7 +97,6 @@ const BlogCarousel = () => {
         </div>
 
         <div className="relative max-w-7xl mx-auto" ref={carouselRef}>
-          {/* Navigation Buttons - Hidden on mobile */}
           <button 
             onClick={prevSlide}
             className="hidden md:flex absolute left-0 top-1/2 -translate-y-1/2 -translate-x-6 z-10 
@@ -139,6 +117,9 @@ const BlogCarousel = () => {
                 exit={{ opacity: 0, x: -100 }}
                 transition={{ type: "spring", stiffness: 300, damping: 30 }}
                 className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8"
+                onTouchStart={handleTouchStart}
+                onTouchMove={handleTouchMove}
+                onTouchEnd={handleTouchEnd}
               >
                 {[
                   currentIndex,
@@ -151,9 +132,10 @@ const BlogCarousel = () => {
                               ${index !== currentIndex ? 'hidden md:block' : ''}`}
                   >
                     <motion.div 
-                      className="bg-white rounded-2xl overflow-hidden shadow-[0_8px_30px_rgb(0,0,0,0.06)] h-full"
+                      className="bg-white rounded-2xl overflow-hidden shadow-[0_8px_30px_rgb(0,0,0,0.06)]"
                       whileHover={{ y: -8 }}
                       transition={{ duration: 0.4 }}
+                      style={{ height: '500px' }} // Altezza fissa per tutte le card
                     >
                       <div className="relative h-48 md:h-64 overflow-hidden">
                         <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent z-10" />
@@ -167,12 +149,13 @@ const BlogCarousel = () => {
                           {blogArticles[index].category}
                         </span>
                       </div>
-                      <div className="p-6 md:p-8">
+                      <div className="p-6 md:p-8 flex flex-col h-[calc(500px-16rem)]"> {/* Calcolo preciso dell'altezza rimanente */}
                         <h3 className="text-xl md:text-2xl font-medium text-[#233539] mb-3 
-                                   group-hover:text-[#4A828F] transition-colors duration-300">
+                                   group-hover:text-[#4A828F] transition-colors duration-300 
+                                   line-clamp-2 flex-none"> {/* flex-none impedisce la compressione */}
                           {blogArticles[index].title}
                         </h3>
-                        <p className="text-[#2E545D]/70 leading-relaxed">
+                        <p className="text-[#2E545D]/70 leading-relaxed line-clamp-3 flex-grow">
                           {blogArticles[index].subtitle}
                         </p>
                       </div>
@@ -194,7 +177,6 @@ const BlogCarousel = () => {
             <IoArrowForward className="w-6 h-6" />
           </button>
 
-          {/* Dots Navigation */}
           <div className="flex justify-center mt-8 md:mt-12 gap-2">
             {blogArticles.map((_, idx) => (
               <button
