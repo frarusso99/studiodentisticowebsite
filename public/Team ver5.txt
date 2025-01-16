@@ -6,41 +6,31 @@ const teamMembers = [
         id: 1,
         name: "Dr. Mario Rossi",
         role: "Direttore Sanitario",
-        image: "https://www.adcdentalcenter.it/wp-content/uploads/sos-dentista.webp",
-        bgColor: "bg-[#AFCDD5]"
+        image: "/team/mario-rossi.webp",
+        bgColor: "bg-[#FFE4D6]"
     },
     {
         id: 2,
         name: "Dr.ssa Anna Bianchi",
         role: "Ortodontista",
-        image: "./ortodontista.webp",
+        image: "/team/anna-bianchi.webp",
         bgColor: "bg-[#D6E9FF]"
     },
     {
         id: 3,
         name: "Dr. Luca Verdi",
         role: "Chirurgo Orale",
-        image: "https://www.letterainsurancebroker.com/wp-content/uploads/2023/07/assicurazione-dentisti.jpg",
+        image: "/team/luca-verdi.webp",
         bgColor: "bg-[#F8E4FF]"
-    },
-    {
-        id: 4,
-        name: "Dr.ssa Chiara Neri",
-        role: "Igienista Dentale",
-        image: "https://media.gettyimages.com/id/1391411841/it/foto/facciamo-in-modo-che-questi-denti-siano-di-nuovo-buoni.jpg?s=612x612&w=gi&k=20&c=B3o7kC2fw45uLxr7RQgp2PgrtHGKXhxE_SoqiSdcPio=",
-        bgColor: "bg-[#FFE4D6]"
     }
 ];
 
 export default function Team() {
     const { scrollY } = useScroll();
-
-    const yTransforms = [
-        useTransform(scrollY, [0, 1000], [0, -50]),
-        useTransform(scrollY, [0, 1000], [0, -20]),
-        useTransform(scrollY, [0, 1000], [0, -35]),
-        useTransform(scrollY, [0, 1000], [0, -25])
-    ];
+    
+    const y1 = useTransform(scrollY, [0, 1000], [0, -50]);
+    const y2 = useTransform(scrollY, [0, 1000], [0, -20]);
+    const y3 = useTransform(scrollY, [0, 1000], [0, -35]);
 
     return (
         <section className="relative min-h-screen py-20 lg:py-32 overflow-hidden bg-white">
@@ -79,16 +69,15 @@ export default function Team() {
                     </motion.div>
 
                     {/* Team Members - Desktop */}
-                    <div className="lg:w-1/2 relative h-[600px] hidden lg:block">
+                    <div className="lg:w-1/2 relative h-[500px] hidden lg:block">
                         {teamMembers.map((member, index) => (
                             <motion.div
                                 key={member.id}
-                                style={{ y: yTransforms[index] }}
+                                style={{ y: [y1, y2, y3][index] }}
                                 className={`absolute transition-all duration-500
-                                    ${index === 0 ? 'left-[5%] top-[5%]' : ''}
-                                    ${index === 1 ? 'left-[50%] top-[10%] translate-x-[-50%]' : ''}
-                                    ${index === 2 ? 'left-[20%] top-[60%]' : ''}
-                                    ${index === 3 ? 'left-[60%] top-[50%] translate-x-[-50%]' : ''}
+                                    ${index === 0 ? 'left-[10%] top-[5%]' : ''}
+                                    ${index === 1 ? 'left-[40%] top-[35%]' : ''}
+                                    ${index === 2 ? 'left-[15%] top-[60%]' : ''}
                                 `}
                             >
                                 <motion.div

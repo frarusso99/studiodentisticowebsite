@@ -19,49 +19,27 @@ const services = [
     title: "Implantologia All-on-4",
     description: "Recupera il tuo sorriso in una sola seduta con la tecnologia implantare più innovativa."
   },
-
   {
     icon: <Shield className="w-8 h-8 sm:w-10 sm:h-10" />,
-    title: "Implantologia All-on-4",
-    description: "Recupera il tuo sorriso in una sola seduta con la tecnologia implantare più innovativa."
-  },
-
+    title: "Ortodonzia Invisibile",
+    description: "Ti garantiamo il raggiungimento di un perfetto allineamento dentale con tecniche invisibili e personalizzate."
+  }
 ];
 
-interface CardVariants {
-  [key: string]: any;
-  enter: (direction: number) => {
-    x: number;
-    opacity: number;
-  };
-  center: {
-    zIndex: number;
-    x: number;
-    opacity: number;
-  };
-  exit: (direction: number) => {
-    zIndex: number;
-    x: number;
-    opacity: number;
-  };
-}
-
-const cardVariants: CardVariants = {
+const cardVariants = {
   enter: (direction: number) => ({
-    x: direction > 0 ? 300 : -300,  // Reduced from 1000 to 300
+    x: direction > 0 ? 100 : -100,
     opacity: 0
   }),
   center: {
-    zIndex: 1,
     x: 0,
     opacity: 1
   },
   exit: (direction: number) => ({
-    zIndex: 0,
-    x: direction < 0 ? 300 : -300,  // Reduced from 1000 to 300
+    x: direction < 0 ? 100 : -100,
     opacity: 0
   })
-}
+};
 
 export default function Services() {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -76,16 +54,15 @@ export default function Services() {
   }, []);
 
   const swipeHandlers = useSwipeable({
-    onSwipedLeft: (_eventData: SwipeEventData) => {
+    onSwipedLeft: () => {
       setDirection(1);
       setCurrentIndex((prev) => (prev + 1) % services.length);
     },
-    onSwipedRight: (_eventData: SwipeEventData) => {
+    onSwipedRight: () => {
       setDirection(-1);
       setCurrentIndex((prev) => (prev - 1 + services.length) % services.length);
     },
     trackMouse: true,
-    swipeDuration: 500,
     preventScrollOnSwipe: true,
     trackTouch: true
   });
@@ -97,14 +74,15 @@ export default function Services() {
   ];
 
   return (
-    <section className="min-h-[80vh] flex items-center bg-gradient-to-b from-[#233539] via-[#4A828F] to-[#233539] py-12 lg:py-20 overflow-hidden">
+    <section className="relative py-16 lg:py-20 bg-gradient-to-b from-[#233539] via-[#4A828F] to-[#233539] overflow-hidden">
       <div className="absolute inset-0 bg-[url('/pattern.png')] opacity-5" />
       
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <motion.div 
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          transition={{ duration: 0.6 }}
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5 }}
+          viewport={{ once: true }}
           className="text-center max-w-3xl mx-auto mb-12"
         >
           <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-white mb-4">
@@ -137,45 +115,38 @@ export default function Services() {
         </div>
 
         <div {...swipeHandlers} className="relative px-4">
-          <AnimatePresence initial={false} mode="wait" custom={direction}>
-            <motion.div
-              key={currentIndex}
-              custom={direction}
-              variants={cardVariants}
-              initial="enter"
-              animate="center"
-              exit="exit"
-              transition={{ duration: 0.5, ease: "easeInOut" }}
-              className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8"
-            >
-              {visibleServices.map((service, idx) => (
-                <motion.div
-                  key={idx}
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: idx * 0.1 }}
-                  className="group relative"
-                >
-                  <div 
-                    className="absolute inset-0 bg-gradient-to-br from-[#4A828F]/40 to-[#AFCDD5]/40 rounded-3xl transform rotate-2 transition-all duration-300 group-hover:rotate-0 group-hover:scale-105 blur-sm"
-                  />
-                  <div className="relative p-6 sm:p-8 bg-gradient-to-br from-white/90 to-white/80 backdrop-blur-md rounded-3xl shadow-xl transition-all duration-300 group-hover:-translate-y-1">
-                    <div className="mb-5 p-4 bg-gradient-to-br from-[#AFCDD5]/20 to-[#4A828F]/10 rounded-2xl w-fit">
-                      <div className="text-[#4A828F] transition-colors duration-300 group-hover:text-[#233539]">
-                        {service.icon}
-                      </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
+            {visibleServices.map((service, idx) => (
+              <motion.div
+                key={`${currentIndex}-${idx}`}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ 
+                  duration: 0.4,
+                  delay: idx * 0.1,
+                  ease: "easeOut"
+                }}
+                className="group relative"
+              >
+                <div 
+                  className="absolute inset-0 bg-gradient-to-br from-[#4A828F]/40 to-[#AFCDD5]/40 rounded-3xl transform rotate-2 transition-all duration-300 group-hover:rotate-0 group-hover:scale-105 blur-sm"
+                />
+                <div className="relative p-6 sm:p-8 bg-gradient-to-br from-white/90 to-white/80 backdrop-blur-md rounded-3xl shadow-xl transition-all duration-300 group-hover:-translate-y-1">
+                  <div className="mb-5 p-4 bg-gradient-to-br from-[#AFCDD5]/20 to-[#4A828F]/10 rounded-2xl w-fit">
+                    <div className="text-[#4A828F] transition-colors duration-300 group-hover:text-[#233539]">
+                      {service.icon}
                     </div>
-                    <h3 className="text-lg sm:text-xl font-bold text-[#233539] mb-3 transition-colors duration-300 group-hover:text-[#4A828F]">
-                      {service.title}
-                    </h3>
-                    <p className="text-sm sm:text-base text-gray-600/90 leading-relaxed">
-                      {service.description}
-                    </p>
                   </div>
-                </motion.div>
-              ))}
-            </motion.div>
-          </AnimatePresence>
+                  <h3 className="text-lg sm:text-xl font-bold text-[#233539] mb-3 transition-colors duration-300 group-hover:text-[#4A828F]">
+                    {service.title}
+                  </h3>
+                  <p className="text-sm sm:text-base text-gray-600/90 leading-relaxed">
+                    {service.description}
+                  </p>
+                </div>
+              </motion.div>
+            ))}
+          </div>
 
           <div className="flex justify-between mt-8">
             <button
