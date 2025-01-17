@@ -43,7 +43,7 @@ export default function Team() {
     ];
 
     return (
-        <section className="relative min-h-screen py-20 lg:py-28 overflow-hidden bg-primary/10">
+        <section className="relative min-h-screen py-20 lg:py-32 overflow-hidden bg-white">
             <div className="container mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="flex flex-col lg:flex-row items-center justify-between gap-16 lg:gap-24">
                     {/* Content Section */}
@@ -55,13 +55,13 @@ export default function Team() {
                         className="lg:w-1/2 max-w-xl"
                     >
                         <div className="space-y-8">
-                            <h2 className="font-urbanist text-4xl sm:text-5xl lg:text-6xl font-bold text-primary-medium/90 leading-tight">
+                            <h2 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-[#233539] leading-tight">
                                 Staff cordiale,
                                 <span className="block">Dentisti eccezionali,</span>
-                                <span className="block text-primary/70">Servizio impeccabile.</span>
+                                <span className="block text-[#4A828F]">Servizio impeccabile.</span>
                             </h2>
                             
-                            <p className="font-manrope font-medium text-lg text-[#2E545D]/80 leading-relaxed">
+                            <p className="text-lg text-[#2E545D]/80 leading-relaxed">
                                 Il nostro team unisce competenza ed empatia per offrirti 
                                 un'esperienza di cura dentale superiore. Ogni membro porta 
                                 con sé anni di esperienza e una passione genuina per il 
@@ -70,7 +70,7 @@ export default function Team() {
 
                             <motion.button
                                 whileHover={{ x: 5 }}
-                                className="font-manrope inline-flex items-center gap-2 text-[#4A828F] font-semibold hover:text-[#233539] transition-colors"
+                                className="inline-flex items-center gap-2 text-[#4A828F] font-medium hover:text-[#233539] transition-colors"
                             >
                                 Scopri di più sul nostro team
                                 <ArrowRight className="w-5 h-5" />

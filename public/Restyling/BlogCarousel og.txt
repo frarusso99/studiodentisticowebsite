@@ -87,10 +87,10 @@ const BlogCarousel = () => {
     <section className="py-16 md:py-32 bg-gradient-to-b from-[#AFCDD5]/10 to-white">
       <div className="container mx-auto px-4 md:px-6">
         <div className="max-w-3xl mx-auto text-center mb-12 md:mb-16">
-          <h2 className="font-bold text-primary-medium/90 font-urbanist text-6xl md:text-5xl mb-4 md:mb-6">
+          <h2 className="text-4xl md:text-5xl font-light text-[#233539] mb-4 md:mb-6">
             Approfondimenti e Novità
           </h2>
-          <p className="font-urbanist font-semibold text-lg md:text-xl text-primary-medium/60 leading-relaxed">
+          <p className="text-lg md:text-xl text-[#2E545D]/80 leading-relaxed">
             Esplora i nostri articoli per rimanere aggiornato sulle ultime novità 
             nel campo della salute dentale
           </p>
@@ -144,18 +144,18 @@ const BlogCarousel = () => {
                           alt={blogArticles[index].title}
                           className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700"
                         />
-                        <span className="font-manrope absolute top-4 left-4 z-20 px-4 py-1.5 rounded-full text-sm 
+                        <span className="absolute top-4 left-4 z-20 px-4 py-1.5 rounded-full text-sm 
                                      font-medium text-white bg-[#4A828F]/90 backdrop-blur-sm">
                           {blogArticles[index].category}
                         </span>
                       </div>
                       <div className="p-6 md:p-8 flex flex-col h-[calc(500px-16rem)]"> {/* Calcolo preciso dell'altezza rimanente */}
-                        <h3 className="font-urbanist text-xl md:text-2xl font-semibold text-primary-medium/90 mb-3 
+                        <h3 className="text-xl md:text-2xl font-medium text-[#233539] mb-3 
                                    group-hover:text-[#4A828F] transition-colors duration-300 
                                    line-clamp-2 flex-none"> {/* flex-none impedisce la compressione */}
                           {blogArticles[index].title}
                         </h3>
-                        <p className="font-manrope font-medium text-[#2E545D]/70 leading-relaxed line-clamp-3 flex-grow">
+                        <p className="text-[#2E545D]/70 leading-relaxed line-clamp-3 flex-grow">
                           {blogArticles[index].subtitle}
                         </p>
                       </div>

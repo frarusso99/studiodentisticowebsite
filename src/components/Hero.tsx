@@ -1,194 +1,185 @@
-import { Clock, MapPin, ChevronDown } from 'lucide-react';
-import { FaWhatsapp } from 'react-icons/fa';
-import { useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import React, { useState, useEffect } from 'react';
+import { ChevronLeft, ChevronRight } from 'lucide-react';
+import { useSwipeable } from 'react-swipeable';
+import { motion } from 'framer-motion';
 
-const openingHours = [
-  { day: "Lunedì - Venerdì", hours: "09:00 - 19:00" },
-  { day: "Sabato", hours: "09:00 - 13:00" },
-  { day: "Domenica", hours: "Chiuso" }
-];
+const HeroSection = () => {
+  const [currentSlide, setCurrentSlide] = useState(0);
+  const [scrollPosition, setScrollPosition] = useState(0);
+  const [isMobile, setIsMobile] = useState(false);
 
-const images = [
-  {
-    src: "https://images.unsplash.com/photo-1629909613654-28e377c37b09",
-    alt: "Studio dentistico moderno",
-    title: "Studio Moderno",
-    desc: "Tecnologia e comfort per i nostri pazienti"
-  },
-  {
-    src: "https://centridentalsmile.it/wp-content/uploads/2018/11/scanner-intra-orale.jpg",
-    alt: "Scanner intraorale",
-    title: "Scanner Intraorale",
-    desc: "Precisione digitale per il tuo sorriso"
-  },
-  {
-    src: "https://www.dental-art.it/wp-content/uploads/2020/10/studio-dentistico-monterotti-area-servizio_11-scaled-e1602678564612.jpg",
-    alt: "Sala operatoria",
-    title: "Sala Operatoria",
-    desc: "Ambiente sterile e all'avanguardia"
-  }
-];
+  const images = [
+    'https://images.pexels.com/photos/305568/pexels-photo-305568.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
+    'https://images.pexels.com/photos/52527/dentist-pain-borowac-cure-52527.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
+    'https://images.unsplash.com/photo-1629909613654-28e377c37b09',
+  ];
 
-export default function Hero() {
-  const [currentHour, setCurrentHour] = useState(0);
-  const [isPaused, setIsPaused] = useState(false);
-  const [isExpanded, setIsExpanded] = useState(false);
+  const nextSlide = () => {
+    setCurrentSlide((prev) => (prev === images.length - 1 ? 0 : prev + 1));
+  };
+
+  const prevSlide = () => {
+    setCurrentSlide((prev) => (prev === 0 ? images.length - 1 : prev - 1));
+  };
 
   useEffect(() => {
-    if (isPaused) return;
-    const timer = setInterval(() => {
-      setCurrentHour((prev) => (prev + 1) % openingHours.length);
-    }, 3000);
-    return () => clearInterval(timer);
-  }, [isPaused]);
+    const timer = setInterval(nextSlide, 5000);
+  
+    const handleResize = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+  
+    let ticking = false;
+    const handleScroll = () => {
+      if (!isMobile && !ticking) {
+        ticking = true;
+        requestAnimationFrame(() => {
+          setScrollPosition(window.scrollY);
+          ticking = false;
+        });
+      }
+    };
+  
+    handleResize();
+    window.addEventListener('scroll', handleScroll);
+    window.addEventListener('resize', handleResize);
+  
+    return () => {
+      clearInterval(timer);
+      window.removeEventListener('scroll', handleScroll);
+      window.removeEventListener('resize', handleResize);
+    };
+  }, [isMobile]);
+  
+
+  const handlers = useSwipeable({
+    onSwipedLeft: nextSlide,
+    onSwipedRight: prevSlide,
+    trackMouse: true,
+  });
+
+  // Calcola le trasformazioni basate sullo scroll
+  const maxScroll = 400; // Punto massimo di scroll per l'effetto
+  const progress = Math.min(scrollPosition / maxScroll, 1);
+
+  // Interpolazione lineare per le proprietà animate
+  const minHeight = isMobile ? 300 : 460; // Altezza iniziale (mobile vs desktop)
+  const maxHeight = isMobile ? 300 : 700; // Altezza massima dopo lo scroll (solo desktop)
+  const currentHeight = isMobile ? minHeight : minHeight + (maxHeight - minHeight) * progress;
+
+  // Calcola l'offset dello scroll solo per desktop
+  const scrollOffset = isMobile ? 0 : Math.min(scrollPosition / 3, 120);
 
   return (
-    <section className="relative min-h-screen pt-28 sm:pt-28 md:pt-32 pb-16 md:pb-20 lg:pb-24 bg-gradient-to-br from-primary-light/5 via-white to-primary/5">
-      {/* Gradient Background */}
-      <div className="absolute inset-0 overflow-hidden">
-        <div className="absolute top-0 left-0 w-full h-1/2 bg-gradient-to-br from-[#AFCDD5]/20 to-transparent blur-[40px]" />
-        <div className="absolute bottom-0 right-0 w-full h-1/2 bg-gradient-to-tl from-[#4A828F]/10 to-transparent blur-[40px]" />
-      </div>
-
-      {/* Main Content */}
-      <div className="relative container mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-start">
-          
-          {/* Left Column */}
-          <div className="space-y-8 md:space-y-10">
-            {/* Hero Text */}
-            <div className="space-y-6">
-              <motion.h1 
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                className="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-800 leading-tight"
-              >
-                Il Tuo Sorriso, <br />
-                <span className="text-primary mt-2 block">La Nostra Passione</span>
-              </motion.h1>
-              
-              <motion.p 
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ delay: 0.2 }}
-                className="text-lg md:text-xl text-gray-600 max-w-prose leading-relaxed"
-              >
-                Trasformiamo la salute del tuo sorriso con tecnologia all'avanguardia 
-                e cure personalizzate nel cuore di Reggio Calabria.
-              </motion.p>
-            </div>
-
-            {/* Opening Hours Card */}
-            <motion.div 
-              className="bg-white/80 backdrop-blur-sm rounded-2xl p-6 shadow-lg border border-gray-100 relative"
-              whileHover={{ y: -2 }}
-              onHoverStart={() => setIsPaused(true)}
-              onHoverEnd={() => setIsPaused(false)}
-            >
-        <button 
-          onClick={() => setIsExpanded(!isExpanded)}
-          className="flex items-center justify-between w-full lg:hidden"
+    <div className="min-h-[100vh] md:min-h-[150vh] relative w-full min-h-screen bg-gradient-to-br from-[#4A828F] via-[#5BA3AE] to-[#A4D2C5] px-4 md:px-8">
+      <div className="max-w-[1400px] mx-auto relative z-20 pt-28 md:pt-32">
+        {/* Hero Text */}
+        <motion.h1
+          className="text-5xl md:text-6xl font-light leading-tight mb-8 md:mb-8 md:text-center text-left px-0 md:px-4"
+          initial={{ opacity: 0, y: -50 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5 }}
         >
-          <div className="flex items-center gap-3">
-            <Clock className="text-primary" size={24} />
-            <h2 className="font-semibold text-gray-800 text-lg">Orari di Apertura</h2>
-          </div>
-          <ChevronDown 
-            className={`text-primary transition-transform duration-300 ${
-              isExpanded ? 'rotate-180' : ''
-            }`} 
-            size={20} 
-          />
-        </button>
+          <span className="font-urbanist font-semibold text-white block md:inline text-5xl md:text-6xl lg:text-7xl leading-tight">
+            Il tuo sorriso
+          </span>{' '}
+          <span className="font-urbanist font-semibold text-white block md:inline text-5xl md:text-6xl lg:text-7xl leading-tight">
+            è la nostra priorità
+          </span>
+        </motion.h1>
 
-        <div className="hidden lg:flex items-center gap-3 mb-4">
-          <Clock className="text-primary" size={24} />
-          <h2 className="font-semibold text-gray-800 text-lg">Orari di Apertura</h2>
-        </div>
-
+        {/* Carousel Container with Overlay */}
         <motion.div
-          initial={{ height: 40 }}
-          animate={{ 
-            height: isExpanded ? 'auto' : 40,
-            transition: { duration: 0.3 }
+          className="relative"
+          animate={{
+            y: scrollOffset,
+            height: currentHeight,
           }}
-          whileHover={{ height: 'auto' }}
-          className="overflow-hidden"
+          transition={{ type: 'spring', stiffness: 300, damping: 50 }}
         >
-          <AnimatePresence mode="wait">
-            {(openingHours.map((schedule, index) =>
-              (index === currentHour || isPaused || isExpanded) ? (
-                <motion.div
-                  key={index}
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -20 }}
-                  className="flex justify-between py-2"
-                >
-                  <span className="text-gray-600 text-base">{schedule.day}</span>
-                  <span className="text-primary font-medium text-lg">{schedule.hours}</span>
-                </motion.div>
-              ) : null
-            ))}
-          </AnimatePresence>
-        </motion.div>
-      </motion.div>
-
-            {/* CTA Buttons */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 md:gap-6">
-              <motion.a
-                whileHover={{ scale: 1.02 }}
-                whileTap={{ scale: 0.98 }}
-                href="https://wa.me/+39NUMEROSTUDIO"
-                className="flex items-center justify-center gap-3 px-8 py-4 bg-[#25D366] text-white rounded-xl hover:bg-[#20BA5A] transition-all duration-300 shadow-md hover:shadow-lg"
-              >
-                <FaWhatsapp size={24} />
-                <span className="text-base font-medium">Prenota Visita</span>
-              </motion.a>
-              
-              <motion.a
-                whileHover={{ scale: 1.02 }}
-                whileTap={{ scale: 0.98 }}
-                href="#dove-siamo"
-                className="flex items-center justify-center gap-3 px-8 py-4 bg-primary text-white rounded-xl hover:bg-primary-dark transition-all duration-300 shadow-md hover:shadow-lg"
-              >
-                <MapPin size={24} />
-                <span className="text-base font-medium">Dove Siamo</span>
-              </motion.a>
+          <div
+            className={`relative w-full overflow-hidden rounded-2xl transition-all duration-300`}
+            style={{ height: `${currentHeight}px` }}
+          >
+            {/* Carousel Content */}
+            <div
+              className="flex h-full transition-transform duration-500 ease-out"
+              style={{ transform: `translateX(-${currentSlide * 100}%)` }}
+              {...handlers}
+            >
+              {images.map((img, index) => (
+                <div key={index} className="w-full h-full flex-shrink-0 relative">
+                  <img
+                    src={img}
+                    alt={`Slide ${index + 1}`}
+                    className={`w-full h-full object-cover transition-all duration-300`}
+                  />
+                  {/* Image Overlay - si attenua con lo scroll */}
+                  <div
+                    className="absolute inset-0 bg-gradient-to-t from-[#233539]/80 via-transparent to-transparent transition-opacity duration-300"
+                    style={{ opacity: isMobile ? 1 : 1 - progress * 0.8 }}
+                  />
+                </div>
+              ))}
             </div>
-          </div>
 
-          {/* Right Column - Gallery */}
-          <div className="grid grid-cols-2 gap-4 md:gap-6 mt-8 lg:mt-0">
-            {images.map((image, index) => (
-              <motion.div
-                key={image.src}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: index * 0.2 }}
-                className={`group relative rounded-xl overflow-hidden shadow-md hover:shadow-xl transition-shadow duration-300 ${
-                  index === 2 ? "col-span-2" : ""
-                }`}
-              >
-                <img
-                  src={image.src}
-                  alt={image.alt}
-                  className={`w-full object-cover transition-transform duration-500 group-hover:scale-105 ${
-                    index === 2 ? "h-56 md:h-64" : "h-48 md:h-56"
+            {/* Carousel Navigation Dots */}
+            <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-2 z-20">
+              {images.map((_, index) => (
+                <button
+                  key={index}
+                  onClick={() => setCurrentSlide(index)}
+                  className={`w-2 h-2 rounded-full transition-colors duration-300 ${
+                    currentSlide === index ? 'bg-white' : 'bg-white/50'
                   }`}
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                  <div className="absolute bottom-4 left-4 right-4 text-white">
-                    <h3 className="text-lg font-semibold">{image.title}</h3>
-                    <p className="text-sm text-gray-200 mt-1">{image.desc}</p>
-                  </div>
-                </div>
-              </motion.div>
-            ))}
+              ))}
+            </div>
+
+            {/* Desktop CTA */}
+            <div className="hidden md:flex items-start flex-col absolute bottom-8 left-8 space-y-6 z-20">
+              <p className="font-manrope text-white text-xl font-light max-w-lg leading-relaxed">
+                Siamo un team dedicato alla cura del tuo sorriso,
+                <br /> con tecnologie all'avanguardia.
+              </p>
+              <button className="font-manrope bg-white hover:bg-[#AFCDD5] text-primary px-8 py-4 rounded-2xl transition-all duration-300 shadow-lg text-lg font-bold transform hover:scale-105">
+                Prenota ora
+              </button>
+            </div>
+
+            {/* Desktop Navigation Arrows */}
+            <div className="hidden md:flex absolute bottom-8 right-8 gap-3 z-20">
+              <button
+                onClick={prevSlide}
+                className="bg-white/20 hover:bg-white/40 backdrop-blur-sm p-3 rounded-full transition-colors duration-300 text-white"
+                aria-label="Previous slide"
+              >
+                <ChevronLeft className="w-6 h-6" />
+              </button>
+              <button
+                onClick={nextSlide}
+                className="bg-white/20 hover:bg-white/40 backdrop-blur-sm p-3 rounded-full transition-colors duration-300 text-white"
+                aria-label="Next slide"
+              >
+                <ChevronRight className="w-6 h-6" />
+              </button>
+            </div>
           </div>
-        </div>
+
+          {/* Mobile CTA - Moved outside carousel */}
+          <div className="block md:hidden mt-8 space-y-6 text-left px-2">
+            <p className="text-white text-2xl font-light leading-relaxed">
+              Siamo un team dedicato alla cura del tuo sorriso,
+              <br className="hidden sm:block" /> con tecnologie all'avanguardia.
+            </p>
+            <button className="bg-white hover:bg-[#AFCDD5] text-[#233539] px-10 py-5 rounded-full transition-all duration-300 shadow-lg text-xl font-medium transform hover:scale-105">
+              Prenota ora
+            </button>
+          </div>
+        </motion.div>
       </div>
-    </section>
+    </div>
   );
-}
+};
+
+export default HeroSection;

@@ -52,9 +52,9 @@ const Location = () => {
   };
 
   return (
-    <section className="py-16 px-4 sm:px-8 bg-gradient-to-b from-primary/20 to-white/80">
+    <section className="py-16 px-4 sm:px-8 bg-gradient-to-b from-[#AFCDD5]/30 to-white/80">
       <motion.h1 
-        className="font-urbanist text-4xl text-center sm:text-5xl font-semibold text-primary-medium/90 mb-16"
+        className="text-center text-4xl md:text-5xl font-light text-[#233539] mb-16"
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6 }}
@@ -71,14 +71,14 @@ const Location = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
             >
-              <h3 className="font-urbanist font-semibold text-xl text-primary-medium/90 mb-6 flex items-center gap-2">
+              <h3 className="text-xl text-[#233539] mb-6 flex items-center gap-2">
                 <FaMapMarkerAlt className="text-[#4A828F]" /> Studio Dentistico
               </h3>
-              <p className="font-manrope font-medium text-[#2E545D] my-3">Via G. Washington, 70, 20146 Milano MI</p>
+              <p className="text-[#2E545D] my-3">Via G. Washington, 70, 20146 Milano MI</p>
               <p className="text-[#2E545D] my-3 flex items-center gap-2">
                 <FaPhone className="text-[#4A828F]" /> +39 02 4047785
               </p>
-              <p className="font-manrope font-medium text-[#2E545D] my-3 flex items-center gap-2">
+              <p className="text-[#2E545D] my-3 flex items-center gap-2">
                 <FaEnvelope className="text-[#4A828F]" /> studio@dentistagalimberti.it
               </p>
             </motion.div>
@@ -89,11 +89,11 @@ const Location = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.1 }}
             >
-              <h3 className="font-urbanist font-semibold text-primary-medium/90 text-xl mb-6 flex items-center gap-2">
+              <h3 className="text-xl text-[#233539] mb-6 flex items-center gap-2">
                 <FaClock className="text-[#4A828F]" /> Orari di Apertura
               </h3>
               {businessHours.map(({ day, hours }) => (
-                <p key={day} className="font-manrope font-medium text-[#2E545D] my-3">
+                <p key={day} className="text-[#2E545D] my-3">
                   <strong>{day}:</strong> {hours}
                 </p>
               ))}
@@ -121,7 +121,7 @@ const Location = () => {
             whileHover={{ scale: 1.02 }}
           >
             <FaGoogle className="text-xl" /> 
-            <span className="font-bold font-manrope">4.9</span>
+            <span className="font-medium">4.9</span>
             <div className="flex gap-1 text-yellow-400">
               <FaStar />
               <FaStar />
@@ -129,7 +129,7 @@ const Location = () => {
               <FaStar />
               <FaStar />
             </div>
-            <span className="font-manrope font-semibold text-sm">(Leggi le recensioni degli utenti)</span>
+            <span className="text-sm">(120+ recensioni)</span>
           </motion.a>
         </div>
 
@@ -139,19 +139,19 @@ const Location = () => {
           transition={{ duration: 0.6, delay: 0.3 }}
         >
           <div className="bg-white p-10 rounded-3xl shadow-lg shadow-blue-100/50 border border-gray-100">
-            <div className="font-manrope font-medium inline-flex items-center gap-2 bg-[#4A828F]/10 text-[#4A828F] px-6 py-3 rounded-full text-sm mb-6">
+            <div className="inline-flex items-center gap-2 bg-[#4A828F]/10 text-[#4A828F] px-6 py-3 rounded-full text-sm mb-6">
               <FaRegCalendarCheck /> Risposta entro 24h
             </div>
             
-            <h2 className="font-manrope font-semibold text-3xl text-primary-medium/90 mb-4">Prenota una Visita</h2>
-            <p className="font-manrope font-medium text-primary-medium/90 mb-8 leading-relaxed">
+            <h2 className="text-3xl text-[#233539] mb-4 font-light">Prenota una Visita</h2>
+            <p className="text-[#2E545D] mb-8 leading-relaxed">
               Compila il form per richiedere un appuntamento. 
               Il nostro team ti ricontatterà per trovare l'orario più adatto alle tue esigenze.
             </p>
 
             <form onSubmit={handleSubmit} className="flex flex-col gap-6">
               <div className="flex flex-col gap-2">
-                <label className="font-manrope text-primary-medium/90 text-sm font-semibold">
+                <label className="text-[#233539] text-sm font-medium">
                   Nome e Cognome *
                 </label>
                 <input
@@ -166,7 +166,7 @@ const Location = () => {
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div className="flex flex-col gap-2">
-                  <label className="font-manrope text-primary-medium/90 text-sm font-semibold">
+                  <label className="text-[#233539] text-sm font-medium">
                     Telefono *
                   </label>
                   <input
@@ -180,7 +180,7 @@ const Location = () => {
                 </div>
 
                 <div className="flex flex-col gap-2">
-                  <label className="font-manrope text-primary-medium/90 text-sm font-semibold">
+                  <label className="text-[#233539] text-sm font-medium">
                     Email *
                   </label>
                   <input
@@ -195,7 +195,7 @@ const Location = () => {
               </div>
 
               <div className="flex flex-col gap-2">
-                <label className="font-manrope text-primary-medium/90 text-sm font-semibold">
+                <label className="text-[#233539] text-sm font-medium">
                   Fascia Oraria Preferita
                 </label>
                 <select 
@@ -212,7 +212,7 @@ const Location = () => {
               </div>
 
               <div className="flex flex-col gap-2">
-                <label className="font-manrope text-primary-medium/90 text-sm font-semibold">
+                <label className="text-[#233539] text-sm font-medium">
                   Trattamento di Interesse
                 </label>
                 <select 
@@ -231,7 +231,7 @@ const Location = () => {
               </div>
 
               <div className="flex flex-col gap-2">
-                <label className="font-manrope text-primary-medium/90 text-sm font-semibold">
+                <label className="text-[#233539] text-sm font-medium">
                   Messaggio
                 </label>
                 <textarea
@@ -247,7 +247,7 @@ const Location = () => {
               <motion.button 
                 type="submit" 
                 disabled={isSubmitting}
-                className="p-4 bg-[#4A828F] text-white border-none rounded-xl text-base font-manrope font-semibold cursor-pointer transition-all duration-300 hover:bg-[#2E545D] disabled:opacity-70 disabled:cursor-not-allowed shadow-lg shadow-blue-200/50"
+                className="p-4 bg-[#4A828F] text-white border-none rounded-xl text-base font-medium cursor-pointer transition-all duration-300 hover:bg-[#2E545D] disabled:opacity-70 disabled:cursor-not-allowed shadow-lg shadow-blue-200/50"
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
               >

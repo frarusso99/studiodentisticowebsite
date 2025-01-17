@@ -54,20 +54,20 @@ const Studio = () => {
 
   return (
     <section 
-      className="min-h-screen bg-gradient-to-b from-white/10 to-primary/50 relative overflow-hidden py-20 lg:py-28">
+      className="min-h-screen bg-gradient-to-b from-[#AFCDD5]/10 to-white relative overflow-hidden py-16">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="max-w-2xl mx-auto text-center mb-12">
           <motion.h2 
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
-            className="font-urbanist font-semibold text-4xl text-primary-medium/90 mb-4 sm:text-5xl">
+            className="text-4xl font-light text-[#233539] mb-4 sm:text-5xl">
             Scopri il Nostro Studio
           </motion.h2>
           <motion.p 
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2 }}
-            className="font-semibold font-manrope text-lg text-primary-medium/60 leading-relaxed sm:text-lg">
+            className="text-lg text-[#2E545D]/80 leading-relaxed sm:text-xl">
             Un ambiente all'avanguardia dove tecnologia e comfort 
             si uniscono per garantirti la migliore esperienza possibile
           </motion.p>
@@ -91,12 +91,12 @@ const Studio = () => {
           className="w-full h-full object-cover"
         />
         <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-transparent to-black/60" />
-        <div className="font-manrope absolute bottom-4 left-4 right-4 text-white">
+        <div className="absolute bottom-4 left-4 right-4 text-white">
           <motion.h3
             initial={{ y: 20, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             transition={{ delay: 0.2 }}
-            className="font-urbanist text-2xl font-light"
+            className="text-2xl font-light"
           >
             {studioSlides[currentIndex].title}
           </motion.h3>
