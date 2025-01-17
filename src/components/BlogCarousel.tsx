@@ -87,10 +87,10 @@ const BlogCarousel = () => {
     <section className="py-16 md:py-32 bg-gradient-to-b from-[#AFCDD5]/10 to-white">
       <div className="container mx-auto px-4 md:px-6">
         <div className="max-w-3xl mx-auto text-center mb-12 md:mb-16">
-          <h2 className="font-bold text-primary-medium/90 font-urbanist text-6xl md:text-5xl mb-4 md:mb-6">
+          <h2 className="font-urbanist font-bold text-4xl md:text-5xl text-primary-medium/90 mb-4 md:mb-6">
             Approfondimenti e Novità
           </h2>
-          <p className="font-urbanist font-semibold text-lg md:text-xl text-primary-medium/60 leading-relaxed">
+          <p className="font-semibold font-manrope text-lg md:text-xl text-primary-medium/60 leading-relaxed">
             Esplora i nostri articoli per rimanere aggiornato sulle ultime novità 
             nel campo della salute dentale
           </p>
