@@ -93,7 +93,7 @@ export default function Navbar() {
                 href="#dove-siamo"
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
-                className="font-manrope font-bold px-6 py-2.5 bg-white text-primary rounded-2xl hover:bg-white/90 transition-colors shadow-md ml-3"
+                className="font-manrope font-semibold px-6 py-2.5 bg-white text-primary rounded-2xl hover:bg-white/90 transition-colors shadow-md ml-3"
               >
                 Prenota Ora
               </motion.a>
@@ -152,7 +152,7 @@ export default function Navbar() {
                     href={item.href}
                     whileTap={{ scale: 0.98 }}
                     onClick={() => setIsOpen(false)}
-                    className="block px-4 py-3 text-base font-medium text-gray-600 hover:text-primary hover:bg-gray-50 rounded-xl transition-colors"
+                    className="font-manrope block px-4 py-3 text-base font-medium text-gray-600 hover:text-primary hover:bg-gray-50 rounded-xl transition-colors"
                   >
                     {item.name}
                   </motion.a>
@@ -184,7 +184,7 @@ export default function Navbar() {
                   <motion.a
                     href="tel:+39NUMEROSTUDIO"
                     whileTap={{ scale: 0.98 }}
-                    className="flex items-center justify-center gap-2 px-4 py-3 bg-primary text-white rounded-xl hover:bg-primary-dark transition-colors"
+                    className="font-manrope font-semibold flex items-center justify-center gap-2 px-4 py-3 bg-primary text-white rounded-xl hover:bg-primary-dark transition-colors"
                   >
                     <Phone size={18} />
                     <span>Chiamaci</span>
@@ -192,7 +192,7 @@ export default function Navbar() {
                   <motion.a
                     href="#dove-siamo"
                     whileTap={{ scale: 0.98 }}
-                    className="flex items-center justify-center px-4 py-3 bg-primary text-white rounded-xl hover:bg-primary-dark transition-colors shadow-md"
+                    className="font-manrope font-semibold flex items-center justify-center px-4 py-3 bg-primary text-white rounded-xl hover:bg-primary-dark transition-colors shadow-md"
                   >
                     Prenota
                   </motion.a>

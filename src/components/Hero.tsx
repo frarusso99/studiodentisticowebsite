@@ -55,7 +55,7 @@ const HeroSection = () => {
         {/* Carousel Container */}
         <div className="relative">
           <div
-            className="relative w-full overflow-hidden rounded-2xl transition-all duration-300"
+            className="relative w-full overflow-hidden rounded-3xl transition-all duration-300"
             style={{ height: isMobile ? '300px' : '460px' }}
           >
             {/* Carousel Content */}
@@ -96,7 +96,7 @@ const HeroSection = () => {
                 Siamo un team dedicato alla cura del tuo sorriso,
                 <br /> con tecnologie all'avanguardia.
               </p>
-              <button className="bg-white hover:bg-[#AFCDD5] text-primary px-10 py-5 rounded-3xl transition-all duration-300 shadow-lg text-xl font-medium transform hover:scale-105 mt-6">
+              <button className="font-manrope font-semibold bg-white hover:bg-white/90 text-primary px-10 py-5 rounded-3xl transition-all duration-300 shadow-lg text-xl transform hover:scale-105 mt-6">
                 Prenota ora
               </button>
             </div>
@@ -122,11 +122,11 @@ const HeroSection = () => {
 
           {/* Mobile CTA - Moved outside carousel */}
           <div className="block md:hidden mt-8 space-y-6 text-left px-2">
-            <p className="text-white text-xl font-light leading-relaxed">
+            <p className="font-manrope text-white text-base font leading-relaxed">
               Siamo un team dedicato alla cura del tuo sorriso,
               <br className="hidden sm:block" /> con tecnologie all'avanguardia.
             </p>
-            <button className="bg-white hover:bg-[#AFCDD5] text-primary px-10 py-5 rounded-3xl transition-all duration-300 shadow-lg text-xl font-medium transform hover:scale-105">
+            <button className="font-manrope bg-white hover:bg-[#AFCDD5] text-primary px-10 py-5 rounded-3xl transition-all duration-300 shadow-lg text-xl font-medium transform hover:scale-105">
               Prenota ora
             </button>
           </div>
