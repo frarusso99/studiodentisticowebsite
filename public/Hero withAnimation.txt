@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { useSwipeable } from 'react-swipeable';
+import { motion } from 'framer-motion';
 
 const HeroSection = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
+  const [scrollPosition, setScrollPosition] = useState(0);
   const [isMobile, setIsMobile] = useState(false);
 
   const images = [
@@ -21,17 +23,34 @@ const HeroSection = () => {
   };
 
   useEffect(() => {
+    const timer = setInterval(nextSlide, 5000);
+  
     const handleResize = () => {
       setIsMobile(window.innerWidth < 768);
     };
-
+  
+    let ticking = false;
+    const handleScroll = () => {
+      if (!isMobile && !ticking) {
+        ticking = true;
+        requestAnimationFrame(() => {
+          setScrollPosition(window.scrollY);
+          ticking = false;
+        });
+      }
+    };
+  
     handleResize();
+    window.addEventListener('scroll', handleScroll);
     window.addEventListener('resize', handleResize);
-
+  
     return () => {
+      clearInterval(timer);
+      window.removeEventListener('scroll', handleScroll);
       window.removeEventListener('resize', handleResize);
     };
-  }, []);
+  }, [isMobile]);
+  
 
   const handlers = useSwipeable({
     onSwipedLeft: nextSlide,
@@ -39,24 +58,48 @@ const HeroSection = () => {
     trackMouse: true,
   });
 
+  // Calcola le trasformazioni basate sullo scroll
+  const maxScroll = 400; // Punto massimo di scroll per l'effetto
+  const progress = Math.min(scrollPosition / maxScroll, 1);
+
+  // Interpolazione lineare per le proprietà animate
+  const minHeight = isMobile ? 300 : 460; // Altezza iniziale (mobile vs desktop)
+  const maxHeight = isMobile ? 300 : 700; // Altezza massima dopo lo scroll (solo desktop)
+  const currentHeight = isMobile ? minHeight : minHeight + (maxHeight - minHeight) * progress;
+
+  // Calcola l'offset dello scroll solo per desktop
+  const scrollOffset = isMobile ? 0 : Math.min(scrollPosition / 3, 120);
+
   return (
-    <div className="min-h-[100vh] relative w-full bg-gradient-to-br from-[#4A828F] via-[#5BA3AE] to-[#A4D2C5] px-4 md:px-8 pb-20 md:pb-0">
+    <div className="min-h-[100vh] md:min-h-[155vh] relative w-full min-h-screen bg-gradient-to-br from-[#4A828F] via-[#5BA3AE] to-[#A4D2C5] px-4 md:px-8">
       <div className="max-w-[1400px] mx-auto relative z-20 pt-28 md:pt-32">
         {/* Hero Text */}
-        <h1 className="text-5xl md:text-6xl font-light leading-tight mb-8 md:mb-8 md:text-center text-left px-0 md:px-4">
+        <motion.h1
+          className="text-5xl md:text-6xl font-light leading-tight mb-8 md:mb-8 md:text-center text-left px-0 md:px-4"
+          initial={{ opacity: 0, y: -50 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5 }}
+        >
           <span className="font-urbanist font-semibold text-white block md:inline text-5xl md:text-6xl lg:text-7xl leading-tight">
             Il tuo sorriso
           </span>{' '}
           <span className="font-urbanist font-semibold text-white block md:inline text-5xl md:text-6xl lg:text-7xl leading-tight">
             è la nostra priorità
           </span>
-        </h1>
+        </motion.h1>
 
-        {/* Carousel Container */}
-        <div className="relative">
+        {/* Carousel Container with Overlay */}
+        <motion.div
+          className="relative"
+          animate={{
+            y: scrollOffset,
+            height: currentHeight,
+          }}
+          transition={{ type: 'spring', stiffness: 300, damping: 50 }}
+        >
           <div
-            className="relative w-full overflow-hidden rounded-2xl transition-all duration-300"
-            style={{ height: isMobile ? '300px' : '460px' }}
+            className={`relative w-full overflow-hidden rounded-2xl transition-all duration-300`}
+            style={{ height: `${currentHeight}px` }}
           >
             {/* Carousel Content */}
             <div
@@ -69,10 +112,13 @@ const HeroSection = () => {
                   <img
                     src={img}
                     alt={`Slide ${index + 1}`}
-                    className="w-full h-full object-cover transition-all duration-300"
+                    className={`w-full h-full object-cover transition-all duration-300`}
                   />
-                  {/* Image Overlay */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#233539]/80 via-transparent to-transparent transition-opacity duration-300" />
+                  {/* Image Overlay - si attenua con lo scroll */}
+                  <div
+                    className="absolute inset-0 bg-gradient-to-t from-[#233539]/80 via-transparent to-transparent transition-opacity duration-300"
+                    style={{ opacity: isMobile ? 1 : 1 - progress * 0.8 }}
+                  />
                 </div>
               ))}
             </div>
@@ -96,7 +142,7 @@ const HeroSection = () => {
                 Siamo un team dedicato alla cura del tuo sorriso,
                 <br /> con tecnologie all'avanguardia.
               </p>
-              <button className="bg-white hover:bg-[#AFCDD5] text-[#233539] px-10 py-5 rounded-full transition-all duration-300 shadow-lg text-xl font-medium transform hover:scale-105 mt-6">
+              <button className="font-manrope bg-white hover:bg-[#AFCDD5] text-primary px-8 py-4 rounded-2xl transition-all duration-300 shadow-lg text-lg font-bold transform hover:scale-105">
                 Prenota ora
               </button>
             </div>
@@ -121,7 +167,7 @@ const HeroSection = () => {
           </div>
 
           {/* Mobile CTA - Moved outside carousel */}
-          <div className="block md:hidden mt-8 space-y-6 text-left px-2">
+          <div className="block md:hidden mt-4 space-y-4 text-left px-2">
             <p className="text-white text-xl font-light leading-relaxed">
               Siamo un team dedicato alla cura del tuo sorriso,
               <br className="hidden sm:block" /> con tecnologie all'avanguardia.
@@ -130,7 +176,7 @@ const HeroSection = () => {
               Prenota ora
             </button>
           </div>
-        </div>
+        </motion.div>
       </div>
     </div>
   );
