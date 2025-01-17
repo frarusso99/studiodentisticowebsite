@@ -96,7 +96,7 @@ const HeroSection = () => {
                 Siamo un team dedicato alla cura del tuo sorriso,
                 <br /> con tecnologie all'avanguardia.
               </p>
-              <button className="bg-white hover:bg-[#AFCDD5] text-[#233539] px-10 py-5 rounded-full transition-all duration-300 shadow-lg text-xl font-medium transform hover:scale-105 mt-6">
+              <button className="bg-white hover:bg-[#AFCDD5] text-[#233539] px-10 py-5 rounded-3xl transition-all duration-300 shadow-lg text-xl font-medium transform hover:scale-105 mt-6">
                 Prenota ora
               </button>
             </div>
@@ -126,7 +126,7 @@ const HeroSection = () => {
               Siamo un team dedicato alla cura del tuo sorriso,
               <br className="hidden sm:block" /> con tecnologie all'avanguardia.
             </p>
-            <button className="bg-white hover:bg-[#AFCDD5] text-[#233539] px-10 py-5 rounded-full transition-all duration-300 shadow-lg text-xl font-medium transform hover:scale-105">
+            <button className="bg-white hover:bg-[#AFCDD5] text-[#233539] px-10 py-5 rounded-3xl transition-all duration-300 shadow-lg text-xl font-medium transform hover:scale-105">
               Prenota ora
             </button>
           </div>
