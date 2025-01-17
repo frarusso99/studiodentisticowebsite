@@ -50,99 +50,94 @@ const Studio = () => {
     onSwipedRight: () => handleSwipe('RIGHT'),
   });
 
-  
-
   return (
     <section 
-      className="min-h-screen bg-gradient-to-b from-white/10 to-primary/50 relative overflow-hidden py-20 lg:py-28">
+      className="min-h-screen bg-gradient-to-b from-white/10 to-primary/50 relative overflow-hidden py-6 md:py-12 lg:py-28">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="max-w-2xl mx-auto text-center mb-12">
+        <div className="max-w-2xl mx-auto text-center mb-8 lg:mb-12">
           <motion.h2 
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
-            className="font-urbanist font-semibold text-4xl text-primary-medium/90 mb-4 sm:text-5xl">
+            className="font-urbanist font-semibold text-3xl lg:text-4xl text-primary-medium/90 mb-3 sm:mb-4 sm:text-5xl">
             Scopri il Nostro Studio
           </motion.h2>
           <motion.p 
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2 }}
-            className="font-semibold font-manrope text-lg text-primary-medium/60 leading-relaxed sm:text-lg">
+            className="font-semibold font-manrope text-base lg:text-lg text-primary-medium/60 leading-relaxed">
             Un ambiente all'avanguardia dove tecnologia e comfort 
             si uniscono per garantirti la migliore esperienza possibile
           </motion.p>
         </div>
 
         <div {...handlers} className="relative max-w-4xl mx-auto">
-        <div className="relative max-w-4xl mx-auto">
-  <div className="aspect-w-16 aspect-h-9 rounded-xl overflow-hidden shadow-lg bg-[#233539]">
-    <AnimatePresence mode="wait">
-      <motion.div
-        key={currentIndex}
-        initial={{ opacity: 0, scale: 1.05 }}
-        animate={{ opacity: 1, scale: 1 }}
-        exit={{ opacity: 0, scale: 0.95 }}
-        transition={{ duration: 0.6 }}
-        className="relative w-full h-full"
-      >
-        <img
-          src={studioSlides[currentIndex].image}
-          alt={studioSlides[currentIndex].title}
-          className="w-full h-full object-cover"
-        />
-        <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-transparent to-black/60" />
-        <div className="font-manrope absolute bottom-4 left-4 right-4 text-white">
-          <motion.h3
-            initial={{ y: 20, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-            transition={{ delay: 0.2 }}
-            className="font-urbanist text-2xl font-light"
+          <div className="relative h-[60vh] rounded-xl overflow-hidden shadow-lg bg-[#233539]">
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={currentIndex}
+                initial={{ opacity: 0, scale: 1.05 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0, scale: 0.95 }}
+                transition={{ duration: 0.6 }}
+                className="relative w-full h-full"
+              >
+                <img
+                  src={studioSlides[currentIndex].image}
+                  alt={studioSlides[currentIndex].title}
+                  className="w-full h-full object-cover"
+                />
+                <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-transparent to-black/60" />
+                <div className="font-manrope absolute bottom-3 sm:bottom-4 left-3 sm:left-4 right-3 sm:right-4 text-white">
+                  <motion.h3
+                    initial={{ y: 20, opacity: 0 }}
+                    animate={{ y: 0, opacity: 1 }}
+                    transition={{ delay: 0.2 }}
+                    className="font-urbanist text-xl sm:text-2xl font-light"
+                  >
+                    {studioSlides[currentIndex].title}
+                  </motion.h3>
+                  <p className="text-sm sm:text-base mt-1 sm:mt-2">
+                    {studioSlides[currentIndex].description}
+                  </p>
+                  <span className="mt-2 sm:mt-4 inline-block px-3 py-1 bg-[#4A828F]/90 rounded-full text-xs sm:text-sm">
+                    {studioSlides[currentIndex].highlight}
+                  </span>
+                </div>
+              </motion.div>
+            </AnimatePresence>
+          </div>
+
+          <button
+            onClick={() => handleSwipe('RIGHT')}
+            className="hidden sm:flex absolute left-2 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-[#4A828F] text-[#4A828F] hover:text-white w-10 h-10 rounded-full items-center justify-center transition-all duration-300"
           >
-            {studioSlides[currentIndex].title}
-          </motion.h3>
-          <p className="text-sm sm:text-base mt-2">
-            {studioSlides[currentIndex].description}
-          </p>
-          <span className="mt-4 inline-block px-3 py-1 bg-[#4A828F]/90 rounded-full text-xs sm:text-sm">
-            {studioSlides[currentIndex].highlight}
-          </span>
-        </div>
-      </motion.div>
-    </AnimatePresence>
-  </div>
+            <IoArrowBack className="w-5 h-5" />
+          </button>
 
-  {/* Frecce per schermi grandi */}
-  <button
-    onClick={() => handleSwipe('RIGHT')}
-    className="hidden sm:flex absolute left-2 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-[#4A828F] text-[#4A828F] hover:text-white w-10 h-10 rounded-full items-center justify-center transition-all duration-300"
-  >
-    <IoArrowBack className="w-5 h-5" />
-  </button>
+          <button
+            onClick={() => handleSwipe('LEFT')}
+            className="hidden sm:flex absolute right-2 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-[#4A828F] text-[#4A828F] hover:text-white w-10 h-10 rounded-full items-center justify-center transition-all duration-300"
+          >
+            <IoArrowForward className="w-5 h-5" />
+          </button>
 
-  <button
-    onClick={() => handleSwipe('LEFT')}
-    className="hidden sm:flex absolute right-2 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-[#4A828F] text-[#4A828F] hover:text-white w-10 h-10 rounded-full items-center justify-center transition-all duration-300"
-  >
-    <IoArrowForward className="w-5 h-5" />
-  </button>
+          <div className="flex sm:hidden justify-between mt-3">
+            <button
+              onClick={() => handleSwipe('RIGHT')}
+              className="bg-white/80 hover:bg-[#4A828F] text-[#4A828F] hover:text-white w-10 h-10 rounded-full flex items-center justify-center transition-all duration-300"
+            >
+              <IoArrowBack className="w-5 h-5" />
+            </button>
+            <button
+              onClick={() => handleSwipe('LEFT')}
+              className="bg-white/80 hover:bg-[#4A828F] text-[#4A828F] hover:text-white w-10 h-10 rounded-full flex items-center justify-center transition-all duration-300"
+            >
+              <IoArrowForward className="w-5 h-5" />
+            </button>
+          </div>
 
-  {/* Frecce per dispositivi mobili */}
-  <div className="flex sm:hidden justify-between mt-4">
-    <button
-      onClick={() => handleSwipe('RIGHT')}
-      className="bg-white/80 hover:bg-[#4A828F] text-[#4A828F] hover:text-white w-10 h-10 rounded-full flex items-center justify-center transition-all duration-300"
-    >
-      <IoArrowBack className="w-5 h-5" />
-    </button>
-    <button
-      onClick={() => handleSwipe('LEFT')}
-      className="bg-white/80 hover:bg-[#4A828F] text-[#4A828F] hover:text-white w-10 h-10 rounded-full flex items-center justify-center transition-all duration-300"
-    >
-      <IoArrowForward className="w-5 h-5" />
-    </button>
-  </div>
-</div>
-          <div className="absolute -bottom-6 left-1/2 -translate-x-1/2 flex gap-1">
+          <div className="absolute -bottom-4 sm:-bottom-6 left-1/2 -translate-x-1/2 flex gap-1">
             {studioSlides.map((_, idx) => (
               <button
                 key={idx}

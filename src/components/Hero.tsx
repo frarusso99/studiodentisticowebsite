@@ -71,7 +71,7 @@ const HeroSection = () => {
   const scrollOffset = isMobile ? 0 : Math.min(scrollPosition / 3, 120);
 
   return (
-    <div className="min-h-[100vh] md:min-h-[150vh] relative w-full min-h-screen bg-gradient-to-br from-[#4A828F] via-[#5BA3AE] to-[#A4D2C5] px-4 md:px-8">
+    <div className="min-h-[100vh] md:min-h-[155vh] relative w-full min-h-screen bg-gradient-to-br from-[#4A828F] via-[#5BA3AE] to-[#A4D2C5] px-4 md:px-8">
       <div className="max-w-[1400px] mx-auto relative z-20 pt-28 md:pt-32">
         {/* Hero Text */}
         <motion.h1
@@ -167,8 +167,8 @@ const HeroSection = () => {
           </div>
 
           {/* Mobile CTA - Moved outside carousel */}
-          <div className="block md:hidden mt-8 space-y-6 text-left px-2">
-            <p className="text-white text-2xl font-light leading-relaxed">
+          <div className="block md:hidden mt-4 space-y-4 text-left px-2">
+            <p className="text-white text-xl font-light leading-relaxed">
               Siamo un team dedicato alla cura del tuo sorriso,
               <br className="hidden sm:block" /> con tecnologie all'avanguardia.
             </p>

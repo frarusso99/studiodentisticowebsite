@@ -19,27 +19,30 @@ export default function Navbar() {
       <motion.nav
         initial={{ y: -100 }}
         animate={{ y: 0 }}
-        className="fixed top-0 left-0 right-0 z-50 mx-2 sm:mx-4 lg:mx-8 my-2 sm:my-4 rounded-2xl bg-primary/80 backdrop-blur-lg shadow-lg transition-all duration-500"
+        className="fixed top-0 left-0 right-0 z-50"
       >
-        <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8">
-          <div className="flex items-center h-20 md:h-24">
-            {/* Logo */}
+        {/* Background with blur - separate from content */}
+        <div className="absolute inset-0 bg-primary/80 backdrop-blur-lg shadow-lg" />
+        
+        <div className="relative max-w-7xl mx-auto">
+          <div className="flex items-center justify-between h-24 md:h-24 px-4">
+            {/* Logo - Moved more to the left */}
             <motion.a
               href="#"
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
-              className="relative flex items-center mr-8"
+              className="relative flex items-center -ml-2"
             >
               <img
-                className="h-14 w-auto sm:h-16 md:h-20"
+                className="h-16 w-auto sm:h-16 md:h-20"
                 src="./logoneg.png"
                 alt="Studio Dentistico Logo"
               />
             </motion.a>
 
             {/* Desktop Navigation */}
-            <div className="hidden md:flex items-center justify-center flex-1">
-              <div className="flex space-x-8">
+            <div className="hidden md:flex items-center justify-center flex-1 ml-8">
+              <div className="flex space-x-6">
                 {navigation.map((item) => (
                   <motion.a
                     key={item.name}
@@ -54,9 +57,8 @@ export default function Navbar() {
               </div>
             </div>
 
-            {/* Desktop Social & CTA */}
-            <div className="hidden md:flex items-center space-x-6">
-              {/* Social Icons */}
+            {/* Desktop Social & CTA - Moved more to the right */}
+            <div className="hidden md:flex items-center -mr-2">
               <div className="flex items-center space-x-4 mr-4">
                 <motion.a
                   href="#"
@@ -91,7 +93,7 @@ export default function Navbar() {
                 href="#dove-siamo"
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
-                className="font-manrope font-bold px-6 py-2.5 bg-white text-primary rounded-2xl hover:bg-white/90 transition-colors shadow-md"
+                className="font-manrope font-bold px-6 py-2.5 bg-white text-primary rounded-2xl hover:bg-white/90 transition-colors shadow-md ml-3"
               >
                 Prenota Ora
               </motion.a>
@@ -101,41 +103,47 @@ export default function Navbar() {
             <motion.button
               whileTap={{ scale: 0.95 }}
               onClick={() => setIsOpen(!isOpen)}
-              className="md:hidden ml-auto rounded-lg p-2 text-white hover:bg-primary-dark/20 transition-colors"
+              className="md:hidden -mr-2 rounded-lg p-2 text-white hover:bg-primary-dark/20 transition-colors"
             >
               {isOpen ? <X size={24} /> : <Menu size={24} />}
             </motion.button>
           </div>
         </div>
-      </motion.nav>
 
-      {/* Mobile Menu Overlay */}
-      <AnimatePresence>
-        {isOpen && (
-          <>
-            {/* Backdrop */}
+        {/* Mobile Menu - Now part of the navbar */}
+        <AnimatePresence>
+          {isOpen && (
             <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              className="fixed inset-0 bg-black/20 backdrop-blur-sm z-40 md:hidden"
-              onClick={() => setIsOpen(false)}
-            />
-
-            {/* Menu Content */}
-            <motion.div
-              initial={{ opacity: 0, x: -100 }}
+              initial={{ height: 0, opacity: 0 }}
               animate={{ 
-                opacity: 1, 
-                x: 0,
-                transition: { type: "spring", damping: 20 }
+                height: "auto", 
+                opacity: 1,
+                transition: { 
+                  height: {
+                    type: "spring",
+                    damping: 30,
+                    stiffness: 300
+                  },
+                  opacity: {
+                    duration: 0.2
+                  }
+                }
               }}
               exit={{ 
-                opacity: 0, 
-                x: -100,
-                transition: { type: "spring", damping: 20 }
+                height: 0,
+                opacity: 0,
+                transition: {
+                  height: {
+                    type: "spring",
+                    damping: 30,
+                    stiffness: 300
+                  },
+                  opacity: {
+                    duration: 0.2
+                  }
+                }
               }}
-              className="fixed top-24 left-2 right-2 z-50 md:hidden bg-white/95 backdrop-blur-md rounded-2xl shadow-lg border border-gray-100 overflow-hidden"
+              className="relative md:hidden bg-white shadow-lg overflow-hidden"
             >
               <div className="px-4 py-6 space-y-4">
                 {navigation.map((item) => (
@@ -191,9 +199,9 @@ export default function Navbar() {
                 </div>
               </div>
             </motion.div>
-          </>
-        )}
-      </AnimatePresence>
+          )}
+        </AnimatePresence>
+      </motion.nav>
     </>
   );
 }
