@@ -43,11 +43,11 @@ const HeroSection = () => {
     <div className="min-h-[100vh] relative w-full bg-gradient-to-br from-[#4A828F] via-[#5BA3AE] to-[#A4D2C5] px-4 md:px-8 pb-20 md:pb-0">
       <div className="max-w-[1400px] mx-auto relative z-20 pt-28 md:pt-32">
         {/* Hero Text */}
-        <h1 className="text-5xl md:text-6xl font-light leading-tight mb-8 md:mb-8 md:text-center text-left px-0 md:px-4">
-          <span className="font-urbanist font-semibold text-white block md:inline text-5xl md:text-6xl lg:text-7xl leading-tight">
+        <h1 className="text-4xl sm:text-5xl md:text-6xl font-light leading-tight mb-8 md:mb-8 md:text-center text-left px-0 md:px-4">
+          <span className="font-urbanist font-semibold text-white block md:inline text-4xl sm:text-5xl md:text-6xl lg:text-7xl leading-tight">
             Il tuo sorriso
           </span>{' '}
-          <span className="font-urbanist font-semibold text-white block md:inline text-5xl md:text-6xl lg:text-7xl leading-tight">
+          <span className="font-urbanist font-semibold text-white block md:inline text-4xl sm:text-5xl md:text-6xl lg:text-7xl leading-tight">
             è la nostra priorità
           </span>
         </h1>
