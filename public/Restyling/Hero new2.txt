@@ -13,8 +13,6 @@ const images = [
 const HeroSection = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isHovering, setIsHovering] = useState(false);
-  const [touchStart, setTouchStart] = useState<number | null>(null);
-  const [touchEnd, setTouchEnd] = useState<number | null>(null);
 
   const nextSlide = useCallback(() => {
     setCurrentIndex((prevIndex) => (prevIndex + 1) % images.length);
@@ -25,31 +23,6 @@ const HeroSection = () => {
       prevIndex === 0 ? images.length - 1 : prevIndex - 1
     );
   }, []);
-
-  // Touch handlers
-  const onTouchStart = (e: React.TouchEvent<HTMLDivElement>) => {
-    setTouchEnd(null);
-    setTouchStart(e.targetTouches[0].clientX);
-  };
-  
-  const onTouchMove = (e: React.TouchEvent<HTMLDivElement>) => {
-    setTouchEnd(e.targetTouches[0].clientX);
-  };
-
-  const onTouchEnd = () => {
-    if (!touchStart || !touchEnd) return;
-    
-    const distance = touchStart - touchEnd;
-    const minSwipeDistance = 50;
-
-    if (Math.abs(distance) >= minSwipeDistance) {
-      if (distance > 0) {
-        nextSlide();
-      } else {
-        prevSlide();
-      }
-    }
-  };
 
   // Autoplay
   useEffect(() => {
@@ -62,7 +35,7 @@ const HeroSection = () => {
   return (
     <div className="min-h-screen flex flex-col md:flex-row">
       {/* Left Column - Text Content */}
-      <div className="w-full md:w-1/2 bg-[#FDF7EE] flex items-center justify-center order-2 md:order-1 px-6 md:px-12 lg:px-20 py-16 md:py-0">
+      <div className="w-full md:w-1/2 bg-gradient-to-br from-[#4A828F]/10 to-[#AFCDD5]/20 flex items-center justify-center order-2 md:order-1 px-6 md:px-12 lg:px-20 py-16 md:py-0">
         <div className="max-w-xl">
           <h1 className="font-manrope text-4xl md:text-5xl lg:text-6xl text-[#233539] leading-tight mb-6">
             Il tuo sorriso,{' '}
@@ -76,7 +49,7 @@ const HeroSection = () => {
           <motion.button
             whileHover={{ scale: 1.02 }}
             whileTap={{ scale: 0.98 }}
-            className="font-manrope font-medium px-8 py-4 bg-[#4A828F] text-white hover:bg-[#2E545D] transition-colors duration-300 rounded-2xl shadow-sm hover:shadow-md"
+            className="font-manrope font-medium px-8 py-4 bg-[#4A828F] text-white hover:bg-[#2E545D] transition-colors duration-300"
           >
             Prenota una Visita
           </motion.button>
@@ -88,9 +61,6 @@ const HeroSection = () => {
         className="w-full md:w-1/2 h-[60vh] md:h-screen relative overflow-hidden order-1 md:order-2"
         onMouseEnter={() => setIsHovering(true)}
         onMouseLeave={() => setIsHovering(false)}
-        onTouchStart={onTouchStart}
-        onTouchMove={onTouchMove}
-        onTouchEnd={onTouchEnd}
       >
         <AnimatePresence initial={false}>
           <motion.img
@@ -102,7 +72,6 @@ const HeroSection = () => {
             transition={{ duration: 0.5 }}
             className="absolute inset-0 w-full h-full object-cover"
             alt="Studio dentistico"
-            draggable="false"
           />
         </AnimatePresence>
 
@@ -115,7 +84,7 @@ const HeroSection = () => {
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
                 onClick={prevSlide}
-                className="absolute left-4 top-1/2 -translate-y-1/2 p-2.5 bg-white/80 hover:bg-white transition-colors duration-300 rounded-xl backdrop-blur-sm"
+                className="absolute left-4 top-1/2 -translate-y-1/2 p-2 bg-white/80 hover:bg-white transition-colors duration-300"
               >
                 <ChevronLeft className="w-6 h-6 text-[#4A828F]" />
               </motion.button>
@@ -124,7 +93,7 @@ const HeroSection = () => {
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
                 onClick={nextSlide}
-                className="absolute right-4 top-1/2 -translate-y-1/2 p-2.5 bg-white/80 hover:bg-white transition-colors duration-300 rounded-xl backdrop-blur-sm"
+                className="absolute right-4 top-1/2 -translate-y-1/2 p-2 bg-white/80 hover:bg-white transition-colors duration-300"
               >
                 <ChevronRight className="w-6 h-6 text-[#4A828F]" />
               </motion.button>
@@ -138,10 +107,10 @@ const HeroSection = () => {
             <button
               key={index}
               onClick={() => setCurrentIndex(index)}
-              className={`h-1.5 transition-all duration-300 rounded-full ${
+              className={`w-2 h-2 transition-all duration-300 ${
                 currentIndex === index 
-                  ? 'bg-white w-8' 
-                  : 'bg-white/60 hover:bg-white/80 w-1.5'
+                  ? 'bg-white w-6' 
+                  : 'bg-white/60 hover:bg-white/80'
               }`}
             />
           ))}
