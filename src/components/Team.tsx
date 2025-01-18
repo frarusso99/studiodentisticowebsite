@@ -43,7 +43,7 @@ export default function Team() {
     ];
 
     return (
-        <section className="relative min-h-screen py-20 lg:py-28 overflow-hidden bg-primary/10">
+        <section className="relative min-h-screen py-20 lg:py-28 overflow-hidden bg-[#DCE4EC]">
             <div className="container mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="flex flex-col lg:flex-row items-center justify-between gap-16 lg:gap-24">
                     {/* Content Section */}
