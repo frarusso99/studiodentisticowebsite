@@ -71,7 +71,7 @@ const HeroSection = () => {
             </span>
           </h1>
           <p className="font-manrope text-[#2E545D] text-lg md:text-xl mb-8 leading-relaxed">
-            Da oltre 25 anni, ci prendiamo cura della salute del tuo sorriso con professionalità, tecnologie all'avanguardia e un approccio personalizzato per ogni paziente.
+            Ci prendiamo cura della salute del tuo sorriso con professionalità e un approccio personalizzato per ogni paziente.
           </p>
           <motion.button
             whileHover={{ scale: 1.02 }}
