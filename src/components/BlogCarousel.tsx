@@ -84,17 +84,16 @@ const BlogCarousel = () => {
   };
 
   return (
-    <section className="py-16 md:py-32 bg-[#F9E4D4]/30">
-      <div className="container mx-auto px-4 md:px-6">
-        <div className="max-w-3xl mx-auto text-center mb-12 md:mb-16">
-          <h2 className="font-urbanist font-bold text-4xl md:text-5xl text-primary-medium/90 mb-4 md:mb-6">
-            Approfondimenti e Novità
-          </h2>
-          <p className="font-semibold font-manrope text-lg md:text-xl text-primary-medium/60 leading-relaxed">
-            Esplora i nostri articoli per rimanere aggiornato sulle ultime novità 
-            nel campo della salute dentale
-          </p>
-        </div>
+<section className="py-16 md:py-32 bg-[#F9E4D4]/30">
+  <div className="container mx-auto px-4 md:px-6">
+    <div className="max-w-3xl mx-auto text-center mb-12 md:mb-16">
+      <h2 className="font-manrope text-4xl sm:text-5xl text-[#233539] mb-6">
+        Approfondimenti e Novità
+      </h2>
+      <p className="font-manrope text-[#2E545D] text-lg">
+        Esplora i nostri articoli per rimanere aggiornato sulle ultime novità
+      </p>
+    </div>
 
         <div className="relative max-w-7xl mx-auto" ref={carouselRef}>
           <button 

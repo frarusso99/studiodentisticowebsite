@@ -53,15 +53,16 @@ const Location = () => {
 
   return (
     <section className="py-16 px-4 sm:px-8 bg-[#E7E6F7]/30 to-white/80">
-      <motion.h1 
-        className="font-urbanist text-4xl text-center sm:text-5xl font-semibold text-primary-medium/90 mb-16"
-        initial={{ opacity: 0, y: -20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6 }}
+      <motion.h2 
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        className="font-manrope text-4xl md:text-5xl text-[#233539] mb-8 text-center"
       >
-        Vieni a Trovarci
-      </motion.h1>
-      
+        Dove Trovarci
+      </motion.h2>
+      <p className="font-manrope text-[#2E545D] text-lg mb-8 text-center">
+        Vieni a visitare il nostro studio e scopri i nostri servizi
+      </p>
       <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16">
         <div className="flex flex-col gap-8">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">

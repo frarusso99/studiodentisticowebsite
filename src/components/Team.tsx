@@ -43,40 +43,43 @@ export default function Team() {
     ];
 
     return (
-        <section className="relative min-h-screen py-20 lg:py-28 overflow-hidden bg-[#DCE4EC]">
-            <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-                <div className="flex flex-col lg:flex-row items-center justify-between gap-16 lg:gap-24">
-                    {/* Content Section */}
-                    <motion.div 
-                        initial={{ opacity: 0, y: 20 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.8 }}
-                        viewport={{ once: true }}
-                        className="lg:w-1/2 max-w-xl"
-                    >
-                        <div className="space-y-8">
-                            <h2 className="font-urbanist text-4xl sm:text-5xl lg:text-6xl font-bold text-primary-medium/90 leading-tight">
-                                Staff cordiale,
-                                <span className="block">Dentisti eccezionali,</span>
-                                <span className="block text-primary/70">Servizio impeccabile.</span>
-                            </h2>
-                            
-                            <p className="font-manrope font-medium text-lg text-[#2E545D]/80 leading-relaxed">
-                                Il nostro team unisce competenza ed empatia per offrirti 
-                                un'esperienza di cura dentale superiore. Ogni membro porta 
-                                con sé anni di esperienza e una passione genuina per il 
-                                benessere dei pazienti.
-                            </p>
+        <section className="relative min-h-screen py-20 lg:py-28 overflow-hidden bg-gradient-to-br from-[#AFCDD5]/20 via-white/50 to-[#4A828F]/10">
+        <div className="absolute inset-0 bg-[url('/pattern.png')] opacity-5" />
+        
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative">
+            <div className="flex flex-col lg:flex-row items-center justify-between gap-16 lg:gap-24">
+                {/* Content Section */}
+                <motion.div 
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.8 }}
+                    viewport={{ once: true }}
+                    className="lg:w-1/2 max-w-xl"
+                >
+                    <div className="space-y-8">
+                        <h2 className="font-manrope text-4xl sm:text-5xl text-[#233539] mb-6">
+                            Il Nostro Team
+                            <span className="block text-2xl md:text-3xl font-light italic mt-2 text-[#4A828F]">
+                                professionalità ed esperienza
+                            </span>
+                        </h2>
+                        
+                        <p className="font-manrope text-[#2E545D]/80 text-lg leading-relaxed">
+                            Il nostro team unisce competenza ed empatia per offrirti 
+                            un'esperienza di cura dentale superiore. Ogni membro porta 
+                            con sé anni di esperienza e una passione genuina per il 
+                            benessere dei pazienti.
+                        </p>
 
-                            <motion.button
-                                whileHover={{ x: 5 }}
-                                className="font-manrope inline-flex items-center gap-2 text-[#4A828F] font-semibold hover:text-[#233539] transition-colors"
-                            >
-                                Scopri di più sul nostro team
-                                <ArrowRight className="w-5 h-5" />
-                            </motion.button>
-                        </div>
-                    </motion.div>
+                        <motion.button
+                            whileHover={{ x: 5 }}
+                            className="font-manrope inline-flex items-center gap-2 text-[#4A828F] hover:text-[#233539] transition-colors"
+                        >
+                            Scopri di più sul nostro team
+                            <ArrowRight className="w-5 h-5" />
+                        </motion.button>
+                    </div>
+                </motion.div>
 
                     {/* Team Members - Desktop */}
                     <div className="lg:w-1/2 relative h-[600px] hidden lg:block">

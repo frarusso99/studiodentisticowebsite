@@ -8,7 +8,7 @@ const studioSlides = [
     id: 1,
     title: 'Reception & Accoglienza',
     description: 'Il tuo percorso inizia in un ambiente accogliente e rilassante',
-    image: 'https://images.unsplash.com/photo-1629909613654-28e377c37b09?auto=format&fit=crop&q=80',
+    image: 'https://images.pexels.com/photos/6809645/pexels-photo-6809645.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
     highlight: 'Wi-Fi gratuito e area refresh'
   },
   {
@@ -22,14 +22,14 @@ const studioSlides = [
     id: 3,
     title: 'Area Diagnostica',
     description: 'Imaging digitale per diagnosi immediate e accurate',
-    image: 'https://images.unsplash.com/photo-1629909613654-28e377c37b09?auto=format&fit=crop&q=80',
+    image: 'https://images.pexels.com/photos/6502019/pexels-photo-6502019.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
     highlight: 'TAC 3D e radiografia digitale'
   },
   {
     id: 4,
     title: 'Zona Relax',
     description: 'Un ambiente confortevole per il tuo benessere',
-    image: 'https://images.unsplash.com/photo-1629909613654-28e377c37b09?auto=format&fit=crop&q=80',
+    image: 'https://images.pexels.com/photos/8459996/pexels-photo-8459996.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
     highlight: 'Poltrone massaggianti e TV'
   }
 ];
@@ -58,18 +58,25 @@ const Studio = () => {
           <motion.h2 
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
-            className="font-urbanist font-semibold text-3xl lg:text-4xl text-primary-medium/90 mb-3 sm:mb-4 sm:text-5xl">
-            Scopri il Nostro Studio
+            className="font-manrope text-4xl md:text-5xl text-[#233539] mb-6"
+          >
+            Il Nostro Studio
+            <span className="block text-2xl md:text-3xl font-light italic mt-2 text-[#4A828F]">
+              accogliente e vicino a te
+            </span>
           </motion.h2>
+
           <motion.p 
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.2 }}
-            className="font-semibold font-manrope text-base lg:text-lg text-primary-medium/60 leading-relaxed">
-            Un ambiente all'avanguardia dove tecnologia e comfort 
-            si uniscono per garantirti la migliore esperienza possibile
+            className="font-manrope text-[#2E545D]/80 text-lg leading-relaxed"
+          >
+            Un ambiente semplice e curato, progettato per offrirti tranquillità e benessere. 
+            Qui troverai attenzione, professionalità e un'atmosfera familiare.
           </motion.p>
         </div>
+
 
         <div {...handlers} className="relative max-w-4xl mx-auto">
           <div className="relative h-[60vh] rounded-xl overflow-hidden shadow-lg bg-[#233539]">
@@ -93,7 +100,7 @@ const Studio = () => {
                     initial={{ y: 20, opacity: 0 }}
                     animate={{ y: 0, opacity: 1 }}
                     transition={{ delay: 0.2 }}
-                    className="font-urbanist text-xl sm:text-2xl font-light"
+                    className="font-manrope text-xl sm:text-2xl font-light"
                   >
                     {studioSlides[currentIndex].title}
                   </motion.h3>
