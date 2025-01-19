@@ -72,14 +72,14 @@ const Location = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
             >
-              <h3 className="font-urbanist font-semibold text-xl text-primary-medium/90 mb-6 flex items-center gap-2">
+              <h3 className="font-manrope font-medium text-xl text-primary-medium/90 mb-6 flex items-center gap-2">
                 <FaMapMarkerAlt className="text-[#4A828F]" /> Studio Dentistico
               </h3>
-              <p className="font-manrope font-medium text-[#2E545D] my-3">Via G. Washington, 70, 20146 Milano MI</p>
-              <p className="text-[#2E545D] my-3 flex items-center gap-2">
+              <p className="font-manrope text-[#2E545D] my-3">Via G. Washington, 70, 20146 Milano MI</p>
+              <p className="font-manrope text-[#2E545D] my-3 flex items-center gap-2">
                 <FaPhone className="text-[#4A828F]" /> +39 02 4047785
               </p>
-              <p className="font-manrope font-medium text-[#2E545D] my-3 flex items-center gap-2">
+              <p className="font-manrope text-[#2E545D] my-3 flex items-center gap-2">
                 <FaEnvelope className="text-[#4A828F]" /> studio@dentistagalimberti.it
               </p>
             </motion.div>
@@ -90,11 +90,11 @@ const Location = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.1 }}
             >
-              <h3 className="font-urbanist font-semibold text-primary-medium/90 text-xl mb-6 flex items-center gap-2">
+              <h3 className="font-manrope font-medium text-primary-medium/90 text-xl mb-6 flex items-center gap-2">
                 <FaClock className="text-[#4A828F]" /> Orari di Apertura
               </h3>
               {businessHours.map(({ day, hours }) => (
-                <p key={day} className="font-manrope font-medium text-[#2E545D] my-3">
+                <p key={day} className="font-manrope text-[#2E545D] my-3">
                   <strong>{day}:</strong> {hours}
                 </p>
               ))}
@@ -108,7 +108,7 @@ const Location = () => {
             transition={{ duration: 0.6, delay: 0.2 }}
           >
             <iframe
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2798.8876171939824!2d9.138449776652927!3d45.46069413642744!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4786c3c8d8fd373f%3A0xf9413c5045960b01!2sStudio%20Dentistico%20Dott.%20Galimberti!5e0!3m2!1sit!2sit!4v1705330000000!5m2!1sit!2sit"
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d5593.436387931559!2d9.2207452!3d45.495619299999994!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4786c71e5bd0a023%3A0xdf3a968cf22b736e!2sStudio%20dentistico%20Dentalp%20Milano!5e0!3m2!1sit!2sit!4v1737328891415!5m2!1sit!2sit"
               className="w-full h-[400px] border-0"
               allowFullScreen
               loading="lazy"
@@ -130,7 +130,7 @@ const Location = () => {
               <FaStar />
               <FaStar />
             </div>
-            <span className="font-manrope font-semibold text-sm">(Leggi le recensioni degli utenti)</span>
+            <span className="font-manrope text-sm">(Leggi le recensioni degli utenti)</span>
           </motion.a>
         </div>
 
@@ -140,12 +140,12 @@ const Location = () => {
           transition={{ duration: 0.6, delay: 0.3 }}
         >
           <div className="bg-white p-10 rounded-3xl shadow-lg shadow-blue-100/50 border border-gray-100">
-            <div className="font-manrope font-medium inline-flex items-center gap-2 bg-[#4A828F]/10 text-[#4A828F] px-6 py-3 rounded-full text-sm mb-6">
+            <div className="font-manrope inline-flex items-center gap-2 bg-[#4A828F]/10 text-[#4A828F] px-6 py-3 rounded-full text-sm mb-6">
               <FaRegCalendarCheck /> Risposta entro 24h
             </div>
             
-            <h2 className="font-manrope font-semibold text-3xl text-primary-medium/90 mb-4">Prenota una Visita</h2>
-            <p className="font-manrope font-medium text-primary-medium/90 mb-8 leading-relaxed">
+            <h2 className="font-manrope font-medium text-3xl text-primary-medium/90 mb-4">Prenota una Visita</h2>
+            <p className="font-manrope text-primary-medium/90 mb-8 leading-relaxed">
               Compila il form per richiedere un appuntamento. 
               Il nostro team ti ricontatterà per trovare l'orario più adatto alle tue esigenze.
             </p>

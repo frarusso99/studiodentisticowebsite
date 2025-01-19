@@ -131,7 +131,7 @@ const BlogCarousel = () => {
 
                         {/* Container del testo */}
                         <div className="p-8 flex-grow flex flex-col">
-                          <h3 className="font-manrope text-xl font-bold text-[#233539] group-hover:text-[#4A828F] transition-colors duration-300 mb-4 line-clamp-2">
+                          <h3 className="font-manrope font-medium text-xl text-[#233539] group-hover:text-[#4A828F] transition-colors duration-300 mb-4 line-clamp-2">
                             {blogPosts[index].title}
                           </h3>
                           <p className="font-manrope text-[#2E545D]/80 line-clamp-3 mb-6">
@@ -169,10 +169,10 @@ const BlogCarousel = () => {
               <button
                 key={idx}
                 onClick={() => setCurrentIndex(idx * (window.innerWidth >= 768 ? 3 : 1))}
-                className={`h-2 rounded-full transition-all duration-300 ${
+                className={`h-1.5 rounded-full transition-all duration-300 ${
                   Math.floor(currentIndex / (window.innerWidth >= 768 ? 3 : 1)) === idx
                     ? 'bg-[#4A828F] w-8'
-                    : 'bg-[#4A828F]/20 w-2'
+                    : 'bg-[#4A828F]/20 w-1.5'
                 }`}
                 aria-label={`Vai all'articolo ${idx + 1}`}
               />

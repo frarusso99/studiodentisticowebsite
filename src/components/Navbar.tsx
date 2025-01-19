@@ -43,27 +43,40 @@ const Navbar = () => {
       >
         <div className="max-w-[1920px] mx-auto px-6 md:px-12 lg:px-20">
           <div className="flex justify-between items-center h-24">
-            <div className="flex items-center w-1/2">
-              <img
-                src="/studiodentisticowebsite/logo3.png"
-                alt="Studio Dentistico"
-                className={`h-16 w-auto mr-8 transition-opacity duration-300 ${
-                  isMenuOpen ? 'opacity-0' : 'opacity-100'
-                }`}
-              />
-              <div className="hidden lg:flex space-x-5">
-                {['Home', 'Servizi', 'Team', 'Dove siamo', 'Blog', 'Contatti'].map((item) => (
-                  <button
-                    key={item}
-                    onClick={() => handleNavigation(item)}
-                    className="text-gray-800 hover:text-[#4A828F] transition-colors font-manrope text-sm"
-                  >
-                    {item}
-                  </button>
-                ))}
-              </div>
-            </div>
+          <div className="flex items-center w-1/2">
+          <button
+            onClick={() => {
+              if (location.pathname === '/') {
+                // Se siamo già nella homepage, scrolliamo in alto
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+              } else {
+                // Altrimenti, naviga alla homepage
+                navigate('/');
+              }
+            }}
+            className="focus:outline-none"
+          >
+            <img
+              src="/studiodentisticowebsite/logo3.png"
+              alt="Studio Dentistico"
+              className={`h-16 w-auto mr-8 transition-opacity duration-300 ${
+                isMenuOpen ? 'opacity-0' : 'opacity-100'
+              }`}
+            />
+          </button>
 
+            <div className="hidden lg:flex space-x-5">
+              {['Home', 'Servizi', 'Team', 'Dove siamo', 'Blog', 'Contatti'].map((item) => (
+                <button
+                  key={item}
+                  onClick={() => handleNavigation(item)}
+                  className="text-gray-800 hover:text-[#4A828F] transition-colors font-manrope text-sm"
+                >
+                  {item}
+                </button>
+              ))}
+            </div>
+          </div>
             <div className="hidden lg:flex items-center space-x-5">
               <div className="flex space-x-4">
                 <button
