@@ -84,7 +84,7 @@ const BlogCarousel = () => {
   };
 
   return (
-<section className="py-16 md:py-32 bg-[#F9E4D4]/30">
+<section id="blog" className="py-16 md:py-32 bg-[#F9E4D4]/30">
   <div className="container mx-auto px-4 md:px-6">
     <div className="max-w-3xl mx-auto text-center mb-12 md:mb-16">
       <h2 className="font-manrope text-4xl sm:text-5xl text-[#233539] mb-6">
@@ -149,7 +149,7 @@ const BlogCarousel = () => {
                         </span>
                       </div>
                       <div className="p-6 md:p-8 flex flex-col h-[calc(500px-16rem)]"> {/* Calcolo preciso dell'altezza rimanente */}
-                        <h3 className="font-urbanist text-xl md:text-2xl font-semibold text-primary-medium/90 mb-3 
+                        <h3 className="font-manrope text-xl md:text-2xl font-semibold text-primary-medium/90 mb-3 
                                    group-hover:text-[#4A828F] transition-colors duration-300 
                                    line-clamp-2 flex-none"> {/* flex-none impedisce la compressione */}
                           {blogArticles[index].title}

@@ -52,7 +52,7 @@ const Location = () => {
   };
 
   return (
-    <section className="py-16 px-4 sm:px-8 bg-[#E7E6F7]/30 to-white/80">
+    <section id="dove siamo" className="py-16 px-4 sm:px-8 bg-[#E7E6F7]/30 to-white/80">
       <motion.h2 
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}

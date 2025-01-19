@@ -60,7 +60,7 @@ const HeroSection = () => {
   }, [nextSlide, isHovering]);
 
   return (
-    <div className="min-h-screen flex flex-col md:flex-row">
+    <div id="home" className="min-h-screen flex flex-col md:flex-row">
       {/* Left Column - Text Content */}
       <div className="w-full md:w-1/2 bg-[#F3EFEA] flex items-center justify-center order-2 md:order-1 px-6 md:px-12 lg:px-20 py-16 md:py-0">
         <div className="max-w-xl">

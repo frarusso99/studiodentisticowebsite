@@ -51,8 +51,7 @@ const Studio = () => {
   });
 
   return (
-    <section 
-      className="min-h-screen bg-[#F7DAD9]/30 relative overflow-hidden py-6 md:py-12 lg:py-28">
+    <section id="studio" className="min-h-screen bg-[#F7DAD9]/30 relative overflow-hidden py-6 md:py-12 lg:py-28">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="max-w-2xl mx-auto text-center mb-8 lg:mb-12">
           <motion.h2 

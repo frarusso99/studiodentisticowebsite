@@ -90,7 +90,7 @@ export default function Services() {
   }, []);
 
   return (
-    <section className="py-20 relative bg-gradient-to-br from-[#AFCDD5]/20 via-white/50 to-[#4A828F]/10">
+    <section id="servizi" className="py-20 relative bg-gradient-to-br from-[#AFCDD5]/20 via-white/50 to-[#4A828F]/10">
       <div className="absolute inset-0 bg-[url('/pattern.png')] opacity-5" />
       
       <div className="relative">

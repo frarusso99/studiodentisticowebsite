@@ -62,7 +62,7 @@ const Footer = () => {
         </span>
       </a>
 
-      <footer className="bg-[#233539] text-white pt-20 pb-8">
+      <footer id="contatti" className="bg-[#233539] text-white pt-20 pb-8">
         <div className="container mx-auto px-6">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
             {/* Brand Section */}
