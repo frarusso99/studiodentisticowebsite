@@ -76,7 +76,7 @@ const HeroSection = () => {
           <motion.button
             whileHover={{ scale: 1.02 }}
             whileTap={{ scale: 0.98 }}
-            className="font-manrope font-medium px-8 py-4 bg-[#4A828F] text-white hover:bg-[#2E545D] transition-colors duration-300 rounded-2xl shadow-sm hover:shadow-md"
+            className="font-manrope font-medium px-8 py-4 bg-[#4A828F] text-white hover:bg-[#2E545D] transition-colors duration-300 rounded-full shadow-sm hover:shadow-md"
           >
             Prenota una Visita
           </motion.button>

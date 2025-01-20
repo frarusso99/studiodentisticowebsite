@@ -31,19 +31,24 @@ const Footer = () => {
   
   const handleNavigation = (section: string) => {
     setEmail(''); // Reset form when navigating
-    if (location.pathname !== '/') {
-      if (section.toLowerCase() === 'blog') {
-        if (location.pathname !== '/blog') {
-          navigate('/blog');
-        }
+
+    if (section.toLowerCase() === 'blog') {
+      // Se siamo già sulla pagina blog, non fare nulla
+      if (location.pathname !== '/blog') {
+        navigate('/blog');  // Naviga alla pagina Blog
+      }
+    } else {
+      // Altre navigazioni
+      if (location.pathname === '/') {
+        // Siamo sulla home page, scrolliamo alla sezione desiderata
+        document.getElementById(section.toLowerCase())?.scrollIntoView({ behavior: 'instant' });
       } else {
+        // Se siamo su una pagina diversa dalla Home, naviga alla Home
         navigate('/');
         setTimeout(() => {
           document.getElementById(section.toLowerCase())?.scrollIntoView({ behavior: 'instant' });
         }, 100);
       }
-    } else {
-      document.getElementById(section.toLowerCase())?.scrollIntoView({ behavior: 'smooth' });
     }
   };
 

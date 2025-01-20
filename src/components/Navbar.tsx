@@ -48,7 +48,7 @@ const Navbar = () => {
             onClick={() => {
               if (location.pathname === '/') {
                 // Se siamo già nella homepage, scrolliamo in alto
-                window.scrollTo({ top: 0, behavior: 'smooth' });
+                window.scrollTo({ top: 0, behavior: 'instant' });
               } else {
                 // Altrimenti, naviga alla homepage
                 navigate('/');
@@ -103,7 +103,7 @@ const Navbar = () => {
 
               <button
                 onClick={() => handleNavigation('Dove siamo')}
-                className="bg-[#4A828F] text-white px-6 py-2 rounded-md hover:bg-[#2E545D] transition-colors font-manrope"
+                className="bg-[#4A828F] text-white px-6 py-2 rounded-full hover:bg-[#2E545D] transition-colors font-manrope"
               >
                 Prenota Ora
               </button>
