@@ -5,9 +5,9 @@ import { motion, AnimatePresence } from 'framer-motion';
 const Services = () => {
   const [currentGroup, setCurrentGroup] = useState(0);
   const [isHovering, setIsHovering] = useState(false);
-  const [touchStart, setTouchStart] = useState(null);
-  const [touchEnd, setTouchEnd] = useState(null);
-
+  const [touchStart, setTouchStart] = useState<number | null>(null);
+  const [touchEnd, setTouchEnd] = useState<number | null>(null);
+  
   const services = [
     {
       icon: Smile,
@@ -51,12 +51,10 @@ const Services = () => {
     }
   ];
 
-  // Calcola il numero di gruppi in base al numero di servizi
   const getGroupCount = () => {
     return Math.ceil(services.length / 3);
   };
 
-  // Mostra i servizi per il gruppo attuale (3 per gruppo)
   const getVisibleServices = () => {
     const start = currentGroup * 3;
     const end = start + 3;
@@ -71,11 +69,11 @@ const Services = () => {
     setCurrentGroup((prevGroup) => (prevGroup === 0 ? getGroupCount() - 1 : prevGroup - 1));
   }, []);
 
-  const handleTouchStart = (e) => {
+  const handleTouchStart = (e: React.TouchEvent<HTMLDivElement>) => {
     setTouchStart(e.targetTouches[0].clientX);
   };
 
-  const handleTouchMove = (e) => {
+  const handleTouchMove = (e: React.TouchEvent<HTMLDivElement>) => {
     setTouchEnd(e.targetTouches[0].clientX);
   };
 
@@ -101,22 +99,22 @@ const Services = () => {
   }, [nextGroup, isHovering]);
 
   return (
-    <section id="servizi" className="bg-gradient-to-br from-[#E8F4F2] to-[#F5F0EB] py-8 md:py-16 lg:py-24 px-2 md:px-8 lg:px-20">
+    <section id="servizi" className="min-h-screen bg-gradient-to-br from-[#E8F4F2] to-[#F5F0EB] py-12 md:py-24 px-4 md:px-12 lg:px-20">
       <div className="max-w-7xl mx-auto">
-        {/* Header più compatto */}
-        <div className="max-w-2xl mb-8 md:mb-12 lg:mb-20 text-center md:text-left">
-          <h2 className="font-manrope text-2xl md:text-4xl lg:text-5xl text-[#233539] mb-2 md:mb-6">
+        {/* Header */}
+        <div className="max-w-2xl mb-12 md:mb-20 text-center md:text-left">
+          <h2 className="font-manrope text-3xl md:text-4xl lg:text-5xl text-[#233539] mb-4 md:mb-6">
             I Nostri Servizi
-            <span className="block text-lg md:text-2xl lg:text-3xl font-light italic mt-1 md:mt-2 text-[#4A828F]">
+            <span className="block text-xl md:text-2xl lg:text-3xl font-light italic mt-2 text-[#4A828F]">
               tecnologia e professionalità
             </span>
           </h2>
-          <p className="font-manrope text-[#2E545D] text-sm md:text-lg">
+          <p className="font-manrope text-[#2E545D] text-base md:text-lg">
             Offriamo cure dentistiche complete con un approccio delicato e personalizzato per ogni paziente.
           </p>
         </div>
         
-        <div className="relative pb-12 md:pb-16 lg:pb-20">
+        <div className="relative pb-16 md:pb-20">
           <div 
             className="relative overflow-hidden"
             onMouseEnter={() => setIsHovering(true)}
@@ -125,37 +123,36 @@ const Services = () => {
             onTouchMove={handleTouchMove}
             onTouchEnd={handleTouchEnd}
           >
-            <div className="grid grid-cols-3 gap-2 md:gap-6 lg:gap-8">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-8">
               <AnimatePresence mode="wait">
                 {getVisibleServices().map((service, idx) => {
                   const Icon = service.icon;
                   return (
                     <motion.div
-                      key={`${service.title}-${currentGroup}-${idx}`}
+                      key={`${service.title}-${idx}`}
                       initial={{ opacity: 0, y: 20 }}
                       animate={{ opacity: 1, y: 0 }}
                       exit={{ opacity: 0, y: -20 }}
                       transition={{ duration: 0.4, ease: "easeInOut" }}
                       className="group"
                     >
-                      <div className="bg-white/80 backdrop-blur-sm p-3 md:p-6 lg:p-8 rounded-lg md:rounded-2xl lg:rounded-3xl shadow-sm 
+                      <div className="bg-white/80 backdrop-blur-sm p-4 md:p-8 rounded-2xl md:rounded-3xl shadow-sm 
                                     transition-all duration-300 h-full
                                     hover:shadow-lg hover:bg-white
                                     border border-[#4A828F]/10">
-                        <div className="mb-2 md:mb-4 lg:mb-6 p-2 md:p-3 lg:p-4 rounded-lg md:rounded-xl lg:rounded-2xl 
-                                    bg-gradient-to-br from-[#4A828F]/5 to-transparent
-                                    w-8 h-8 md:w-12 md:h-12 lg:w-16 lg:h-16 flex items-center justify-center
+                        <div className="mb-4 md:mb-6 p-3 md:p-4 rounded-xl md:rounded-2xl bg-gradient-to-br from-[#4A828F]/5 to-transparent
+                                    w-12 h-12 md:w-16 md:h-16 flex items-center justify-center
                                     group-hover:from-[#4A828F]/10 transition-colors duration-300">
                           <Icon 
-                            className="w-4 h-4 md:w-6 md:h-6 lg:w-8 lg:h-8 text-[#4A828F] transition-transform duration-300 group-hover:scale-110" 
+                            className="w-6 h-6 md:w-8 md:h-8 text-[#4A828F] transition-transform duration-300 group-hover:scale-110" 
                             strokeWidth={1.5}
                           />
                         </div>
-                        <h3 className="font-manrope text-sm md:text-xl lg:text-2xl text-[#233539] font-medium mb-1 md:mb-3 lg:mb-4 
+                        <h3 className="font-manrope text-xl md:text-2xl text-[#233539] font-medium mb-2 md:mb-4 
                                      group-hover:text-[#4A828F] transition-colors duration-300">
                           {service.title}
                         </h3>
-                        <p className="font-manrope text-[#2E545D]/80 text-xs md:text-sm lg:text-base leading-relaxed">
+                        <p className="font-manrope text-sm md:text-base text-[#2E545D]/80 leading-relaxed">
                           {service.description}
                         </p>
                       </div>
@@ -166,8 +163,8 @@ const Services = () => {
             </div>
           </div>
 
-          {/* Controlli di navigazione più compatti */}
-          <div className="absolute -bottom-6 left-0 w-full flex justify-between items-center px-2 md:px-4">
+          {/* Controlli di navigazione */}
+          <div className="absolute -bottom-4 left-0 w-full flex justify-between items-center px-2 md:px-4 mt-6 md:mt-8">
             <div className="flex space-x-1 md:space-x-2">
               {Array.from({ length: getGroupCount() }).map((_, index) => (
                 <button
@@ -175,34 +172,34 @@ const Services = () => {
                   onClick={() => setCurrentGroup(index)}
                   className={`h-1 transition-all duration-300 rounded-full 
                     ${currentGroup === index 
-                      ? 'bg-[#4A828F] w-4 md:w-6 lg:w-8' 
-                      : 'bg-[#4A828F]/20 hover:bg-[#4A828F]/40 w-1 md:w-2'
+                      ? 'bg-[#4A828F] w-6 md:w-8' 
+                      : 'bg-[#4A828F]/20 hover:bg-[#4A828F]/40 w-2'
                     }`}
                   aria-label={`Vai al gruppo ${index + 1}`}
                 />
               ))}
             </div>
             
-            <div className="flex space-x-2">
+            <div className="flex space-x-2 md:space-x-3">
               <motion.button
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
                 onClick={prevGroup}
-                className="p-1.5 md:p-2 lg:p-3 bg-white hover:bg-[#4A828F] text-[#4A828F] hover:text-white
+                className="p-2 md:p-3 bg-white hover:bg-[#4A828F] text-[#4A828F] hover:text-white
                           transition-all duration-300 rounded-full shadow-sm hover:shadow-md"
                 aria-label="Gruppo precedente"
               >
-                <ChevronLeft className="w-3 h-3 md:w-4 md:h-4 lg:w-5 lg:h-5" />
+                <ChevronLeft className="w-4 h-4 md:w-5 md:h-5" />
               </motion.button>
               <motion.button
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
                 onClick={nextGroup}
-                className="p-1.5 md:p-2 lg:p-3 bg-white hover:bg-[#4A828F] text-[#4A828F] hover:text-white
+                className="p-2 md:p-3 bg-white hover:bg-[#4A828F] text-[#4A828F] hover:text-white
                           transition-all duration-300 rounded-full shadow-sm hover:shadow-md"
                 aria-label="Gruppo successivo"
               >
-                <ChevronRight className="w-3 h-3 md:w-4 md:h-4 lg:w-5 lg:h-5" />
+                <ChevronRight className="w-4 h-4 md:w-5 md:h-5" />
               </motion.button>
             </div>
           </div>
