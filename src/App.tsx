@@ -1,6 +1,7 @@
 import { BrowserRouter, Routes, Route, Outlet } from 'react-router-dom';
-import ScrollToTop from './components/ScrollToTop'; // Importa ScrollToTop
+import ScrollToTop from './components/ScrollToTop';
 import Navbar from './components/Navbar';
+import TemporaryLandingPage from './components/TemporaryLandingPage';
 import Hero from './components/Hero';
 import Services from './components/Services';
 import Team from './components/Team';
@@ -11,7 +12,17 @@ import Footer from './components/Footer';
 import Blog from './pages/Blog';
 import BlogPost from './pages/BlogPost';
 
-const Home = () => {
+// Pagina temporanea che mostra solo landing page e sezione location
+const TemporaryHome = () => {
+  return (
+    <>
+      <TemporaryLandingPage />
+    </>
+  );
+};
+
+// Pagina completa originale (per quando vorrai tornare al sito completo)
+const FullHome = () => {
   return (
     <>
       <Hero />
@@ -36,16 +47,39 @@ const Layout = () => {
   );
 };
 
+// Layout senza navbar per la landing page temporanea
+const TemporaryLayout = () => {
+  return (
+    <div className="min-h-screen flex flex-col bg-white overflow-x-hidden">
+      <main className="flex-grow relative">
+        <Outlet />
+      </main>
++
+    </div>
+  );
+};
+
 function App() {
+  // Imposta su true per mostrare la landing page temporanea
+  const showTemporary = true;
+
   return (
     <BrowserRouter basename="/studiodentisticowebsite">
       <ScrollToTop />
       <Routes>
-        <Route path="/" element={<Layout />}>
-          <Route index element={<Home />} />
-          <Route path="blog" element={<Blog />} />
-          <Route path="blog/:slug" element={<BlogPost />} />
-        </Route>
+        {showTemporary ? (
+          <Route path="/" element={<TemporaryLayout />}>
+            <Route index element={<TemporaryHome />} />
+            <Route path="blog" element={<Blog />} />
+            <Route path="blog/:slug" element={<BlogPost />} />
+          </Route>
+        ) : (
+          <Route path="/" element={<Layout />}>
+            <Route index element={<FullHome />} />
+            <Route path="blog" element={<Blog />} />
+            <Route path="blog/:slug" element={<BlogPost />} />
+          </Route>
+        )}
       </Routes>
     </BrowserRouter>
   );
