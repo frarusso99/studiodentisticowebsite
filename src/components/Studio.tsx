@@ -1,41 +1,50 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { IoArrowBack, IoArrowForward } from 'react-icons/io5';
+import { IoArrowBack, IoArrowForward, IoClose, IoExpand } from 'react-icons/io5';
 import { useSwipeable } from 'react-swipeable';
 
 const studioSlides = [
   {
     id: 1,
-    title: 'Reception & Accoglienza',
-    description: 'Il tuo percorso inizia in un ambiente accogliente e rilassante',
-    image: 'https://images.pexels.com/photos/6809645/pexels-photo-6809645.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
-    highlight: 'Wi-Fi gratuito e area refresh'
+    title: 'Sala Attesa',
+    description: 'Uno spazio semplice e ordinato dove accomodarsi prima della visita.',
+    image: '/studiodentisticowebsite/salaattesa1.jpg',
+    highlight: 'Sedie comode e ambiente tranquillo'
   },
   {
     id: 2,
-    title: 'Sala Operatoria Principale',
-    description: "Tecnologie all'avanguardia per diagnosi e trattamenti precisi",
-    image: 'https://images.unsplash.com/photo-1629909613654-28e377c37b09?auto=format&fit=crop&q=80',
-    highlight: 'Microscopio 3D di ultima generazione'
+    title: 'Reception',
+    description: 'Il primo punto di contatto, con personale disponibile per ogni esigenza.',
+    image: '/studiodentisticowebsite/reception1.jpg',
+    highlight: 'Accoglienza cortese e informazioni chiare'
   },
   {
     id: 3,
-    title: 'Area Diagnostica',
-    description: 'Imaging digitale per diagnosi immediate e accurate',
-    image: 'https://images.pexels.com/photos/6502019/pexels-photo-6502019.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
-    highlight: 'TAC 3D e radiografia digitale'
+    title: 'Sala Operatoria',
+    description: 'Locale attrezzato per trattamenti odontoiatrici in un ambiente pulito e funzionale.',
+    image: '/studiodentisticowebsite/poltrona1.jpg',
+    highlight: 'Poltrona confortevole e strumenti aggiornati'
   },
   {
     id: 4,
-    title: 'Zona Relax',
-    description: 'Un ambiente confortevole per il tuo benessere',
-    image: 'https://images.pexels.com/photos/8459996/pexels-photo-8459996.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
-    highlight: 'Poltrone massaggianti e TV'
+    title: 'Ingresso',
+    description: 'Corridoio ordinato che collega reception, ambulatori e area attesa.',
+    image: '/studiodentisticowebsite/entrata1.jpg',
+    highlight: 'Spazi ristrutturati e accesso semplice'
+  },
+  {
+    id: 5,
+    title: 'Esterno dello Studio',
+    description: 'Facciata visibile dalla strada con ingresso ben segnalato.',
+    image: '/studiodentisticowebsite/facciata1.jpg',
+    highlight: 'Studio facilmente riconoscibile e raggiungibile'
   }
 ];
 
 const Studio = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [isLightboxOpen, setIsLightboxOpen] = useState(false);
+  const [lightboxIndex, setLightboxIndex] = useState(0);
 
   const handleSwipe = (direction: 'LEFT' | 'RIGHT') => {
     if (direction === 'LEFT') {
@@ -45,9 +54,35 @@ const Studio = () => {
     }
   };
 
-  const handlers = useSwipeable({
+  const handleLightboxSwipe = (direction: 'LEFT' | 'RIGHT') => {
+    if (direction === 'LEFT') {
+      setLightboxIndex((prev) => (prev + 1) % studioSlides.length);
+    } else if (direction === 'RIGHT') {
+      setLightboxIndex((prev) => (prev === 0 ? studioSlides.length - 1 : prev - 1));
+    }
+  };
+
+  const openLightbox = (index: number) => {
+    setLightboxIndex(index);
+    setIsLightboxOpen(true);
+    // Prevent scrolling when lightbox is open
+    document.body.style.overflow = 'hidden';
+  };
+
+  const closeLightbox = () => {
+    setIsLightboxOpen(false);
+    // Enable scrolling again
+    document.body.style.overflow = 'auto';
+  };
+
+  const carouselHandlers = useSwipeable({
     onSwipedLeft: () => handleSwipe('LEFT'),
     onSwipedRight: () => handleSwipe('RIGHT'),
+  });
+
+  const lightboxHandlers = useSwipeable({
+    onSwipedLeft: () => handleLightboxSwipe('LEFT'),
+    onSwipedRight: () => handleLightboxSwipe('RIGHT'),
   });
 
   return (
@@ -76,9 +111,20 @@ const Studio = () => {
           </motion.p>
         </div>
 
-
-        <div {...handlers} className="relative max-w-4xl mx-auto">
-          <div className="relative h-[60vh] rounded-xl overflow-hidden shadow-lg bg-[#233539]">
+        <div {...carouselHandlers} className="relative max-w-4xl mx-auto">
+          <div className="relative h-[60vh] rounded-xl overflow-hidden shadow-lg bg-[#233539] cursor-pointer group">
+            <button 
+              onClick={() => openLightbox(currentIndex)}
+              className="absolute inset-0 w-full h-full z-10"
+              aria-label="Apri immagine a schermo intero"
+            >
+              <span className="sr-only">Visualizza immagine a schermo intero</span>
+            </button>
+            
+            <div className="absolute top-4 right-4 z-20 bg-white/80 hover:bg-[#4A828F] text-[#4A828F] hover:text-white w-10 h-10 rounded-full flex items-center justify-center transition-all duration-300 opacity-0 group-hover:opacity-100">
+              <IoExpand className="w-5 h-5" />
+            </div>
+            
             <AnimatePresence mode="wait">
               <motion.div
                 key={currentIndex}
@@ -115,15 +161,21 @@ const Studio = () => {
           </div>
 
           <button
-            onClick={() => handleSwipe('RIGHT')}
-            className="hidden sm:flex absolute left-2 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-[#4A828F] text-[#4A828F] hover:text-white w-10 h-10 rounded-full items-center justify-center transition-all duration-300"
+            onClick={(e) => {
+              e.stopPropagation();
+              handleSwipe('RIGHT');
+            }}
+            className="hidden sm:flex absolute left-2 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-[#4A828F] text-[#4A828F] hover:text-white w-10 h-10 rounded-full items-center justify-center transition-all duration-300 z-20"
           >
             <IoArrowBack className="w-5 h-5" />
           </button>
 
           <button
-            onClick={() => handleSwipe('LEFT')}
-            className="hidden sm:flex absolute right-2 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-[#4A828F] text-[#4A828F] hover:text-white w-10 h-10 rounded-full items-center justify-center transition-all duration-300"
+            onClick={(e) => {
+              e.stopPropagation();
+              handleSwipe('LEFT');
+            }}
+            className="hidden sm:flex absolute right-2 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-[#4A828F] text-[#4A828F] hover:text-white w-10 h-10 rounded-full items-center justify-center transition-all duration-300 z-20"
           >
             <IoArrowForward className="w-5 h-5" />
           </button>
@@ -157,6 +209,94 @@ const Studio = () => {
           </div>
         </div>
       </div>
+
+      {/* Lightbox Modal */}
+      <AnimatePresence>
+        {isLightboxOpen && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.3 }}
+            className="fixed inset-0 bg-black/90 z-50 flex items-center justify-center"
+          >
+            <div 
+              {...lightboxHandlers}
+              className="relative w-full h-full flex flex-col justify-center items-center"
+            >
+              <div className="absolute top-4 right-4 z-50">
+                <button
+                  onClick={closeLightbox}
+                  className="bg-white/20 hover:bg-white/40 text-white w-12 h-12 rounded-full flex items-center justify-center transition-all duration-300"
+                >
+                  <IoClose className="w-6 h-6" />
+                </button>
+              </div>
+              
+              <div className="relative w-full h-full max-h-screen flex items-center justify-center p-4 sm:p-8">
+                <motion.div
+                  key={`lightbox-${lightboxIndex}`}
+                  initial={{ opacity: 0, scale: 0.95 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  exit={{ opacity: 0, scale: 0.95 }}
+                  transition={{ duration: 0.4 }}
+                  className="relative w-full h-full max-w-5xl max-h-[80vh] flex flex-col"
+                >
+                  <div className="flex-1 relative overflow-hidden rounded-lg">
+                    <img
+                      src={studioSlides[lightboxIndex].image}
+                      alt={studioSlides[lightboxIndex].title}
+                      className="w-full h-full object-contain"
+                    />
+                  </div>
+                  
+                  <div className="text-white text-center mt-4 px-4">
+                    <h3 className="text-xl sm:text-2xl font-light">
+                      {studioSlides[lightboxIndex].title}
+                    </h3>
+                    <p className="text-sm sm:text-base mt-1 sm:mt-2 text-white/80">
+                      {studioSlides[lightboxIndex].description}
+                    </p>
+                  </div>
+                </motion.div>
+                
+                <button
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    handleLightboxSwipe('RIGHT');
+                  }}
+                  className="absolute left-4 sm:left-8 top-1/2 -translate-y-1/2 bg-white/20 hover:bg-white/40 text-white w-10 h-10 sm:w-12 sm:h-12 rounded-full flex items-center justify-center transition-all duration-300"
+                >
+                  <IoArrowBack className="w-5 h-5" />
+                </button>
+                
+                <button
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    handleLightboxSwipe('LEFT');
+                  }}
+                  className="absolute right-4 sm:right-8 top-1/2 -translate-y-1/2 bg-white/20 hover:bg-white/40 text-white w-10 h-10 sm:w-12 sm:h-12 rounded-full flex items-center justify-center transition-all duration-300"
+                >
+                  <IoArrowForward className="w-5 h-5" />
+                </button>
+              </div>
+              
+              <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-2">
+                {studioSlides.map((_, idx) => (
+                  <button
+                    key={idx}
+                    onClick={() => setLightboxIndex(idx)}
+                    className={`h-2 rounded-full transition-all duration-300
+                      ${lightboxIndex === idx 
+                        ? 'w-10 bg-white' 
+                        : 'w-2 bg-white/30'}`}>
+                  </button>
+                ))}
+              </div>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </section>
   );
 };

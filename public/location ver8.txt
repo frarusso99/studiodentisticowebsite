@@ -7,6 +7,7 @@ import {
   FaEnvelope, 
   FaClock,
   FaRegCalendarCheck,
+  FaStar,
   FaInfoCircle
 } from 'react-icons/fa';
 
@@ -36,7 +37,6 @@ const Location = () => {
     message: ''
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [isSubmitted, setIsSubmitted] = useState(false);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
@@ -46,31 +46,9 @@ const Location = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
-
-    try {
-      // Con Netlify Forms, non dobbiamo fare chiamate fetch manuali
-      // Il form verrà gestito automaticamente da Netlify
-      // Ma possiamo simulare un ritardo per mostrare lo stato di caricamento
-      await new Promise(resolve => setTimeout(resolve, 1000));
-      
-      // Reimpostare il form dopo l'invio
-      setFormData({
-        name: '',
-        phone: '',
-        email: '',
-        preferredTime: '',
-        treatment: '',
-        message: ''
-      });
-      
-      setIsSubmitted(true);
-      // Nascondere il messaggio di successo dopo 5 secondi
-      setTimeout(() => setIsSubmitted(false), 5000);
-    } catch (error) {
-      console.error('Errore durante l\'invio del form:', error);
-    } finally {
-      setIsSubmitting(false);
-    }
+    await new Promise(resolve => setTimeout(resolve, 1000));
+    console.log(formData);
+    setIsSubmitting(false);
   };
 
   return (
@@ -149,13 +127,17 @@ const Location = () => {
           </motion.div>
 
           <motion.a 
-            href="https://g.co/kgs/MWvDSnS"
+            href="https://g.co/kgs/MWvDSnS" 
             target="_blank"
             rel="noopener noreferrer"
             className="flex items-center justify-center gap-3 p-5 bg-white text-[#4A828F] no-underline rounded-xl font-medium shadow-md border border-gray-100 hover:bg-[#4A828F] hover:text-white transition-all duration-300"
             whileHover={{ scale: 1.02 }}
           >
             <FaGoogle className="text-xl" /> 
+            {/* <span className="font-bold font-manrope">4.9</span> */}
+            {/* <div className="flex gap-1 text-yellow-400">
+              {[...Array(5)].map((_, i) => <FaStar key={i} />)}
+            </div> */}
             <span className="font-manrope text-sm">Visita la nostra pagina Google</span>
           </motion.a>
         </div>
@@ -176,30 +158,7 @@ const Location = () => {
               Ti ricontatteremo presto.
             </p>
 
-            {isSubmitted && (
-              <div className="p-4 mb-6 rounded-lg bg-green-100 text-green-800">
-                Grazie! La tua richiesta è stata inviata. Ti contatteremo presto.
-              </div>
-            )}
-
-            <form 
-              name="appointment" 
-              method="POST" 
-              data-netlify="true" 
-              netlify-honeypot="bot-field"
-              onSubmit={handleSubmit} 
-              className="flex flex-col gap-5"
-            >
-              {/* Campo nascosto per netlify */}
-              <input type="hidden" name="form-name" value="appointment" />
-              
-              {/* Campo honeypot per prevenire spam */}
-              <p className="hidden">
-                <label>
-                  Non compilare questo campo se sei umano: <input name="bot-field" />
-                </label>
-              </p>
-
+            <form onSubmit={handleSubmit} className="flex flex-col gap-5">
               <div className="flex flex-col gap-2">
                 <label className="font-manrope text-[#2E545D] text-sm font-medium">
                   Nome e Cognome *
@@ -257,7 +216,7 @@ const Location = () => {
                   >
                     <option value="">Seleziona un orario</option>
                     <option value="mattina">Mattina (9:00 - 13:00)</option>
-                    <option value="pomeriggio">Pomeriggio (15:00 - 19:00)</option>
+                    <option value="pomeriggio">Pomeriggio (14:00 - 19:00)</option>
                     <option value="sabato">Sabato Mattina</option>
                   </select>
                 </div>

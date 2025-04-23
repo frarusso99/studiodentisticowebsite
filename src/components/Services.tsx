@@ -1,5 +1,5 @@
 import { useState, useEffect, useCallback } from 'react';
-import { ChevronLeft, ChevronRight, Smile, Timer, Sparkles, Shield, Heart, Activity, Target, Star } from 'lucide-react';
+import { ChevronLeft, ChevronRight, Smile, Timer, Sparkles, Shield, Heart, Activity, Target, Star, Square } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 const Services = () => {
@@ -7,47 +7,52 @@ const Services = () => {
   const [isHovering, setIsHovering] = useState(false);
   const [touchStart, setTouchStart] = useState<number | null>(null);
   const [touchEnd, setTouchEnd] = useState<number | null>(null);
-  
+
   const services = [
     {
       icon: Smile,
-      title: "Pulizia Dentale",
-      description: "Igiene professionale e personalizzata per mantenere il tuo sorriso naturalmente sano."
+      title: "Igiene Orale Professionale",
+      description: "Rimozione del tartaro e prevenzione delle patologie gengivali. Un trattamento regolare per mantenere denti e gengive in perfetta salute."
     },
     {
       icon: Timer,
-      title: "Ortodonzia",
-      description: "Trattamenti su misura per un allineamento dentale armonioso e naturale."
+      title: "Ortodonzia Invisibile",
+      description: "Soluzioni moderne e trasparenti per allineare i denti in modo discreto. Ideale per adulti e adolescenti che desiderano un sorriso armonioso."
     },
     {
       icon: Sparkles,
-      title: "Sbiancamento",
-      description: "Tecniche delicate e progressive per valorizzare la luminosità del tuo sorriso."
+      title: "Sbiancamento Dentale",
+      description: "Tecniche sicure e progressive per illuminare il tuo sorriso. Trattamenti effettuati in studio o con kit personalizzati per casa."
     },
     {
       icon: Shield,
-      title: "Otturazioni",
-      description: "Restauri estetici con materiali biocompatibili di ultima generazione."
+      title: "Cure Conservative",
+      description: "Otturazioni estetiche in composito, minimamente invasive, per ripristinare la funzionalità e l’estetica del dente danneggiato."
     },
     {
       icon: Heart,
-      title: "Cure Conservative",
-      description: "Interventi minimamente invasivi per preservare la naturale bellezza dei tuoi denti."
+      title: "Endodonzia (Devitalizzazione)",
+      description: "Trattamenti endodontici precisi per salvare il dente compromesso, eliminando dolore e infezioni."
     },
     {
       icon: Activity,
-      title: "Devitalizzazioni",
-      description: "Procedure precise e confortevoli per eliminare il dolore preservando il dente."
+      title: "Protesi Fisse e Mobili",
+      description: "Riabilitazioni su misura per restituire funzionalità ed estetica al sorriso. Protesi moderne, comode e altamente personalizzate."
     },
     {
       icon: Target,
-      title: "Protesi Dentali",
-      description: "Soluzioni personalizzate che si integrano perfettamente con il tuo sorriso."
+      title: "Implantologia Dentale",
+      description: "Sostituzione dei denti mancanti con impianti dentali in titanio di ultima generazione, per un risultato stabile e naturale."
     },
     {
       icon: Star,
-      title: "Estetica Dentale",
-      description: "Trattamenti delicati per valorizzare l'armonia naturale del tuo viso."
+      title: "Estetica Dentale e Faccette",
+      description: "Interventi su forma e colore dei denti per valorizzare il sorriso in modo naturale, con tecniche non invasive."
+    },
+    {
+      icon: Shield,
+      title: "Trattamenti per Parodontite",
+      description: "Terapie mirate per la cura delle gengive e il mantenimento della salute del parodonto."
     }
   ];
 
@@ -104,16 +109,16 @@ const Services = () => {
         {/* Header */}
         <div className="max-w-2xl mb-12 md:mb-20 text-center md:text-left">
           <h2 className="font-manrope text-3xl md:text-4xl lg:text-5xl text-[#233539] mb-4 md:mb-6">
-            I Nostri Servizi
+            I nostri servizi
             <span className="block text-xl md:text-2xl lg:text-3xl font-light italic mt-2 text-[#4A828F]">
-              tecnologia e professionalità
+              Tecnologie moderne e attenzione al paziente
             </span>
           </h2>
           <p className="font-manrope text-[#2E545D] text-base md:text-lg">
-            Offriamo cure dentistiche complete con un approccio delicato e personalizzato per ogni paziente.
+            Presso il nostro studio dentistico a Varapodio offriamo cure dentistiche complete con un approccio delicato e personalizzato per ogni paziente. 
           </p>
         </div>
-        
+
         <div className="relative pb-16 md:pb-20">
           <div 
             className="relative overflow-hidden"
@@ -179,7 +184,7 @@ const Services = () => {
                 />
               ))}
             </div>
-            
+
             <div className="flex space-x-2 md:space-x-3">
               <motion.button
                 whileHover={{ scale: 1.05 }}

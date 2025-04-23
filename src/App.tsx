@@ -4,7 +4,7 @@ import Navbar from './components/Navbar';
 import TemporaryLandingPage from './components/TemporaryLandingPage';
 import Hero from './components/Hero';
 import Services from './components/Services';
-import Team from './components/Team';
+// import Team from './components/Team';
 import Studio from './components/Studio';
 import Location from './components/Location';
 import BlogCarousel from './components/BlogCarousel';
@@ -27,7 +27,7 @@ const FullHome = () => {
     <>
       <Hero />
       <Services />
-      <Team />
+      {/* <Team /> */}
       <Studio />
       <Location />
       <BlogCarousel />
@@ -61,7 +61,7 @@ const TemporaryLayout = () => {
 
 function App() {
   // Imposta su true per mostrare la landing page temporanea
-  const showTemporary = true;
+  const showTemporary = false;
 
   return (
     <BrowserRouter basename="/studiodentisticowebsite">

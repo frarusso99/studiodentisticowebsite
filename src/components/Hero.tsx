@@ -3,10 +3,11 @@ import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 const images = [
-  '/studiodentisticowebsite/poltrona1.jpg',
   '/studiodentisticowebsite/entrata1.jpg',
-  '/studiodentisticowebsite/porta1.jpg',
-  'https://images.pexels.com/photos/305568/pexels-photo-305568.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
+  '/studiodentisticowebsite/poltrona1.jpg',
+  '/studiodentisticowebsite/reception1.jpg',
+  '/studiodentisticowebsite/salaattesa1.jpg',
+  '/studiodentisticowebsite/facciata1.jpg',
 ];
 
 
@@ -65,9 +66,9 @@ const HeroSection = () => {
       <div className="w-full md:w-1/2 bg-[#F3EFEA] flex items-center justify-center order-2 md:order-1 px-6 md:px-12 lg:px-20 py-16 md:py-0">
         <div className="max-w-xl">
           <h1 className="font-manrope text-4xl md:text-5xl lg:text-6xl text-[#233539] leading-tight mb-6">
-            Il tuo sorriso,{' '}
+            La cura giusta,{' '}
             <span className="italic font-light">
-              la nostra passione
+              scelta insieme a te
             </span>
           </h1>
           <p className="font-manrope text-[#2E545D] text-lg md:text-xl mb-8 leading-relaxed">

@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { 
-  FaWhatsapp, FaInstagram, FaFacebookF, FaLinkedinIn,
+  FaWhatsapp, FaInstagram, FaFacebookF,
   FaClock, FaPhoneAlt 
 } from 'react-icons/fa';
 import { HiOutlineMail, HiOutlineLocationMarker, HiArrowRight } from 'react-icons/hi';
@@ -11,27 +11,9 @@ import { MouseEvent } from 'react'; // Import for MouseEvent type
 const Footer = () => {
   const navigate = useNavigate();
   const location = useLocation();
-  const [email, setEmail] = useState('');
   const currentYear = new Date().getFullYear();
 
-  const handleSubscribe = async (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    try {
-      // Qui implementa la logica per la newsletter
-      console.log('Subscribing:', email);
-      // Reset form after successful subscription
-      setEmail('');
-      // Mostra feedback all'utente
-      alert('Iscrizione completata con successo!');
-    } catch (error) {
-      console.error('Subscription error:', error);
-      alert('Si è verificato un errore. Riprova più tardi.');
-    }
-  };
-  
   const handleNavigation = (section: string) => {
-    setEmail(''); // Reset form when navigating
-
     if (section.toLowerCase() === 'blog') {
       // Se siamo già sulla pagina blog, non fare nulla
       if (location.pathname !== '/blog') {
@@ -54,8 +36,7 @@ const Footer = () => {
 
   const socialLinks = {
     instagram: 'https://instagram.com/tuoprofilo',
-    facebook: 'https://facebook.com/tuapagina',
-    linkedin: 'https://linkedin.com/company/tuazienda'
+    facebook: 'https://facebook.com/tuapagina'
   };
 
   return (
@@ -111,7 +92,7 @@ const Footer = () => {
 
       <footer id="contatti" className="bg-[#233539] text-white pt-20 pb-8">
         <div className="container mx-auto px-6">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-12 mb-16">
             {/* Brand Section */}
             <div className="space-y-6">
               <h2 className="font-manrope text-2xl">Studio Dentistico</h2>
@@ -122,8 +103,7 @@ const Footer = () => {
               <div className="flex gap-4">
                 {[
                   { Icon: FaInstagram, link: socialLinks.instagram },
-                  { Icon: FaFacebookF, link: socialLinks.facebook },
-                  { Icon: FaLinkedinIn, link: socialLinks.linkedin }
+                  { Icon: FaFacebookF, link: socialLinks.facebook }
                 ].map(({ Icon, link }, index) => (
                   <a
                     key={index}
@@ -159,8 +139,6 @@ const Footer = () => {
               </ul>
             </div>
 
-
-
             {/* Contact Info */}
             <div>
               <h3 className="font-manrope text-lg font-medium mb-6">Orari e Contatti</h3>
@@ -168,8 +146,10 @@ const Footer = () => {
                 <li className="flex items-center gap-3 font-manrop text-[#AFCDD5]/80">
                   <FaClock className="text-[#4A828F]" />
                   <div>
-                    <p>Lun - Ven: 9:00 - 19:00</p>
-                    <p>Sab: 9:00 - 13:00</p>
+                    <p>Mar: 9-13, 15-19</p>
+                    <p>Gio: 9-13, 15-19</p>
+                    <p>Ven: 9-13, 15-19</p>
+                    <p>Sab: 9-13</p>
                   </div>
                 </li>
                 <li>
@@ -203,33 +183,6 @@ const Footer = () => {
                 </li>
               </ul>
             </div>
-
-            {/* Newsletter */}
-            <div>
-              <h3 className="font-manrope text-lg font-medium mb-6">Newsletter</h3>
-              <p className="font-manrope text-[#AFCDD5]/80 mb-4">
-                Iscriviti per ricevere consigli sulla salute dentale e le nostre ultime novità
-              </p>
-              <form onSubmit={handleSubscribe} className="space-y-3">
-                <input
-                  type="email"
-                  placeholder="La tua email"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  required
-                  className="w-full px-4 py-3 rounded-lg bg-[#AFCDD5]/10 border border-[#AFCDD5]/20
-                           text-white placeholder-[#AFCDD5]/50 focus:outline-none 
-                           focus:border-[#4A828F] transition-colors duration-300"
-                />
-                <button
-                  type="submit"
-                  className="font-manrope font-medium w-full bg-[#4A828F] text-white py-3 rounded-lg 
-                           hover:bg-[#2E545D] transition-colors duration-300"
-                >
-                  Iscriviti
-                </button>
-              </form>
-            </div>
           </div>
 
           {/* Bottom Bar */}
@@ -261,7 +214,3 @@ const Footer = () => {
 };
 
 export default Footer;
-
-
-
-
