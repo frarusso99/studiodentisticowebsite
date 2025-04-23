@@ -1,0 +1,16 @@
+[build]
+  command = "npm run build"
+  publish = "build"
+
+# Disattiva tutti i plugin automatici
+[build.processing]
+  skip_processing = true
+
+# Assicurati che non ci siano plugin attivi
+[plugins]
+  package = []
+
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
