@@ -64,7 +64,7 @@ function App() {
   const showTemporary = false;
 
   return (
-    <BrowserRouter basename="/studiodentisticowebsite">
+    <BrowserRouter>
       <ScrollToTop />
       <Routes>
         {showTemporary ? (
