@@ -8,35 +8,35 @@ const studioSlides = [
     id: 1,
     title: 'Sala Attesa',
     description: 'Uno spazio semplice e ordinato dove accomodarsi prima della visita.',
-    image: '/studiodentisticowebsite/salaattesa1.jpg',
+    image: '/salaattesa1.jpg',
     highlight: 'Sedie comode e ambiente tranquillo'
   },
   {
     id: 2,
     title: 'Reception',
     description: 'Il primo punto di contatto, con personale disponibile per ogni esigenza.',
-    image: '/studiodentisticowebsite/reception1.jpg',
+    image: '/reception1.jpg',
     highlight: 'Accoglienza cortese e informazioni chiare'
   },
   {
     id: 3,
     title: 'Sala Operatoria',
     description: 'Locale attrezzato per trattamenti odontoiatrici in un ambiente pulito e funzionale.',
-    image: '/studiodentisticowebsite/poltrona1.jpg',
+    image: '/poltrona1.jpg',
     highlight: 'Poltrona confortevole e strumenti aggiornati'
   },
   {
     id: 4,
     title: 'Ingresso',
     description: 'Corridoio ordinato che collega reception, ambulatori e area attesa.',
-    image: '/studiodentisticowebsite/entrata1.jpg',
+    image: '/entrata1.jpg',
     highlight: 'Spazi ristrutturati e accesso semplice'
   },
   {
     id: 5,
     title: 'Esterno dello Studio',
     description: 'Facciata visibile dalla strada con ingresso ben segnalato.',
-    image: '/studiodentisticowebsite/facciata1.jpg',
+    image: '/facciata1.jpg',
     highlight: 'Studio facilmente riconoscibile e raggiungibile'
   }
 ];
