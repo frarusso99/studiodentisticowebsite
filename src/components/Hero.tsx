@@ -6,7 +6,7 @@ const images = [
   '/studiodentisticowebsite/entrata1.jpg',
   '/studiodentisticowebsite/poltrona1.jpg',
   '/studiodentisticowebsite/reception1.jpg',
-  '',
+  '/studiodentisticowebsite/salaattesa1.jpg',
   '/studiodentisticowebsite/facciata1.jpg',
 ];
 
