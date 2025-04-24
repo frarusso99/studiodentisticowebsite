@@ -68,16 +68,25 @@ const Location = () => {
     
     setIsSubmitting(true);
     setFormError(null);
-
+  
     try {
+      // Mappa i dati in italiano
+      const italianData = {
+        "form-name": "Richiesta di Appuntamento",
+        "Nome e Cognome": formData.name,
+        "Telefono": formData.phone,
+        "Email": formData.email,
+        "Fascia Oraria Preferita": formData.preferredTime,
+        "Trattamento di Interesse": formData.treatment,
+        "Messaggio": formData.message,
+        "Consenso Privacy": formData.privacyConsent ? "Accettato" : "Non accettato"
+      };
+  
       // Invio del form a Netlify
       await fetch("/", {
         method: "POST",
         headers: { "Content-Type": "application/x-www-form-urlencoded" },
-        body: encode({
-          "form-name": "appointment",
-          ...formData
-        })
+        body: encode(italianData)  // Manda i dati con le etichette in italiano
       });
       
       // Reimpostare il form dopo l'invio
@@ -219,7 +228,7 @@ const Location = () => {
 
             {/* Form per Netlify */}
             <form 
-              name="appointment" 
+              name="Richiesta di Appuntamento" 
               method="POST" 
               data-netlify="true" 
               data-netlify-honeypot="bot-field"
@@ -227,7 +236,7 @@ const Location = () => {
               className="flex flex-col gap-5"
             >
               {/* Campo nascosto per netlify */}
-              <input type="hidden" name="form-name" value="appointment" />
+              <input type="hidden" name="form-name" value="Richiesta di Appuntamento" />
               
               {/* Campo honeypot per prevenire spam */}
               <p className="hidden">
@@ -292,9 +301,9 @@ const Location = () => {
                     className="w-full p-3 border border-gray-200 rounded-lg focus:outline-none focus:ring-1 focus:ring-[#4A828F] focus:border-[#4A828F] appearance-none bg-white"
                   >
                     <option value="">Seleziona un orario</option>
-                    <option value="mattina">Mattina (9:00 - 13:00)</option>
-                    <option value="pomeriggio">Pomeriggio (15:00 - 19:00)</option>
-                    <option value="sabato">Sabato Mattina</option>
+                    <option value="Mattina (9:00 - 13:00)">Mattina (9:00 - 13:00)</option>
+                    <option value="Pomeriggio (15:00 - 19:00">Pomeriggio (15:00 - 19:00)</option>
+                    <option value="Sabato Mattina">Sabato Mattina</option>
                   </select>
                 </div>
 
@@ -309,11 +318,11 @@ const Location = () => {
                     className="w-full p-3 border border-gray-200 rounded-lg focus:outline-none focus:ring-1 focus:ring-[#4A828F] focus:border-[#4A828F] appearance-none bg-white"
                   >
                     <option value="">Seleziona un trattamento</option>
-                    <option value="visita">Prima Visita</option>
-                    <option value="igiene">Igiene e Prevenzione</option>
-                    <option value="implantologia">Implantologia</option>
-                    <option value="ortodonzia">Ortodonzia</option>
-                    <option value="estetica">Odontoiatria Estetica</option>
+                    <option value="Prima Visita">Prima Visita</option>
+                    <option value="Igiene e Prevenzione">Igiene e Prevenzione</option>
+                    <option value="Implantologia">Implantologia</option>
+                    <option value="Ortodonzia">Ortodonzia</option>
+                    <option value="Odontoiatria Estetica">Odontoiatria Estetica</option>
                   </select>
                 </div>
               </div>
