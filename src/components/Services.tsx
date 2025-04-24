@@ -104,7 +104,7 @@ const Services = () => {
   }, [nextGroup, isHovering]);
 
   return (
-    <section id="servizi" className="min-h-screen bg-gradient-to-br from-[#E8F4F2] to-[#F5F0EB] py-12 md:py-24 px-4 md:px-12 lg:px-20">
+    <section id="servizi" className="scroll-mt-24 min-h-screen bg-gradient-to-br from-[#E8F4F2] to-[#F5F0EB] py-12 md:py-24 px-4 md:px-12 lg:px-20">
       <div className="max-w-7xl mx-auto">
         {/* Header */}
         <div className="max-w-2xl mb-12 md:mb-20 text-center md:text-left">

@@ -1,6 +1,7 @@
 import { useState, useEffect, useCallback } from 'react';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { useNavigate, useLocation } from 'react-router-dom';
 
 const images = [
   '/entrata1.jpg',
@@ -16,6 +17,8 @@ const HeroSection = () => {
   const [isHovering, setIsHovering] = useState(false);
   const [touchStart, setTouchStart] = useState<number | null>(null);
   const [touchEnd, setTouchEnd] = useState<number | null>(null);
+  const navigate = useNavigate();
+  const location = useLocation();
 
   const nextSlide = useCallback(() => {
     setCurrentIndex((prevIndex) => (prevIndex + 1) % images.length);
@@ -33,6 +36,27 @@ const HeroSection = () => {
     setTouchStart(e.targetTouches[0].clientX);
   };
   
+  const handleNavigation = (section: string) => {
+    const sectionId = section.toLowerCase();
+  
+    const scrollToSection = () => {
+      const el = document.getElementById(sectionId);
+      if (el) {
+        el.scrollIntoView({ behavior: 'smooth' });
+      }
+    };
+  
+    if (sectionId === 'blog') {
+      navigate('/blog');
+    } else if (location.pathname !== '/') {
+      navigate('/');
+      setTimeout(scrollToSection, 200); // permette il montaggio del DOM
+    } else {
+      scrollToSection();
+    }
+  };
+  
+
   const onTouchMove = (e: React.TouchEvent<HTMLDivElement>) => {
     setTouchEnd(e.targetTouches[0].clientX);
   };
@@ -75,6 +99,7 @@ const HeroSection = () => {
             Ci prendiamo cura della salute del tuo sorriso con professionalità e un approccio personalizzato per ogni paziente.
           </p>
           <motion.button
+            onClick={() => handleNavigation('Dove siamo')}
             whileHover={{ scale: 1.02 }}
             whileTap={{ scale: 0.98 }}
             className="font-manrope font-medium px-8 py-4 bg-[#4A828F] text-white hover:bg-[#2E545D] transition-colors duration-300 rounded-full shadow-sm hover:shadow-md"
@@ -116,7 +141,7 @@ const HeroSection = () => {
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
                 onClick={prevSlide}
-                className="absolute left-4 top-1/2 -translate-y-1/2 p-2.5 bg-white/80 hover:bg-white transition-colors duration-300 rounded-xl backdrop-blur-sm"
+                className="absolute left-4 top-1/2 -translate-y-1/2 p-2.5 bg-white/80 hover:bg-white transition-colors duration-300 rounded-full backdrop-blur-sm"
               >
                 <ChevronLeft className="w-6 h-6 text-[#4A828F]" />
               </motion.button>
@@ -125,7 +150,7 @@ const HeroSection = () => {
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
                 onClick={nextSlide}
-                className="absolute right-4 top-1/2 -translate-y-1/2 p-2.5 bg-white/80 hover:bg-white transition-colors duration-300 rounded-xl backdrop-blur-sm"
+                className="absolute right-4 top-1/2 -translate-y-1/2 p-2.5 bg-white/80 hover:bg-white transition-colors duration-300 rounded-full backdrop-blur-sm"
               >
                 <ChevronRight className="w-6 h-6 text-[#4A828F]" />
               </motion.button>

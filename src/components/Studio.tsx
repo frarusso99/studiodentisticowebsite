@@ -86,7 +86,7 @@ const Studio = () => {
   });
 
   return (
-    <section id="studio" className="min-h-screen bg-[#F7DAD9]/30 relative overflow-hidden py-6 md:py-12 lg:py-28">
+    <section id="studio" className="scroll-mt-24 min-h-screen bg-[#F7DAD9]/30 relative py-6 md:py-12 lg:py-28">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="max-w-2xl mx-auto text-center mb-8 lg:mb-12">
           <motion.h2 
@@ -121,9 +121,16 @@ const Studio = () => {
               <span className="sr-only">Visualizza immagine a schermo intero</span>
             </button>
             
-            <div className="absolute top-4 right-4 z-20 bg-white/80 hover:bg-[#4A828F] text-[#4A828F] hover:text-white w-10 h-10 rounded-full flex items-center justify-center transition-all duration-300 opacity-0 group-hover:opacity-100">
+            <button
+              onClick={(e) => {
+                e.stopPropagation(); // Impedisce la propagazione per evitare conflitti
+                openLightbox(currentIndex);
+              }}
+              className="absolute top-4 right-4 z-20 bg-white/80 hover:bg-[#4A828F] text-[#4A828F] hover:text-white w-10 h-10 rounded-full flex items-center justify-center transition-all duration-300 opacity-0 group-hover:opacity-100"
+              aria-label="Apri immagine a schermo intero"
+            >
               <IoExpand className="w-5 h-5" />
-            </div>
+            </button>
             
             <AnimatePresence mode="wait">
               <motion.div

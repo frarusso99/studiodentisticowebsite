@@ -123,7 +123,7 @@ const Footer = () => {
             <div>
               <h3 className="font-manrope text-lg font-medium mb-6">Menu Rapido</h3>
               <ul className="space-y-4">
-                {['Home', 'Servizi', 'Team', 'Studio', 'Blog'].map((item) => (
+                {['Home', 'Servizi', 'Studio', 'Dove siamo', 'Blog'].map((item) => (
                   <li key={item}>
                     <button 
                       onClick={() => handleNavigation(item)}

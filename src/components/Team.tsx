@@ -45,7 +45,7 @@ export default function Team() {
     return (
         <section
             id="team"
-            className="relative min-h-screen py-20 lg:py-28 overflow-hidden bg-gradient-to-br from-[#AFCDD5]/20 via-white/50 to-[#4A828F]/10"
+            className="scroll-mt-24 relative min-h-screen py-20 lg:py-28 overflow-hidden bg-gradient-to-br from-[#AFCDD5]/20 via-white/50 to-[#4A828F]/10"
         >
             <div className="absolute inset-0 bg-[url('/pattern.png')] opacity-5" />
 

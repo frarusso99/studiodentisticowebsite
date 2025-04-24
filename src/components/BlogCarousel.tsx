@@ -70,7 +70,7 @@ const BlogCarousel = () => {
   };
 
   return (
-    <section id="blogCarousel" className="py-24 bg-gradient-to-b from-white to-[#F9E4D4]/20">
+    <section id="blogCarousel" className="scroll-mt-24 py-24 bg-gradient-to-b from-white to-[#F9E4D4]/20">
       <div className="container mx-auto px-4 md:px-6">
         <div className="max-w-3xl mx-auto text-center mb-16">
           <motion.h2

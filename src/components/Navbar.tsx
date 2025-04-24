@@ -55,7 +55,7 @@ const Navbar = () => {
                 className="focus:outline-none"
               >
                 <img
-                  src="/studiodentisticowebsite/logo3.png"
+                  src="/logo3.png"
                   alt="Studio Dentistico"
                   className={`h-16 w-auto mr-8 transition-opacity duration-300 ${
                     isMenuOpen ? 'opacity-0' : 'opacity-100'
@@ -64,7 +64,7 @@ const Navbar = () => {
               </button>
 
               <div className="hidden lg:flex space-x-5">
-                {['Home', 'Servizi', 'Team', 'Dove siamo', 'Blog', 'Contatti'].map((item) => (
+                {['Home', 'Servizi', 'Studio', 'Dove siamo', 'Blog', 'Contatti'].map((item) => (
                   <button
                     key={item}
                     onClick={() => handleNavigation(item)}
@@ -147,7 +147,7 @@ const Navbar = () => {
           </div>
 
           <div className="mt-12 flex flex-col items-center text-center">
-            {['Home', 'Servizi', 'Team', 'Dove siamo', 'Blog', 'Contatti'].map((item) => (
+            {['Home', 'Servizi', 'Studio', 'Dove siamo', 'Blog', 'Contatti'].map((item) => (
               <button
                 key={item}
                 onClick={() => handleNavigation(item)}

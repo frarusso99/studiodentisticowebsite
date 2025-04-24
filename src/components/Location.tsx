@@ -7,7 +7,8 @@ import {
   FaEnvelope, 
   FaClock,
   FaRegCalendarCheck,
-  FaInfoCircle
+  FaInfoCircle,
+  FaShieldAlt
 } from 'react-icons/fa';
 
 type FormData = {
@@ -17,6 +18,7 @@ type FormData = {
   preferredTime: string;
   treatment: string;
   message: string;
+  privacyConsent: boolean;
 };
 
 const businessHours = [
@@ -33,25 +35,50 @@ const Location = () => {
     email: '',
     preferredTime: '',
     treatment: '',
-    message: ''
+    message: '',
+    privacyConsent: false
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [formError, setFormError] = useState<string | null>(null);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
     setFormData(prev => ({ ...prev, [name]: value }));
   };
 
+  const handleCheckboxChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, checked } = e.target;
+    setFormData(prev => ({ ...prev, [name]: checked }));
+  };
+
+  const encode = (data: { [key: string]: any }) => {
+    return Object.keys(data)
+      .map(key => encodeURIComponent(key) + "=" + encodeURIComponent(data[key]))
+      .join("&");
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    
+    if (!formData.privacyConsent) {
+      setFormError("Per favore, accetta l'informativa sulla privacy per continuare.");
+      return;
+    }
+    
     setIsSubmitting(true);
+    setFormError(null);
 
     try {
-      // Con Netlify Forms, non dobbiamo fare chiamate fetch manuali
-      // Il form verrà gestito automaticamente da Netlify
-      // Ma possiamo simulare un ritardo per mostrare lo stato di caricamento
-      await new Promise(resolve => setTimeout(resolve, 1000));
+      // Invio del form a Netlify
+      await fetch("/", {
+        method: "POST",
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        body: encode({
+          "form-name": "appointment",
+          ...formData
+        })
+      });
       
       // Reimpostare il form dopo l'invio
       setFormData({
@@ -60,7 +87,8 @@ const Location = () => {
         email: '',
         preferredTime: '',
         treatment: '',
-        message: ''
+        message: '',
+        privacyConsent: false
       });
       
       setIsSubmitted(true);
@@ -68,13 +96,14 @@ const Location = () => {
       setTimeout(() => setIsSubmitted(false), 5000);
     } catch (error) {
       console.error('Errore durante l\'invio del form:', error);
+      setFormError("Si è verificato un errore durante l'invio del form. Riprova più tardi.");
     } finally {
       setIsSubmitting(false);
     }
   };
 
   return (
-    <section id="dove siamo" className="py-16 px-4 sm:px-8 bg-[#E7E6F7]/30">
+    <section id="dove-siamo" className="scroll-mt-24 py-16 px-4 sm:px-8 bg-[#E7E6F7]/30">
       <motion.h2 
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
@@ -98,7 +127,7 @@ const Location = () => {
                 <FaInfoCircle className="text-[#4A828F]" /> Contatti
               </h3>
               <a 
-                href="https://maps.google.com/?q=Via+Roma+123,+Milano" 
+                href="https://maps.google.com/?q=Via+G.+Washington+70+Milano" 
                 className="font-manrope text-[#2E545D] my-3 flex items-center gap-2 hover:text-[#4A828F] transition-colors"
               >
                <FaMapMarkerAlt className="text-[#4A828F]" /> Via G. Washington, 70, 20146 Milano MI
@@ -182,11 +211,18 @@ const Location = () => {
               </div>
             )}
 
+            {formError && (
+              <div className="p-4 mb-6 rounded-lg bg-red-100 text-red-800">
+                {formError}
+              </div>
+            )}
+
+            {/* Form per Netlify */}
             <form 
               name="appointment" 
               method="POST" 
               data-netlify="true" 
-              netlify-honeypot="bot-field"
+              data-netlify-honeypot="bot-field"
               onSubmit={handleSubmit} 
               className="flex flex-col gap-5"
             >
@@ -294,6 +330,24 @@ const Location = () => {
                   placeholder="Descrivici le tue esigenze..."
                   className="w-full p-3 border border-gray-200 rounded-lg focus:outline-none focus:ring-1 focus:ring-[#4A828F] focus:border-[#4A828F] resize-y"
                 />
+              </div>
+
+              {/* Consenso Privacy - Versione semplificata */}
+              <div className="flex items-start gap-3 p-4 bg-gray-50 rounded-lg">
+                <div className="pt-0.5">
+                  <input
+                    type="checkbox"
+                    name="privacyConsent"
+                    id="privacyConsent"
+                    checked={formData.privacyConsent}
+                    onChange={handleCheckboxChange}
+                    className="h-4 w-4 rounded border-gray-300 text-[#4A828F] focus:ring-[#4A828F]"
+                    required
+                  />
+                </div>
+                <label htmlFor="privacyConsent" className="font-manrope text-sm text-[#2E545D]">
+                  * Ho letto e accetto la <a href="/privacy-policy" className="text-[#4A828F] underline font-medium">Privacy Policy</a> dello studio. I miei dati saranno trattati esclusivamente per rispondere alla richiesta e per eventuali obblighi di legge.
+                </label>
               </div>
 
               <motion.button 
