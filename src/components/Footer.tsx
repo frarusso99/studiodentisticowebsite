@@ -80,7 +80,7 @@ const Footer = () => {
             <div className="grid md:grid-cols-2 gap-8 items-center">
               <div>
                 <h2 className="font-manrope text-3xl font-medium text-white mb-4">
-                  Prenota la Tua Prima Visita Gratuita
+                  Prenota la Tua Prima Visita
                 </h2>
                 <p className="font-manrope font-medium text-[#AFCDD5] mb-6">
                   Un sorriso sano inizia con una consulenza personalizzata
@@ -88,7 +88,7 @@ const Footer = () => {
               </div>
               <div className="flex justify-end">
                 <button 
-                  onClick={() => handleNavigation('contact')}
+                  onClick={() => handleNavigation('Dove siamo')}
                   className="group bg-white px-8 py-4 rounded-full font-manrope font-semibold text-[#233539] 
                            hover:bg-[#AFCDD5] transition-all duration-300 flex items-center gap-3"
                 >
