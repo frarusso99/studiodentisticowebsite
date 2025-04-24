@@ -1,13 +1,13 @@
 <form name="Richiesta di Appuntamento" netlify hidden>
-    <input type="text" name="name" />
-    <input type="tel" name="phone" />
-    <input type="email" name="email" />
-    <select name="preferredTime">
+    <input type="text" name="name" data-netlify-name="Nome e Cognome" />
+    <input type="tel" name="phone" data-netlify-name="Telefono" />
+    <input type="email" name="email" data-netlify-name="Email" />
+    <select name="preferredTime" data-netlify-name="Fascia Oraria Preferita">
       <option value="Mattina (09:00 - 13:00)">Mattina (09:00 - 13:00)</option>
     </select>
-    <select name="treatment">
+    <select name="treatment" data-netlify-name="Trattamento di Interesse">
       <option value="Prima Visita">Prima Visita</option>
     </select>
-    <textarea name="message"></textarea>
-    <input type="checkbox" name="privacyConsent" />
+    <textarea name="message" data-netlify-name="Messaggio"></textarea>
+    <input type="checkbox" name="privacyConsent" data-netlify-name="Consenso Privacy" />
   </form>

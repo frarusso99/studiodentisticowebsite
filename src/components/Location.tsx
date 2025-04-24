@@ -68,25 +68,16 @@ const Location = () => {
     
     setIsSubmitting(true);
     setFormError(null);
-  
+
     try {
-      // Mappa i dati in italiano
-      const italianData = {
-        "form-name": "Richiesta di Appuntamento",
-        "Nome e Cognome": formData.name,
-        "Telefono": formData.phone,
-        "Email": formData.email,
-        "Fascia Oraria Preferita": formData.preferredTime,
-        "Trattamento di Interesse": formData.treatment,
-        "Messaggio": formData.message,
-        "Consenso Privacy": formData.privacyConsent ? "Accettato" : "Non accettato"
-      };
-  
       // Invio del form a Netlify
       await fetch("/", {
         method: "POST",
         headers: { "Content-Type": "application/x-www-form-urlencoded" },
-        body: encode(italianData)  // Manda i dati con le etichette in italiano
+        body: encode({
+          "form-name": "Richiesta di Appuntamento",
+          ...formData
+        })
       });
       
       // Reimpostare il form dopo l'invio
