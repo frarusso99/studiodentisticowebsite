@@ -103,7 +103,7 @@ const Location = () => {
   };
 
   return (
-    <section id="dove-siamo" className="scroll-mt-24 py-16 px-4 sm:px-8 bg-[#E7E6F7]/30">
+    <section id="dove siamo" className="scroll-mt-24 py-16 px-4 sm:px-8 bg-[#E7E6F7]/30">
       <motion.h2 
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
