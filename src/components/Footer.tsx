@@ -80,7 +80,7 @@ const Footer = () => {
             <div className="grid md:grid-cols-2 gap-8 items-center">
               <div>
                 <h2 className="font-manrope text-3xl font-medium text-white mb-4">
-                  Prenota la Tua Prima Visita
+                  Prenota la tua prima visita
                 </h2>
                 <p className="font-manrope font-medium text-[#AFCDD5] mb-6">
                   Un sorriso sano inizia con una consulenza personalizzata
@@ -128,8 +128,7 @@ const Footer = () => {
             <div className="space-y-6">
               <h2 className="font-manrope text-2xl">Studio Dentistico Dr. Nicola Russo</h2>
               <p className="font-manrope text-[#AFCDD5]/80 leading-relaxed">
-                La tua salute dentale è la nostra missione. 
-                Tecnologie all'avanguardia e approccio personalizzato.
+                Tecnologie moderne e cure su misura si incontrano nel nostro impegno quotidiano per la tua salute dentale.
               </p>
               <div className="flex gap-4">
                 {[
