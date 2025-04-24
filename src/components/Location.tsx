@@ -133,10 +133,10 @@ const Location = () => {
                <FaMapMarkerAlt className="text-[#4A828F]" /> Piazza Calvario, 89010 Varapodio RC
               </a>
               <a 
-                href="tel:+393319103441" 
+                href="tel:+393319103440" 
                 className="font-manrope text-[#2E545D] my-3 flex items-center gap-2 hover:text-[#4A828F] transition-colors"
               >
-                <FaPhone className="text-[#4A828F]" /> +39 331 910 3441
+                <FaPhone className="text-[#4A828F]" /> +39 331 910 3440
               </a>
               <a 
                 href="mailto:dr.nicolarusso94@gmail.com" 

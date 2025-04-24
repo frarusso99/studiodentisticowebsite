@@ -103,7 +103,7 @@ const Footer = () => {
 
       {/* WhatsApp Button */}
       <a 
-        href="https://wa.me/393319103441" 
+        href="https://wa.me/393319103440" 
         target="_blank"
         rel="noopener noreferrer"
         className="fixed bottom-8 right-8 bg-green-500 p-4 rounded-full shadow-lg 
@@ -185,11 +185,11 @@ const Footer = () => {
                 </li>
                 <li>
                   <a 
-                    href="tel:+393319103441"
+                    href="tel:+393319103440"
                     className="font-manrope flex items-center gap-3 text-[#AFCDD5]/80 hover:text-white transition-colors"
                   >
                     <FaPhoneAlt className="text-[#4A828F]" />
-                    <span>+39 331 910 3441</span>
+                    <span>+39 331 910 3440</span>
                   </a>
                 </li>
                 <li>

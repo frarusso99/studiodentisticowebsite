@@ -96,7 +96,7 @@ const Navbar = () => {
                 </div>
 
                 <a
-                  href="tel:+393319103441"
+                  href="tel:+393319103440"
                   className="flex items-center space-x-2 text-[#233539] hover:text-[#4A828F] transition-colors font-manrope font-medium"
                 >
                   <Phone className="w-4 h-4" />
@@ -129,7 +129,7 @@ const Navbar = () => {
                 </div>
 
                 <a
-                  href="tel:+393319103441"
+                  href="tel:+393319103440"
                   className="flex items-center space-x-2 text-[#233539] hover:text-[#4A828F] transition-colors font-manrope font-medium"
                 >
                   <Phone className="w-4 h-4" />
@@ -215,7 +215,7 @@ const Navbar = () => {
 
             <div className="pt-8 w-full max-w-xs space-y-4">
               <a
-                href="tel:+393319103441"
+                href="tel:+393319103440"
                 className="flex items-center justify-center space-x-2 text-[#2E545D] hover:text-[#4A828F] transition-colors font-manrope text-lg w-full"
               >
                 <Phone className="w-5 h-5" />
