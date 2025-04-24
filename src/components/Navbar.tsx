@@ -77,50 +77,91 @@ const Navbar = () => {
             </div>
             
             {/* Contenitore con sfondo per i link e i bottoni a destra */}
-            <div className={`hidden lg:flex items-center space-x-5 p-2 rounded-full transition-all duration-500 ${
-              isScrolled ? 'bg-transparent' : 'bg-white/40 backdrop-blur-sm'
-            }`}>
-              <div className="flex space-x-4">
-                <button
-                  onClick={() => handleSocialClick('https://www.facebook.com')}
-                  className="text-[#233539] hover:text-[#4A828F] transition-colors"
+            {isScrolled ? (
+              // Versione senza background durante lo scroll
+              <div className="hidden lg:flex items-center space-x-5 p-2 rounded-full">
+                <div className="flex space-x-4">
+                  <button
+                    onClick={() => handleSocialClick('https://www.facebook.com')}
+                    className="text-[#233539] hover:text-[#4A828F] transition-colors"
+                  >
+                    <Facebook className="w-5 h-5" />
+                  </button>
+                  <button
+                    onClick={() => handleSocialClick('https://www.instagram.com')}
+                    className="text-[#233539] hover:text-[#4A828F] transition-colors"
+                  >
+                    <Instagram className="w-5 h-5" />
+                  </button>
+                </div>
+
+                <a
+                  href="tel:+390123456789"
+                  className="flex items-center space-x-2 text-[#233539] hover:text-[#4A828F] transition-colors font-manrope font-medium"
                 >
-                  <Facebook className="w-5 h-5" />
-                </button>
+                  <Phone className="w-4 h-4" />
+                  <span>Chiamaci</span>
+                </a>
+
                 <button
-                  onClick={() => handleSocialClick('https://www.instagram.com')}
-                  className="text-[#233539] hover:text-[#4A828F] transition-colors"
+                  onClick={() => handleNavigation('Dove siamo')}
+                  className="bg-[#4A828F] text-white px-6 py-2 rounded-full hover:bg-[#2E545D] transition-colors font-manrope shadow-sm"
                 >
-                  <Instagram className="w-5 h-5" />
+                  Prenota Ora
                 </button>
               </div>
+            ) : (
+              // Versione con background solo quando non si è fatto scroll
+              <div className="hidden lg:flex items-center space-x-5 p-2 rounded-full bg-white/40 backdrop-blur-sm">
+                <div className="flex space-x-4">
+                  <button
+                    onClick={() => handleSocialClick('https://www.facebook.com')}
+                    className="text-[#233539] hover:text-[#4A828F] transition-colors"
+                  >
+                    <Facebook className="w-5 h-5" />
+                  </button>
+                  <button
+                    onClick={() => handleSocialClick('https://www.instagram.com')}
+                    className="text-[#233539] hover:text-[#4A828F] transition-colors"
+                  >
+                    <Instagram className="w-5 h-5" />
+                  </button>
+                </div>
 
-              <a
-                href="tel:+390123456789"
-                className="flex items-center space-x-2 text-[#233539] hover:text-[#4A828F] transition-colors font-manrope font-medium"
-              >
-                <Phone className="w-4 h-4" />
-                <span>Chiamaci</span>
-              </a>
+                <a
+                  href="tel:+390123456789"
+                  className="flex items-center space-x-2 text-[#233539] hover:text-[#4A828F] transition-colors font-manrope font-medium"
+                >
+                  <Phone className="w-4 h-4" />
+                  <span>Chiamaci</span>
+                </a>
 
-              <button
-                onClick={() => handleNavigation('Dove siamo')}
-                className="bg-[#4A828F] text-white px-6 py-2 rounded-full hover:bg-[#2E545D] transition-colors font-manrope shadow-sm"
-              >
-                Prenota Ora
-              </button>
-            </div>
+                <button
+                  onClick={() => handleNavigation('Dove siamo')}
+                  className="bg-[#4A828F] text-white px-6 py-2 rounded-full hover:bg-[#2E545D] transition-colors font-manrope shadow-sm"
+                >
+                  Prenota Ora
+                </button>
+              </div>
+            )}
 
-            {/* Menu hamburger per mobile con sfondo semi-trasparente */}
+            {/* Menu hamburger per mobile - Fix per il problema mobile */}
             <div className="lg:hidden">
-              <button
-                onClick={() => setIsMenuOpen(true)}
-                className={`transition-all duration-500 p-2 rounded-full ${
-                  isScrolled ? 'bg-transparent text-[#2E545D]' : 'bg-white/40 backdrop-blur-sm text-[#233539]'
-                } hover:text-[#4A828F]`}
-              >
-                <Menu className="w-7 h-7" />
-              </button>
+              {isScrolled ? (
+                <button
+                  onClick={() => setIsMenuOpen(true)}
+                  className="p-2 rounded-full text-[#2E545D] hover:text-[#4A828F]"
+                >
+                  <Menu className="w-7 h-7" />
+                </button>
+              ) : (
+                <button
+                  onClick={() => setIsMenuOpen(true)}
+                  className="transition-all duration-300 p-2 rounded-full bg-white/40 backdrop-blur-sm text-[#233539] hover:text-[#4A828F]"
+                >
+                  <Menu className="w-7 h-7" />
+                </button>
+              )}
             </div>
           </div>
         </div>

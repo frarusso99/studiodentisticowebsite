@@ -141,7 +141,7 @@ const HeroSection = () => {
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
                 onClick={prevSlide}
-                className="absolute left-4 top-1/2 -translate-y-1/2 p-2.5 bg-white/80 hover:bg-white transition-colors duration-300 rounded-full backdrop-blur-sm"
+                className="absolute left-4 top-1/2 -translate-y-1/2 p-2.5 bg-white/50 hover:bg-white transition-colors duration-300 rounded-full backdrop-blur-sm"
               >
                 <ChevronLeft className="w-6 h-6 text-[#4A828F]" />
               </motion.button>
@@ -150,7 +150,7 @@ const HeroSection = () => {
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
                 onClick={nextSlide}
-                className="absolute right-4 top-1/2 -translate-y-1/2 p-2.5 bg-white/80 hover:bg-white transition-colors duration-300 rounded-full backdrop-blur-sm"
+                className="absolute right-4 top-1/2 -translate-y-1/2 p-2.5 bg-white/50 hover:bg-white transition-colors duration-300 rounded-full backdrop-blur-sm"
               >
                 <ChevronRight className="w-6 h-6 text-[#4A828F]" />
               </motion.button>
