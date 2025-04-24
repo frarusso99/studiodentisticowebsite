@@ -8,5 +8,5 @@
 [[redirects]]
   from = "/*"
   to = "/maintenance.html"
-  status = 200
+  status = 503
   force = true
