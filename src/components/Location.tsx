@@ -170,7 +170,7 @@ const Location = () => {
             transition={{ duration: 0.5, delay: 0.2 }}
           >
             <iframe
-              src="https://www.google.com/maps/place/Studio+dentistico+Dr.+Nicola+Russo/@38.3178658,15.9783844,17z/data=!4m6!3m5!1s0x8052d3a694608597:0xe92563210bc8d0dd!8m2!3d38.3178658!4d15.9809647!16s%2Fg%2F11x8cf9826?entry=ttu&g_ep=EgoyMDI1MDQyMS4wIKXMDSoASAFQAw%3D%3D"
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3130.3439265851775!2d15.978389775589196!3d38.317865771853555!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8052d3a694608597%3A0xe92563210bc8d0dd!2sStudio%20dentistico%20Dr.%20Nicola%20Russo!5e0!3m2!1sit!2sit!4v1745506096084!5m2!1sit!2sit"
               className="w-full h-[350px] border-0"
               allowFullScreen
               loading="lazy"
