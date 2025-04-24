@@ -175,7 +175,7 @@ const Navbar = () => {
         <div className="px-6 md:px-12 py-6">
           <div className="flex justify-between items-center">
             <img
-              src="/studiodentisticowebsite/logo3.png"
+              src="/logo3.png"
               alt="Studio Dentistico"
               className="h-16 w-auto"
             />
