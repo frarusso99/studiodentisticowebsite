@@ -66,8 +66,8 @@ const Footer = () => {
   };
 
   const socialLinks = {
-    instagram: 'https://instagram.com/tuoprofilo',
-    facebook: 'https://facebook.com/tuapagina'
+    instagram: 'https://www.instagram.com/studiodentistico_dr.n_russo?igsh=cWN0cTc0ZnZlYWJ6',
+    facebook: 'https://www.facebook.com/share/1BDxXY1GX4/'
   };
 
   return (
@@ -103,7 +103,7 @@ const Footer = () => {
 
       {/* WhatsApp Button */}
       <a 
-        href="https://wa.me/+390000000000" 
+        href="https://wa.me/+393319103441" 
         target="_blank"
         rel="noopener noreferrer"
         className="fixed bottom-8 right-8 bg-green-500 p-4 rounded-full shadow-lg 
@@ -126,7 +126,7 @@ const Footer = () => {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-12 mb-16">
             {/* Brand Section */}
             <div className="space-y-6">
-              <h2 className="font-manrope text-2xl">Studio Dentistico</h2>
+              <h2 className="font-manrope text-2xl">Studio Dentistico Dr. Nicola Russo</h2>
               <p className="font-manrope text-[#AFCDD5]/80 leading-relaxed">
                 La tua salute dentale è la nostra missione. 
                 Tecnologie all'avanguardia e approccio personalizzato.
@@ -185,31 +185,31 @@ const Footer = () => {
                 </li>
                 <li>
                   <a 
-                    href="tel:+390021234567"
+                    href="tel:+393319103441"
                     className="font-manrope flex items-center gap-3 text-[#AFCDD5]/80 hover:text-white transition-colors"
                   >
                     <FaPhoneAlt className="text-[#4A828F]" />
-                    <span>+39 02 1234567</span>
+                    <span>+39 331 910 3441</span>
                   </a>
                 </li>
                 <li>
                   <a 
-                    href="mailto:info@studiodentistico.it"
+                    href="mailto:dr.nicolarusso94@gmail.com"
                     className="font-manrope flex items-center gap-3 text-[#AFCDD5]/80 hover:text-white transition-colors"
                   >
                     <HiOutlineMail className="text-[#4A828F]" />
-                    <span>info@studiodentistico.it</span>
+                    <span>dr.nicolarusso94@gmail.com</span>
                   </a>
                 </li>
                 <li>
                   <a 
-                    href="https://maps.google.com/?q=Via+Roma+123,+Milano"
+                    href="https://maps.app.goo.gl/6xofLe6CmSrA6p63A"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="font-manrope flex items-center gap-3 text-[#AFCDD5]/80 hover:text-white transition-colors"
                   >
                     <HiOutlineLocationMarker className="text-[#4A828F]" />
-                    <span>Via Roma 123, Milano</span>
+                    <span>Piazza Calvario, 89010 Varapodio RC</span>
                   </a>
                 </li>
               </ul>
@@ -220,7 +220,7 @@ const Footer = () => {
           <div className="border-t border-[#AFCDD5]/20 pt-8">
             <div className="flex flex-col md:flex-row justify-between items-center gap-4">
               <p className="font-manrope text-[#AFCDD5]/60 text-sm">
-                © {currentYear} Studio Dentistico. Tutti i diritti riservati.
+                © {currentYear} Studio Dentistico Dr. Nicola Russo. Tutti i diritti riservati.
               </p>
               <div className="font-manrope flex gap-6 text-sm">
                 <a 

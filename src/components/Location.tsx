@@ -127,22 +127,22 @@ const Location = () => {
                 <FaInfoCircle className="text-[#4A828F]" /> Contatti
               </h3>
               <a 
-                href="https://maps.google.com/?q=Via+G.+Washington+70+Milano" 
+                href="https://maps.app.goo.gl/6xofLe6CmSrA6p63A" 
                 className="font-manrope text-[#2E545D] my-3 flex items-center gap-2 hover:text-[#4A828F] transition-colors"
               >
-               <FaMapMarkerAlt className="text-[#4A828F]" /> Via G. Washington, 70, 20146 Milano MI
+               <FaMapMarkerAlt className="text-[#4A828F]" /> Piazza Calvario, 89010 Varapodio RC
               </a>
               <a 
-                href="tel:+390247785" 
+                href="tel:+393319103441" 
                 className="font-manrope text-[#2E545D] my-3 flex items-center gap-2 hover:text-[#4A828F] transition-colors"
               >
-                <FaPhone className="text-[#4A828F]" /> +39 02 4047785
+                <FaPhone className="text-[#4A828F]" /> +39 331 910 3441
               </a>
               <a 
-                href="mailto:studio@dentistagalimberti.it" 
+                href="mailto:dr.nicolarusso94@gmail.com" 
                 className="font-manrope text-[#2E545D] my-3 flex items-center gap-2 hover:text-[#4A828F] transition-colors"
               >
-                <FaEnvelope className="text-[#4A828F]" /> studio@dentistagalimberti.it
+                <FaEnvelope className="text-[#4A828F]" /> dr.nicolarusso94@gmail.com
               </a>
             </motion.div>
 
@@ -170,7 +170,7 @@ const Location = () => {
             transition={{ duration: 0.5, delay: 0.2 }}
           >
             <iframe
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d5593.436387931559!2d9.2207452!3d45.495619299999994!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4786c71e5bd0a023%3A0xdf3a968cf22b736e!2sStudio%20dentistico%20Dentalp%20Milano!5e0!3m2!1sit!2sit!4v1737328891415!5m2!1sit!2sit"
+              src="https://www.google.com/maps/place/Studio+dentistico+Dr.+Nicola+Russo/@38.3178658,15.9783844,17z/data=!4m6!3m5!1s0x8052d3a694608597:0xe92563210bc8d0dd!8m2!3d38.3178658!4d15.9809647!16s%2Fg%2F11x8cf9826?entry=ttu&g_ep=EgoyMDI1MDQyMS4wIKXMDSoASAFQAw%3D%3D"
               className="w-full h-[350px] border-0"
               allowFullScreen
               loading="lazy"
@@ -178,7 +178,7 @@ const Location = () => {
           </motion.div>
 
           <motion.a 
-            href="https://g.co/kgs/MWvDSnS"
+            href="https://g.co/kgs/LzjPqGc"
             target="_blank"
             rel="noopener noreferrer"
             className="flex items-center justify-center gap-3 p-5 bg-white text-[#4A828F] no-underline rounded-xl font-medium shadow-md border border-gray-100 hover:bg-[#4A828F] hover:text-white transition-all duration-300"

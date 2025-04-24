@@ -56,7 +56,7 @@ const Navbar = () => {
               >
                 <img
                   src="/logo3.png"
-                  alt="Studio Dentistico"
+                  alt="Studio Dentistico Dr. Nicola Russo"
                   className={`h-16 w-auto mr-8 transition-opacity duration-300 ${
                     isMenuOpen ? 'opacity-0' : 'opacity-100'
                   }`}
@@ -82,13 +82,13 @@ const Navbar = () => {
               <div className="hidden lg:flex items-center space-x-5 p-2 rounded-full">
                 <div className="flex space-x-4">
                   <button
-                    onClick={() => handleSocialClick('https://www.facebook.com')}
+                    onClick={() => handleSocialClick('https://www.facebook.com/share/1BDxXY1GX4/')}
                     className="text-[#233539] hover:text-[#4A828F] transition-colors"
                   >
                     <Facebook className="w-5 h-5" />
                   </button>
                   <button
-                    onClick={() => handleSocialClick('https://www.instagram.com')}
+                    onClick={() => handleSocialClick('https://www.instagram.com/studiodentistico_dr.n_russo?igsh=cWN0cTc0ZnZlYWJ6')}
                     className="text-[#233539] hover:text-[#4A828F] transition-colors"
                   >
                     <Instagram className="w-5 h-5" />
@@ -96,7 +96,7 @@ const Navbar = () => {
                 </div>
 
                 <a
-                  href="tel:+390123456789"
+                  href="tel:+393319103441"
                   className="flex items-center space-x-2 text-[#233539] hover:text-[#4A828F] transition-colors font-manrope font-medium"
                 >
                   <Phone className="w-4 h-4" />
@@ -115,13 +115,13 @@ const Navbar = () => {
               <div className="hidden lg:flex items-center space-x-5 p-2 rounded-full bg-white/40 backdrop-blur-sm">
                 <div className="flex space-x-4">
                   <button
-                    onClick={() => handleSocialClick('https://www.facebook.com')}
+                    onClick={() => handleSocialClick('https://www.facebook.com/share/1BDxXY1GX4/')}
                     className="text-[#233539] hover:text-[#4A828F] transition-colors"
                   >
                     <Facebook className="w-5 h-5" />
                   </button>
                   <button
-                    onClick={() => handleSocialClick('https://www.instagram.com')}
+                    onClick={() => handleSocialClick('https://www.instagram.com/studiodentistico_dr.n_russo?igsh=cWN0cTc0ZnZlYWJ6')}
                     className="text-[#233539] hover:text-[#4A828F] transition-colors"
                   >
                     <Instagram className="w-5 h-5" />
@@ -129,7 +129,7 @@ const Navbar = () => {
                 </div>
 
                 <a
-                  href="tel:+390123456789"
+                  href="tel:+393319103441"
                   className="flex items-center space-x-2 text-[#233539] hover:text-[#4A828F] transition-colors font-manrope font-medium"
                 >
                   <Phone className="w-4 h-4" />
@@ -176,7 +176,7 @@ const Navbar = () => {
           <div className="flex justify-between items-center">
             <img
               src="/logo3.png"
-              alt="Studio Dentistico"
+              alt="Studio Dentistico Dr. Nicola Russo"
               className="h-16 w-auto"
             />
             <button
@@ -200,13 +200,13 @@ const Navbar = () => {
 
             <div className="pt-8 flex space-x-6">
               <button
-                onClick={() => handleSocialClick('https://www.facebook.com')}
+                onClick={() => handleSocialClick('https://www.facebook.com/share/1BDxXY1GX4/')}
                 className="text-[#2E545D] hover:text-[#4A828F] transition-colors"
               >
                 <Facebook className="w-6 h-6" />
               </button>
               <button
-                onClick={() => handleSocialClick('https://www.instagram.com')}
+                onClick={() => handleSocialClick('https://www.instagram.com/studiodentistico_dr.n_russo?igsh=cWN0cTc0ZnZlYWJ6')}
                 className="text-[#2E545D] hover:text-[#4A828F] transition-colors"
               >
                 <Instagram className="w-6 h-6" />
@@ -215,7 +215,7 @@ const Navbar = () => {
 
             <div className="pt-8 w-full max-w-xs space-y-4">
               <a
-                href="tel:+390123456789"
+                href="tel:+393319103441"
                 className="flex items-center justify-center space-x-2 text-[#2E545D] hover:text-[#4A828F] transition-colors font-manrope text-lg w-full"
               >
                 <Phone className="w-5 h-5" />
