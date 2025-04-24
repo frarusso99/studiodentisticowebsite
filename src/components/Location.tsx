@@ -346,7 +346,7 @@ const Location = () => {
                   />
                 </div>
                 <label htmlFor="privacyConsent" className="font-manrope text-sm text-[#2E545D]">
-                  * Ho letto e accetto la <a href="/privacy-policy" className="text-[#4A828F] underline font-medium">Privacy Policy</a> dello studio. I miei dati saranno trattati esclusivamente per rispondere alla richiesta e per eventuali obblighi di legge.
+                  * Ho letto e accetto la <a href="https://www.iubenda.com/privacy-policy/55906244" className="text-[#4A828F] underline font-medium">Privacy Policy</a> dello studio. I miei dati saranno trattati esclusivamente per rispondere alla richiesta e per eventuali obblighi di legge.
                 </label>
               </div>
 

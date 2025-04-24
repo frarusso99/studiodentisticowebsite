@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { 
   FaWhatsapp, FaInstagram, FaFacebookF,
   FaClock, FaPhoneAlt 
@@ -12,6 +12,37 @@ const Footer = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const currentYear = new Date().getFullYear();
+
+  useEffect(() => {
+    // Carica lo script di Iubenda
+    const script = document.createElement('script');
+    script.innerHTML = `
+      (function (w,d) {
+        var loader = function () {
+          var s = d.createElement("script"), 
+          tag = d.getElementsByTagName("script")[0];
+          s.src="https://cdn.iubenda.com/iubenda.js";
+          tag.parentNode.insertBefore(s,tag);
+        };
+        if(w.addEventListener){
+          w.addEventListener("load", loader, false);
+        } else if(w.attachEvent){
+          w.attachEvent("onload", loader);
+        } else{
+          w.onload = loader;
+        }
+      })(window, document);
+    `;
+    script.async = true;
+    document.body.appendChild(script);
+    
+    return () => {
+      // Rimuovi lo script quando il componente viene smontato
+      if (script.parentNode) {
+        script.parentNode.removeChild(script);
+      }
+    };
+  }, []);
 
   const handleNavigation = (section: string) => {
     if (section.toLowerCase() === 'blog') {
@@ -193,14 +224,16 @@ const Footer = () => {
               </p>
               <div className="font-manrope flex gap-6 text-sm">
                 <a 
-                  href="/privacy-policy"
-                  className="text-[#AFCDD5]/60 hover:text-white transition-colors duration-300"
+                  href="https://www.iubenda.com/privacy-policy/55906244"
+                  className="iubenda-white iubenda-noiframe iubenda-embed text-[#AFCDD5]/60 hover:text-white transition-colors duration-300"
+                  title="Privacy Policy"
                 >
                   Privacy Policy
                 </a>
                 <a 
-                  href="/cookie-policy"
-                  className="font-manrope text-[#AFCDD5]/60 hover:text-white transition-colors duration-300"
+                  href="https://www.iubenda.com/privacy-policy/55906244/cookie-policy"
+                  className="iubenda-white iubenda-noiframe iubenda-embed text-[#AFCDD5]/60 hover:text-white transition-colors duration-300"
+                  title="Cookie Policy"
                 >
                   Cookie Policy
                 </a>

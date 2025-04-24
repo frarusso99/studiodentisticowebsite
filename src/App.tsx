@@ -11,6 +11,7 @@ import BlogCarousel from './components/BlogCarousel';
 import Footer from './components/Footer';
 import Blog from './pages/Blog';
 import BlogPost from './pages/BlogPost';
+import IubendaCookieBanner from './components/IubendaCookieBanner';
 
 // Pagina temporanea che mostra solo landing page e sezione location
 const TemporaryHome = () => {
@@ -65,6 +66,7 @@ function App() {
 
   return (
     <BrowserRouter>
+      <IubendaCookieBanner /> {/* Aggiungi qui il banner cookie */}
       <ScrollToTop />
       <Routes>
         {showTemporary ? (
