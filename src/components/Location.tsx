@@ -293,7 +293,7 @@ const Location = () => {
                   >
                     <option value="">Seleziona un orario</option>
                     <option value="Mattina (9:00 - 13:00)">Mattina (9:00 - 13:00)</option>
-                    <option value="Pomeriggio (15:00 - 19:00">Pomeriggio (15:00 - 19:00)</option>
+                    <option value="Pomeriggio (15:00 - 19:00)">Pomeriggio (15:00 - 19:00)</option>
                     <option value="Sabato Mattina">Sabato Mattina</option>
                   </select>
                 </div>
